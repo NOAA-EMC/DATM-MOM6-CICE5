@@ -1,0 +1,12 @@
+[submodule "DataComps"]
+	path = DataComps
+	url = gerrit:EMC_NEMSdatacomps
+[submodule "NEMS"]
+	path = NEMS
+	url = gerrit:NEMS
+[submodule "CICE_SRC"]
+	path = CICE_SRC
+	url = gerrit:EMC_CICE
+[submodule "MOM6"]
+	path = MOM6
+	url = https://github.com/EMC-MOM6/NEMS-MOM6-FMS
