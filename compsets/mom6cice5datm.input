@@ -75,10 +75,10 @@ datm_defaults = {
     FNABSC="'global_mxsnoalb.uariz.t126.384.190.rg.grb',"
 
     ENS_NUM='1'
-    SYEAR='2016'
-    SMONTH='10'
-    SDAY='03'
-    SHOUR='00'
+    SYEAR='2017'
+    SMONTH='07'
+    SDAY='18'
+    SHOUR='06'
     DT_ATMOS='1800'
 
     DAYS='1'
@@ -135,7 +135,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
     CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area 
 
-    FV3_input_data="@[plat%INPUTS]/FV3_input_data" 
+    #FV3_input_data="@[plat%INPUTS]/FV3_input_data" 
     UGCS_input_data="@[plat%INPUTS]" 
  
     build=datm_mom6_cice.exe 
@@ -165,21 +165,21 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
       #    WORK FILE  <=filter=   SOURCE FILE 
           'input.nml' <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
     'model_configure' <=atparse=  "@[PARMnems]/model_configure.IN" 
-                 'aerosol.dat' <=copyfrom= "@[FV3_input_data]/INPUT" 
-  'co2historicaldata_201*.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
- 'global_o3prdlos.f77' <=copyfrom= "@[FV3_input_data]/INPUT" 
-      'sfc_emissivity_idx.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
-   'solarconstant_noaa_an.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
-               '*grb' <=copyfrom= "@[FV3_input_data]" 
-            '*_table' <=copyfrom= "@[FV3_input_data]" 
-         '*configure' <=copyfrom= "@[FV3_input_data]" 
-              'INPUT' <=copy=     "@[FV3_input_data]/INPUT" 
-'INPUT/C96_mosaic.nc' <=copy=     "@[FV3_input_data]/INPUT/grid_spec.nc"
+#                 'aerosol.dat' <=copyfrom= "@[FV3_input_data]/INPUT" 
+#  'co2historicaldata_201*.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
+# 'global_o3prdlos.f77' <=copyfrom= "@[FV3_input_data]/INPUT" 
+#      'sfc_emissivity_idx.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
+#   'solarconstant_noaa_an.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
+#               '*grb' <=copyfrom= "@[FV3_input_data]" 
+#            '*_table' <=copyfrom= "@[FV3_input_data]" 
+#         '*configure' <=copyfrom= "@[FV3_input_data]" 
+#              'INPUT' <=copy=     "@[FV3_input_data]/INPUT" 
+#'INPUT/C96_mosaic.nc' <=copy=     "@[FV3_input_data]/INPUT/grid_spec.nc"
      'nems.configure' <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
             'INPUT/*' <=copyfrom= "@[UGCS_input_data]/MOM6_FIX_025deg"
- 'INPUT/MOM6_IC_TS.nc' <=copy=    "@[UGCS_input_data]/MOM6_IC/MOM6_IC_TS.nc"
- 'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/COUPLED/grid_spec.nc"
-         'diag_table'  <=copy=    "@[UGCS_input_data]/COUPLED/diag_table"
+# 'INPUT/MOM6_IC_TS.nc' <=copy=    "@[UGCS_input_data]/MOM6_IC/MOM6_IC_TS.nc"
+# 'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025dea/grid_spec.nc"
+#         'diag_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/diag_table"
                   '*' <=copyfrom= "@[UGCS_input_data]/CICE"
     } 
  

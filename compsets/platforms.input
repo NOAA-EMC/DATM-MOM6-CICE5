@@ -26,9 +26,9 @@ platform.defaults={
 
 # WCOSS and jet support was getting too long, so they have their own files:
 
-load 'wcoss.input'
-load 'jet.input'
-load 'gaea.input'
+#load 'wcoss.input'
+#load 'jet.input'
+#load 'gaea.input'
 
 ########################################################################
 
@@ -56,8 +56,8 @@ platform theia {
 
     # INPUTS is the input directory, which should contain fix and parm
     # files, plus any restarts or other inputs.
-    BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/FV3-MOM6-CICE5/master-20180521"
-    BASELINE_TEMPLATE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/FV3-MOM6-CICE5/master-20180521"
+    BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/master-20180627"
+    BASELINE_TEMPLATE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/master-20180627"
     INPUTS="@[BASELINE]"
 
     default_resources={
@@ -134,4 +134,5 @@ platform theia {
 # Autodetection of available platforms.  Calls the "detect" function
 # from each of the listed platforms.
 
-autodetect plat (/ gaea.c3, gaea.c4, xjet, wcoss.cray, theia, wcoss.phase2, wcoss.phase1 /)
+#autodetect plat (/ gaea.c3, gaea.c4, xjet, wcoss.cray, theia, wcoss.phase2, wcoss.phase1 /)
+autodetect plat (/ theia /)
