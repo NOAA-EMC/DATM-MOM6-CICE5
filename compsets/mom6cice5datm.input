@@ -22,7 +22,7 @@ embed bash datm_prep(RUNDIR,modules,CNTL) [[[
         mkdir MOM6_RESTART MOM6_OUTPUT
         #For CICE
         mkdir history
-
+        mkdir restart
 
         export MPI_TYPE_DEPTH=20
         export OMP_STACKSIZE=512M
@@ -177,9 +177,9 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
 #'INPUT/C96_mosaic.nc' <=copy=     "@[FV3_input_data]/INPUT/grid_spec.nc"
      'nems.configure' <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
             'INPUT/*' <=copyfrom= "@[UGCS_input_data]/MOM6_FIX_025deg"
-# 'INPUT/MOM6_IC_TS.nc' <=copy=    "@[UGCS_input_data]/MOM6_IC/MOM6_IC_TS.nc"
-# 'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025dea/grid_spec.nc"
-#         'diag_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/diag_table"
+ 'INPUT/MOM6_IC_TS.nc' <=copy=    "@[UGCS_input_data]/MOM6_IC/MOM6_IC_TS.nc"
+ 'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/grid_spec.nc"
+         'diag_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/diag_table"
                   '*' <=copyfrom= "@[UGCS_input_data]/CICE"
     } 
  
