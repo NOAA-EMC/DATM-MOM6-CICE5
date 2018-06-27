@@ -18,5 +18,5 @@ CICE_BINDIR=$ROOTDIR/CICE/CICE_INSTALL
 
 # enviornment
 CHOSEN_MODULE=$FULL_MACHINE_ID/coupled
-#CONFOPT=configure.coupled.$FULL_MACHINE_ID
-CONFOPT="coupled_intel_${MACHINE_ID:?}"
+CONFOPT=configure.coupled.$FULL_MACHINE_ID
+#CONFOPT="coupled_intel_${MACHINE_ID:?}"
