@@ -135,8 +135,11 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
     CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area 
 
-    #FV3_input_data="@[plat%INPUTS]/FV3_input_data" 
+    FV3_input_data="@[plat%INPUTS]/FV3_input_data" 
     UGCS_input_data="@[plat%INPUTS]" 
+ 
+         NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
+     CICE_INPUT="@[NEMSRC]/cice_data/mx024"
  
     build=datm_mom6_cice.exe 
  
@@ -145,18 +148,18 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
         CNTL="@[CNTL]") 
      
     # - set total number of tasks to satisfy coupled application need 
-    TASKS=510 
+    TASKS=426 
  
     # - nems.configure --- 
     nems_configure='medcold_atm_ocn_ice' 
     med_model='nems' 
     med_petlist_bounds="0 149" 
-    atm_model='datm' 
-    atm_petlist_bounds="0 149" 
     ocn_model='mom6' 
     ocn_petlist_bounds="150 389" 
     ice_model='cice' 
-    ice_petlist_bounds="390 509" 
+    ice_petlist_bounds="390 413" 
+    atm_model='datm' 
+    atm_petlist_bounds="414 425" 
     coupling_interval_slow_sec=1800.0  # 30min coupling, datm time step 
     coupling_interval_fast_sec=1800.0  # 30min coupling, datm time step 
  
@@ -171,7 +174,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
 #      'sfc_emissivity_idx.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
 #   'solarconstant_noaa_an.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
 #               '*grb' <=copyfrom= "@[FV3_input_data]" 
-#            '*_table' <=copyfrom= "@[FV3_input_data]" 
+            '*_table' <=copyfrom= "@[FV3_input_data]" 
 #         '*configure' <=copyfrom= "@[FV3_input_data]" 
 #              'INPUT' <=copy=     "@[FV3_input_data]/INPUT" 
 #'INPUT/C96_mosaic.nc' <=copy=     "@[FV3_input_data]/INPUT/grid_spec.nc"
@@ -181,6 +184,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
  'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/grid_spec.nc"
          'diag_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/diag_table"
                   '*' <=copyfrom= "@[UGCS_input_data]/CICE"
+             'ice_in' <=copy=     "@[CICE_INPUT]/ice_in_datm_test"
     } 
  
     # Specify output files:
@@ -222,6 +226,9 @@ test cpld_datm_mom6_cice: datm_mom6_cice.exe {
 
     UGCS_input_data="@[plat%INPUTS]" 
  
+         NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
+     CICE_INPUT="@[NEMSRC]/cice_data/mx024"
+
     build=datm_mom6_cice.exe 
  
     prep=datm_prep( 
@@ -266,6 +273,7 @@ test cpld_datm_mom6_cice: datm_mom6_cice.exe {
          'diag_table'  <=copy=    "@[UGCS_input_data]/COUPLED/diag_table"
                   '*' <=copyfrom= "@[UGCS_input_data]/CICE"
                   '*' <=copyfrom= "@[UGCS_input_data]/MEDIATOR"
+             'ice_in' <=copy=     "@[CICE_INPUT]/ice_in_datm_test"
     } 
 
     # Specify output files:
