@@ -174,7 +174,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
 #      'sfc_emissivity_idx.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
 #   'solarconstant_noaa_an.txt' <=copyfrom= "@[FV3_input_data]/INPUT" 
 #               '*grb' <=copyfrom= "@[FV3_input_data]" 
-            '*_table' <=copyfrom= "@[FV3_input_data]" 
+#            '*_table' <=copyfrom= "@[FV3_input_data]" 
 #         '*configure' <=copyfrom= "@[FV3_input_data]" 
 #              'INPUT' <=copy=     "@[FV3_input_data]/INPUT" 
 #'INPUT/C96_mosaic.nc' <=copy=     "@[FV3_input_data]/INPUT/grid_spec.nc"
