@@ -5,14 +5,14 @@
 # EARTH #
 EARTH_component_list: MED ATM
 EARTH_attributes::
-  Verbosity = max
+  Verbosity = 1
 ::
 
 # MED #
 MED_model:                      @[med_model]
 MED_petlist_bounds:             @[med_petlist_bounds]
 MED_attributes::
-  Verbosity = max
+  Verbosity = 1
   DumpFields = true
   DumpRHs = false
 ::
@@ -21,14 +21,15 @@ MED_attributes::
 ATM_model:                      @[atm_model]
 ATM_petlist_bounds:             @[atm_petlist_bounds]
 ATM_attributes::
-  Verbosity = max
+  Verbosity = 1
   DumpFields = true
 ::
 
 # Run Sequence #
 runSeq::
   @@[coupling_interval_sec]
-    ATM
+    ATM -> MED :remapMethod=redist
     MED
+    ATM
   @
 ::

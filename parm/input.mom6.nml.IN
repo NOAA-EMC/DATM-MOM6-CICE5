@@ -1,3 +1,9 @@
+&fms_nml
+            clock_grain='ROUTINE'
+            clock_flags='NONE'
+            domains_stack_size = 5000000
+            stack_size =0
+/
  &MOM_input_nml
          output_directory = 'MOM6_OUTPUT/',
          input_filename = 'n'
@@ -5,4 +11,5 @@
          restart_output_dir = 'MOM6_RESTART/',
          parameter_filename = 'INPUT/MOM_input',
                               'INPUT/MOM_override' /
+
 

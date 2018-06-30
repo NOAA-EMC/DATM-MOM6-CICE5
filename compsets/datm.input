@@ -121,7 +121,7 @@ datm_defaults = {
  
 test datm_control: datm.exe { 
     use plat 
-    use plat%default_resources 
+#    use plat%default_resources 
     use datm_defaults 
  
     TEST_DESCR="datm control" 

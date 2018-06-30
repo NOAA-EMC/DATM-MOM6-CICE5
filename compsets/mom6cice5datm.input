@@ -74,12 +74,12 @@ datm_defaults = {
     FNSMCC="'global_soilmgldas.t126.384.190.grb',"
     FNABSC="'global_mxsnoalb.uariz.t126.384.190.rg.grb',"
 
-    ENS_NUM='1'
-    SYEAR='2017'
-    SMONTH='07'
-    SDAY='18'
-    SHOUR='06'
+    SYEAR='2018'
+    SMONTH='04'
+    SDAY='14'
+    SHOUR='00'
     DT_ATMOS='1800'
+    FHMAX='2'
 
     DAYS='1'
     FHMAX='24'
@@ -120,7 +120,7 @@ datm_defaults = {
  
 test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe { 
     use plat 
-    use plat%default_resources 
+    #use plat%default_resources 
     use datm_defaults 
  
     TEST_DESCR="datm-mom6-cice5 - cold start" 
@@ -183,6 +183,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
  'INPUT/MOM6_IC_TS.nc' <=copy=    "@[UGCS_input_data]/MOM6_IC/MOM6_IC_TS.nc"
  'INPUT/grid_spec.nc'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/grid_spec.nc"
          'diag_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/diag_table"
+         'data_table'  <=copy=    "@[UGCS_input_data]/MOM6_FIX_025deg/data_table"
                   '*' <=copyfrom= "@[UGCS_input_data]/CICE"
              'ice_in' <=copy=     "@[CICE_INPUT]/ice_in_datm_test"
     } 
@@ -208,7 +209,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
  
 test cpld_datm_mom6_cice: datm_mom6_cice.exe { 
     use plat 
-    use plat%default_resources 
+    #use plat%default_resources 
     use datm_defaults 
  
     TEST_DESCR="Fully coupled FV3-MOM6-CICE system from Mediator restarts" 
