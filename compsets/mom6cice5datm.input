@@ -148,18 +148,18 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
         CNTL="@[CNTL]") 
      
     # - set total number of tasks to satisfy coupled application need 
-    TASKS=426 
+    TASKS=328 
  
     # - nems.configure --- 
-    nems_configure='medcold_atm_ocn_ice' 
-    med_model='nems' 
-    med_petlist_bounds="0 149" 
-    ocn_model='mom6' 
-    ocn_petlist_bounds="150 389" 
-    ice_model='cice' 
-    ice_petlist_bounds="390 413" 
-    atm_model='datm' 
-    atm_petlist_bounds="414 425" 
+    nems_configure='medcold_atm_ocn_ice'
+    med_model='nems'
+    med_petlist_bounds="0 63"
+    atm_model='datm'
+    atm_petlist_bounds="0 63"
+    ocn_model='mom6'
+    ocn_petlist_bounds="64 303"
+    ice_model='cice'
+    ice_petlist_bounds="304 327"
     coupling_interval_slow_sec=1800.0  # 30min coupling, datm time step 
     coupling_interval_fast_sec=1800.0  # 30min coupling, datm time step 
  
