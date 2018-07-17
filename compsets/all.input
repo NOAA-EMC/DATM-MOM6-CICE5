@@ -1,8 +1,12 @@
-load 'mom6cice5datm.input'
+load 'platforms.input'
+load 'nemscommon.input'
 
-run cpld_datmC48_mom6_cice_cold @ coupled, cold,    standard, baseline
+#load 'mom6cice5datm.input'
+load 'mom6cice5datm_test.input'
+
+#run cpld_datmC48_mom6_cice_cold @ coupled, cold,    standard, baseline
 #run cpld_datmC768_mom6_cice_cold @ coupled, cold,    standard, baseline
-#run cpld_datm_mom6_cice      @ coupled, restart, standard, baseline
+run cpld_datmC48_mom6_cice_6hr      @ coupled, restart, standard, baseline
 
 #load 'datm.input'
 #run datm_control                 @ datm, standard, baseline

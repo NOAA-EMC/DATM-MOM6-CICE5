@@ -1,0 +1,33 @@
+#
+build datm_mom6_cice.exe { 
+    # Use NEMSAppBuilder to build a coupled app.   
+    use plat 
+    target="@[plat%EXECrt]/datm_mom6_cice.exe" 
+    modules.nems="@[plat%INCrt]/modules_datm_mom6_cice" 
+    md5sum="@[target].md5" 
+ 
+    # The NEMSAppBuilder is another embedded bash script in nemscommon.input 
+    build=NEMSAppBuilder(NEMS.x="@[target]",modules.nems="@[modules.nems]", 
+                         OPTS="app=coupled_DATM_MOM6_CICE",md5sum="@[md5sum]") 
+}
+
+########################################################################
+
+# Common variables used by many tests and input files:
+
+datm_defaults = {
+
+    SYEAR='2018'
+    SMONTH='04'
+    SDAY='14'
+    SHOUR='00'
+    DT_ATMOS='1800'
+    DAYS='1'
+    FHMAX='24'
+}
+
+# Available compsets
+
+load 'cpld_datmC48_mom6_cice_cold'
+#load 'cpld_datmC768_mom6_cice_cold'
+load 'cpld_datmC48_mom6_cice_6hr' 
