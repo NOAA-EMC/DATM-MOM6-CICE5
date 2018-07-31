@@ -19,6 +19,8 @@ test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe {
     CPL='.true.'
     DAYS='0.041666666'
     FHMAX='1'
+    #DAYS='0.083333333'
+    #FHMAX='2'
  
     COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 

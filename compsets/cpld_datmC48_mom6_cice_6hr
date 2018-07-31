@@ -29,9 +29,11 @@ test cpld_datmC48_mom6_cice_6hr: datm_mom6_cice.exe {
          NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
      CICE_INPUT="@[NEMSRC]/cice_data/mx024"
 
-          RTSRC="/scratch4/NCEPDEV/stmp3/Denise.Worthen"
+    #      RTSRC="/scratch4/NCEPDEV/stmp3/Denise.Worthen"
+          RTSRC="/scratch3/NCEPDEV/stmp1/Denise.Worthen"
            CSET="cpld_datmC48_mom6_cice_cold"
-             RT="cold_datm_no_mldexport/tmp"
+    #         RT="cold_datm_no_mldexport/tmp"
+             RT="cold_datm_export3x/tmp"
     RESTART_DIR="@[RTSRC]/@[RT]/@[CSET]"      #for mediator restarts only
 
     build=datm_mom6_cice.exe 
