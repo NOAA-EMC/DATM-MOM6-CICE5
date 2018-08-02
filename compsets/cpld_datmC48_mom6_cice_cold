@@ -30,7 +30,8 @@ test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe {
  
          NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
      CICE_INPUT="@[NEMSRC]/cice_data/mx024"
- 
+     MOM6_INPUT="@[NEMSRC]/mom6_data"
+
     build=datm_mom6_cice.exe 
  
     #prep=datm_prep( 
@@ -71,6 +72,8 @@ test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe {
          'data_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
                   '*' <=copyfrom= "@[BL_INPUTS]/CICE"
              'ice_in' <=copy=     "@[CICE_INPUT]/ice_in_datm_cold"
+    'INPUT/MOM_input' <=copy=     "@[MOM6_INPUT]/MOM_input"
+'INPUT/MOM6_IC_TS.nc' <=copy=     "@[MOM6_INPUT]/MOM6_IC_TS_fix.nc"
     } 
  
     # Specify output files:
