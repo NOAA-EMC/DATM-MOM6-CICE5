@@ -1,14 +1,14 @@
-##########################################################################
+###########################################################################
 #
-##########################################################################
+###########################################################################
 
 load 'runsetup.input'
 
-###########################################################################
-# cold start 20180414 
-###########################################################################
+############################################################################
+# 1d start @CDATE 
+############################################################################
 
-test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe { 
+test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe { 
     use plat 
     use datm_defaults 
  
@@ -17,49 +17,57 @@ test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe {
  
     CPLFLX='.T.' 
     CPL='.true.'
-    DAYS='0.041666666'
-    FHMAX='1'
-    #DAYS='0.083333333'
-    #FHMAX='2'
+    DAYS='1'
+    FHMAX='24'
  
+     SYEAR='2016'
+    SMONTH='10'
+      SDAY='03'
+     SHOUR='00'
+     CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
+
        COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
       CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area 
 
-    BL_INPUTS="@[plat%INPUTS]" 
- 
-         NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
-     CICE_INPUT="@[NEMSRC]/cice_data/mx024"
-     MOM6_INPUT="@[NEMSRC]/mom6_data"
+         BL_INPUTS="@[plat%INPUTS]"
 
+            NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
+        CICE_INPUT="@[NEMSRC]/cice_data/mx024"
+    Bin_input_data="/scratch4/NCEPDEV/nems/noscrub/Bin.Li/FROM_HPSS/@[CDATE]"
+
+          RTSRC="/scratch3/NCEPDEV/stmp2/Denise.Worthen"
+           CSET="cpld_datmC768_mom6_cice_cold"
+             RT="datm768_cold/tmp"
+    RESTART_DIR="@[RTSRC]/@[RT]/@[CSET]"      #for mediator restarts only
+    
     build=datm_mom6_cice.exe 
  
     #prep=datm_prep( 
     #    RUNDIR="@[RUNDIR]",modules="@[datm_mom6_cice.exe%modules.nems]", 
     #    CNTL="@[CNTL]") 
-     
-    prep=coldstart(
+ 
+    prep=restart_from_coldstart(
             RUNDIR="@[RUNDIR]",
            modules="@[build%modules.nems]",
-              CNTL="@[CNTL]")
+              CNTL="@[CNTL]",
+       RESTART_DIR="@[RESTART_DIR]")
 
     # - set total number of tasks to satisfy coupled application need 
-    TASKS=328 
- 
-    # - nems.configure --- 
-    nems_configure='medcold_atm_ocn_ice'
+    TASKS=414
+    
+    nems_configure='med_atm_ocn_ice'
     med_model='nems'
-    med_petlist_bounds="0 63"
+    med_petlist_bounds="0 149"
     atm_model='datm'
-    atm_petlist_bounds="0 63"
+    atm_petlist_bounds="0 149"
     ocn_model='mom6'
-    ocn_petlist_bounds="64 303"
+    ocn_petlist_bounds="150 389"
     ice_model='cice'
-    ice_petlist_bounds="304 327"
+    ice_petlist_bounds="390 413"
     coupling_interval_slow_sec=1800.0  # 30min coupling, datm time step 
     coupling_interval_fast_sec=1800.0  # 30min coupling, datm time step 
- 
-    # Specify input files. 
+    
     filters input { 
       #    WORK FILE  <=filter=   SOURCE FILE 
           'input.nml' <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
@@ -70,10 +78,11 @@ test cpld_datmC48_mom6_cice_cold: datm_mom6_cice.exe {
  'INPUT/grid_spec.nc'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/grid_spec.nc"
          'diag_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table"
          'data_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
-                  '*' <=copyfrom= "@[BL_INPUTS]/CICE"
-             'ice_in' <=copy=     "@[CICE_INPUT]/ice_in_datm_cold"
-    'INPUT/MOM_input' <=copy=     "@[MOM6_INPUT]/MOM_input"
-'INPUT/MOM6_IC_TS.nc' <=copy=     "@[MOM6_INPUT]/MOM6_IC_TS_fix.nc"
+#this ice_in expects a generic name for restart file
+                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold"
+  'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
+  'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
+       'cice5_model.res.nc'  <=copy=     "@[NEMSRC]/cice_data/mx024/cice5_model_0.25.res_@[CDATE].nc"
     } 
  
     # Specify output files:

@@ -75,10 +75,10 @@ datm_defaults = {
 #    FNABSC="'global_mxsnoalb.uariz.t126.384.190.rg.grb',"
 
 #    ENS_NUM='1'
-    SYEAR='2017'
+    SYEAR='2016'
     SMONTH='07'
-    SDAY='18'
-    SHOUR='06'
+    SDAY='01'
+    SHOUR='00'
     DT_ATMOS='1800'
     FHMAX='1'
 

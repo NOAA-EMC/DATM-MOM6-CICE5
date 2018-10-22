@@ -17,9 +17,9 @@ build datm_mom6_cice.exe {
 
 datm_defaults = {
 
-    SYEAR='2018'
-    SMONTH='04'
-    SDAY='14'
+    SYEAR='2016'
+    SMONTH='10'
+    SDAY='03'
     SHOUR='00'
     DT_ATMOS='1800'
     DAYS='1'
@@ -28,6 +28,9 @@ datm_defaults = {
 
 # Available compsets
 
-load 'cpld_datmC48_mom6_cice_cold'
-#load 'cpld_datmC768_mom6_cice_cold'
-load 'cpld_datmC48_mom6_cice_6hr' 
+#load 'cpld_datmC48_mom6_cice_cold'
+#load 'cpld_datmC48_mom6_cice_6hr' 
+
+load 'cpld_datmC768_mom6_cice_cold'
+load 'cpld_datmC768_mom6_cice_1d'
+
