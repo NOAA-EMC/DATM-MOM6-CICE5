@@ -5,10 +5,10 @@
 load 'runsetup.input'
 
 ############################################################################
-# 1d start @CDATE 
+# cold start @CDATE 
 ############################################################################
 
-test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe { 
+test cpld_datmC384_mom6_cice_cold: datm_mom6_cice.exe { 
     use plat 
     use datm_defaults 
  
@@ -17,14 +17,19 @@ test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe {
  
     CPLFLX='.T.' 
     CPL='.true.'
-    DAYS='1'
-    FHMAX='24'
- 
-     SYEAR='2016'
-    SMONTH='07'
+    DAYS='0.041666666'
+    FHMAX='1'
+    DT_ATMOS='1800'
+
+     SYEAR='2012'
+    SMONTH='04'
       SDAY='01'
      SHOUR='00'
      CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
+    #for ice_in
+    #MONTH="jan"
+    #MONTH="july"
+    MONTH="apr"
 
        COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
@@ -36,27 +41,21 @@ test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe {
         CICE_INPUT="@[NEMSRC]/cice_data/mx024"
     Bin_input_data="/scratch4/NCEPDEV/nems/noscrub/Bin.Li/FROM_HPSS/@[CDATE]"
 
-          RTSRC="/scratch3/NCEPDEV/stmp2/Denise.Worthen"
-           CSET="cpld_datmC768_mom6_cice_cold"
-             RT="datm768_cold_july/tmp"
-    RESTART_DIR="@[RTSRC]/@[RT]/@[CSET]"      #for mediator restarts only
-    
     build=datm_mom6_cice.exe 
  
     #prep=datm_prep( 
     #    RUNDIR="@[RUNDIR]",modules="@[datm_mom6_cice.exe%modules.nems]", 
     #    CNTL="@[CNTL]") 
  
-    prep=restart_from_coldstart(
+    prep=coldstart(
             RUNDIR="@[RUNDIR]",
            modules="@[build%modules.nems]",
-              CNTL="@[CNTL]",
-       RESTART_DIR="@[RESTART_DIR]")
+              CNTL="@[CNTL]")
 
     # - set total number of tasks to satisfy coupled application need 
     TASKS=414
     
-    nems_configure='med_atm_ocn_ice'
+    nems_configure='medcold_atm_ocn_ice'
     med_model='nems'
     med_petlist_bounds="0 149"
     atm_model='datm'
@@ -65,8 +64,8 @@ test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe {
     ocn_petlist_bounds="150 389"
     ice_model='cice'
     ice_petlist_bounds="390 413"
-    coupling_interval_slow_sec=3600.0  # 30min coupling, datm time step 
-    coupling_interval_fast_sec=900.0  # 30min coupling, datm time step 
+    coupling_interval_slow_sec=1800.0  # 30min coupling, datm time step 
+    coupling_interval_fast_sec=1800.0  # 30min coupling, datm time step 
     
     filters input { 
       #    WORK FILE  <=filter=   SOURCE FILE 
@@ -79,7 +78,7 @@ test cpld_datmC768_mom6_cice_1d: datm_mom6_cice.exe {
          'diag_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table"
          'data_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
 #this ice_in expects a generic name for restart file
-                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold_july"
+                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold_@[MONTH]"
   'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
   'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
 #       'cice5_model.res.nc'  <=copy=     "@[NEMSRC]/cice_data/mx024/cice5_model_0.25.res_@[CDATE].nc"

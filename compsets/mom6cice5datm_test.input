@@ -31,6 +31,10 @@ datm_defaults = {
 #load 'cpld_datmC48_mom6_cice_cold'
 #load 'cpld_datmC48_mom6_cice_6hr' 
 
-load 'cpld_datmC768_mom6_cice_cold'
-load 'cpld_datmC768_mom6_cice_1d'
+load 'cpld_datmC384_mom6_cice_cold'
+load 'cpld_datmC384_mom6_cice_5d'
+load 'cpld_datmC384_mom6_cice_30d'
+
+#load 'cpld_datmC768_mom6_cice_cold'
+#load 'cpld_datmC768_mom6_cice_1d'
 

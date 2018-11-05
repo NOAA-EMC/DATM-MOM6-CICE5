@@ -19,7 +19,8 @@ test cpld_datmC768_mom6_cice_cold: datm_mom6_cice.exe {
     CPL='.true.'
     DAYS='0.041666666'
     FHMAX='1'
- 
+    DT_ATMOS='1800'
+
      SYEAR='2016'
     SMONTH='07'
       SDAY='01'
@@ -73,10 +74,13 @@ test cpld_datmC768_mom6_cice_cold: datm_mom6_cice.exe {
          'diag_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table"
          'data_table'  <=copy=    "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
 #this ice_in expects a generic name for restart file
-                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold"
+                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold_july"
   'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
   'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
-       'cice5_model.res.nc'  <=copy=     "@[NEMSRC]/cice_data/mx024/cice5_model_0.25.res_@[CDATE].nc"
+#       'cice5_model.res.nc'  <=copy=     "@[NEMSRC]/cice_data/mx024/cice5_model_0.25.res_@[CDATE].nc"
+#       'INPUT/MOM6_IC_TS.nc' <=copy=     "@[Bin_input_data]/mom6_hycom/hycom2mom6_ic_2016070100.nc"
+       'cice5_model.res.nc'  <=copy=     "@[Bin_input_data]/cice5_model_0.25.res_@[CDATE].nc"
+       'INPUT/MOM6_IC_TS.nc' <=copy=     "@[Bin_input_data]/MOM6_IC_TS_@[CDATE].nc"
     } 
  
     # Specify output files:

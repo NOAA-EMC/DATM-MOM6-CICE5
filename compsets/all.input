@@ -7,5 +7,9 @@ load 'mom6cice5datm_test.input'
 #run cpld_datmC48_mom6_cice_cold @ coupled, cold,    standard, baseline
 #run cpld_datmC48_mom6_cice_6hr      @ coupled, restart, standard, baseline
 
-run cpld_datmC768_mom6_cice_cold @ coupled, cold,    standard, baseline
+#run cpld_datmC384_mom6_cice_cold @ coupled, cold,    standard, baseline
+#run cpld_datmC384_mom6_cice_5d @ coupled, cold,    standard, baseline
+run cpld_datmC384_mom6_cice_30d @ coupled, cold,    standard, baseline
+
+#run cpld_datmC768_mom6_cice_cold @ coupled, cold,    standard, baseline
 #run cpld_datmC768_mom6_cice_1d @ coupled, restart,    standard, baseline

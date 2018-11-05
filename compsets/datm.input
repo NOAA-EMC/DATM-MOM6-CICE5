@@ -79,7 +79,7 @@ datm_defaults = {
     SMONTH='07'
     SDAY='01'
     SHOUR='00'
-    DT_ATMOS='1800'
+    DT_ATMOS='900'
     FHMAX='1'
 
 #    DAYS='1'
