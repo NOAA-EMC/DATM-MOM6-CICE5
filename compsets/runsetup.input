@@ -3,7 +3,7 @@
 # coldstart
 #########################################################################
 
-embed bash coldstart(RUNDIR,modules,CNTL) [[[
+embed bash coldstart(RUNDIR,modules,DATM_INPUT,CNTL) [[[
         rm -rf "$RUNDIR"
         mkdir -p "$RUNDIR" "$CNTL"
         cd @[RUNDIR]
@@ -21,6 +21,9 @@ embed bash coldstart(RUNDIR,modules,CNTL) [[[
         #For CICE
         mkdir history
         mkdir restart
+        #For DATM
+        mkdir DATM_INPUT
+        ln -s $DATM_INPUT/* DATM_INPUT/
 
         export MPI_TYPE_DEPTH=20
         export OMP_STACKSIZE=512M
@@ -43,7 +46,7 @@ embed bash coldstart(RUNDIR,modules,CNTL) [[[
 # restart from coldstart
 #########################################################################
 
-embed bash restart_from_coldstart(RUNDIR,modules,CNTL,RESTART_DIR) [[[
+embed bash restart_from_coldstart(RUNDIR,modules,DATM_INPUT,CNTL,RESTART_DIR) [[[
 
    rm -rf "$RUNDIR"
    mkdir -p "$RUNDIR" "$CNTL"
@@ -62,6 +65,9 @@ embed bash restart_from_coldstart(RUNDIR,modules,CNTL,RESTART_DIR) [[[
    #For CICE
    mkdir history
    mkdir restart
+   #For DATM
+   mkdir DATM_INPUT
+   ln -s $DATM_INPUT/* DATM_INPUT/
 
    #For Mediator
    cp -f $RESTART_DIR/mediator*restart* $RUNDIR

@@ -11,4 +11,12 @@ nhours_fcst:             @[FHMAX]
 RUN_CONTINUE:            .false.
 ENS_SPS:                 .false.
 
-dt_atmos:                @[DT_ATMOS]
+dt_atmos:                   @[DT_ATMOS]
+atm_coupling_interval_sec:  @[coupling_interval_fast_sec]
+
+iatm: @[IATM]
+jatm: @[JATM]
+
+cdate0: @[CDATE]
+nfhour: @[NFHOUR]
+filename_base: @[FILENAME_BASE]
