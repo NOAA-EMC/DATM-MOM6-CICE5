@@ -42,14 +42,17 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
       SDAY='01'
      SHOUR='00'
      CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
-    #for ice_in
-    #MONTH="jan"
-    MONTH="july"
-    #MONTH="apr"
+
+    #For CICE5 ice_in coldstart
+    DT_CICE='900'
+    RUNTYPE='initial'
+    # to dump a restart at the end of coldstart
+    DUMPFREQ_N='3600'
+    DUMPFREQ='s'
 
        COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
-    RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
-      CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area 
+    RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"          # Test work area 
+      CNTL="@[plat%BASELINE]/@[CNTL_NAME]"       # Control baseline area 
 
          BL_INPUTS="@[plat%INPUTS]"
 
@@ -96,13 +99,21 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
          'diag_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table"
          'data_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
 #this ice_in expects a generic name for restart file
-                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold_@[MONTH]"
+#                   'ice_in'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_datm_cold_@[MONTH]"
+#this ice_in_template will be edited in the prerun 
+          'ice_in_template'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_template"
   'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
   'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
        'cice5_model.res.nc'  <=copy=     "@[Bin_input_data]/cice5_model_0.25.res_@[CDATE].nc"
        'INPUT/MOM6_IC_TS.nc' <=copy=     "@[Bin_input_data]/MOM6_IC_TS_@[CDATE].nc"
     } 
  
+    prerun=edit_ice_in(CDATE="@[CDATE]",
+                     DT_CICE="@[DT_CICE]",
+                     RUNTYPE="@[RUNTYPE]",
+                  DUMPFREQ_N="@[DUMPFREQ_N]",
+                    DUMPFREQ="@[DUMPFREQ]")
+
     # Specify output files:
     criteria output {
         # WORKFILE                            .comparison. TARGET
