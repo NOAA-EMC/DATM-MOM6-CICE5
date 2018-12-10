@@ -88,6 +88,61 @@ embed bash restart_from_coldstart(RUNDIR,modules,DATM_INPUT,CNTL,RESTART_DIR) [[
         fi
         ulimit -a
 ]]]
+
+########################################################################
+# a new embeded bash script to create input files at prerun from 
+# specifications in compset
+#########################################################################
+embed bash edit_inputs(CDATE,DT_CICE,RUNTYPE,DUMPFREQ_N,DUMPFREQ,DT_THERM,DT_DYNAM) [[[
+
+python <<EOT
+import os
+import datetime
+
+fmt='%Y%m%d%H'
+dt = datetime.datetime.strptime("@[CDATE]", fmt)
+tt = dt.timetuple()
+
+jday=tt.tm_yday
+year=tt.tm_year
+month=tt.tm_mon
+day=tt.tm_mday
+ymd=str(year)+str(month).zfill(2)+str(day).zfill(2)
+
+#ice_in
+istep0=(jday-1)*86400/int("@[DT_CICE]")
+
+with open("ice_in_template",'rt') as inf:
+ with open("ice_in",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('YEAR_INIT',str(year)) \
+             .replace('ISTEP0',str(istep0)) \
+             .replace('DT_CICE',"@[DT_CICE]") \
+             .replace('RUNTYPE',"@[RUNTYPE]") \
+             .replace('DUMPFREQ_N',"@[DUMPFREQ_N]") \
+             .replace('DUMPFREQ',"@[DUMPFREQ]")
+    outf.write(newline)
+
+#MOM_input
+with open("INPUT/MOM_input_template",'rt') as inf:
+ with open("INPUT/MOM_input",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('DT_THERM_MOM6',"@[DT_THERM]") \
+             .replace('DT_DYNAM_MOM6',"@[DT_DYNAM]") 
+    outf.write(newline)
+
+#diag_table
+with open("diag_table_template",'rt') as inf:
+ with open("diag_table",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('YMD',ymd) \
+             .replace('SYEAR',str(year).zfill(4)) \
+             .replace('SMONTH',str(month).zfill(2)) \
+             .replace('SDAY',str(day).zfill(2))
+    outf.write(newline)
+EOT
+]]]
+
 ########################################################################
 #
 ###########################################################################

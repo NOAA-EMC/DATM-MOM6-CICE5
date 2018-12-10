@@ -25,7 +25,7 @@ test cpld_datm_mom6_cice_5d: datm_mom6_cice.exe {
     #Benchmark Nemsio, forecast hour increment
     NEMSIO_SRC="BenchNemsio"
     FILENAME_BASE='gfs.'
-    NFHOUR='6'
+    NFHOUT='6'
 
     #C768
     #IATM='3072'
@@ -33,7 +33,7 @@ test cpld_datm_mom6_cice_5d: datm_mom6_cice.exe {
     #Retro Nemsio, forecast hour increment
     #NEMSIO_SRC="RetroNemsio"
     #FILENAME_BASE='gdas.'
-    #NFHOUR='3'
+    #NFHOUT='3'
  
      SYEAR='2013'
     SMONTH='07'

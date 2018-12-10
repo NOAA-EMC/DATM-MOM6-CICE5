@@ -4,8 +4,7 @@ load 'nemscommon.input'
 #load 'mom6cice5datm.input'
 load 'mom6cice5datm_test.input'
 
-
-#run cpld_datm_mom6_cice_cold @ coupled, cold,    standard, baseline
-run cpld_datm_mom6_cice_5d @ coupled, cold,    standard, baseline
+run cpld_datm_mom6_cice_cold @ coupled, cold,    standard, baseline
+#run cpld_datm_mom6_cice_5d @ coupled, cold,    standard, baseline
 #run cpld_datm_mom6_cice_30d @ coupled, cold,    standard, baseline
 

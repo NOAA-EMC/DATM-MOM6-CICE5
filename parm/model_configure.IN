@@ -18,5 +18,5 @@ iatm: @[IATM]
 jatm: @[JATM]
 
 cdate0: @[CDATE]
-nfhour: @[NFHOUR]
+nfhout: @[NFHOUT]
 filename_base: @[FILENAME_BASE]
