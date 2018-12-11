@@ -37,6 +37,8 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     #FILENAME_BASE='gdas.'
     #NFHOUT='3'
 
+   RUNNAME=NEMSIO_SRC
+
      SYEAR='2013'
     SMONTH='07'
       SDAY='01'
@@ -52,9 +54,18 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     DUMPFREQ='s'
 
     #For MOM6
+    # to NOT dump a restart at the end of coldstart
+    # this doesn't seem to take effect, even when it is set
+    #WRITE_RESTART_MOM6='-1'
+    WRITE_RESTART_MOM6='1'
+    
+    #For MOM6
     DT_THERM_MOM6='3600'
     DT_DYNAM_MOM6='900'
    
+    CPL_SLOW='3600'
+    CPL_FAST='900'
+    
        COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"          # Test work area 
       CNTL="@[plat%BASELINE]/@[CNTL_NAME]"       # Control baseline area 
@@ -90,8 +101,12 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     ocn_petlist_bounds="150 389"
     ice_model='cice'
     ice_petlist_bounds="390 413"
-    coupling_interval_slow_sec=3600.0  # 30min coupling, datm time step 
-    coupling_interval_fast_sec=900.0  # 30min coupling, datm time step 
+    coupling_interval_slow_sec="@[CPL_SLOW]"
+    coupling_interval_fast_sec="@[CPL_FAST]"
+    
+    # move to
+    DESTNAM="@[RUNNAME]_cold_@[CDATE]"
+    DESTDIR="/scratch3/NCEPDEV/stmp2/Denise.Worthen/DATMRuns/@[DESTNAM]"
     
     filters input { 
       #    WORK FILE  <=filter=   SOURCE FILE 
@@ -99,8 +114,9 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
             'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
              'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
                     'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
+                 'data_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
 #for field availability
-                 'data_table'  <=copy=     "@[NEMSRC]/DATM/@[NEMSIO_SRC]/data_table.IN"
+            'datm_data_table'  <=copy=     "@[NEMSRC]/DATM/@[NEMSIO_SRC]/data_table.IN"
 #only the grid and mask from the Baseline
     'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
     'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
@@ -121,7 +137,8 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
                   DUMPFREQ_N="@[DUMPFREQ_N]",
                     DUMPFREQ="@[DUMPFREQ]",
                     DT_THERM="@[DT_THERM_MOM6]",
-                    DT_DYNAM="@[DT_DYNAM_MOM6]")
+                    DT_DYNAM="@[DT_DYNAM_MOM6]",
+                 WRT_RESTART="@[WRITE_RESTART_MOM6]")
 
     # Specify output files:
     criteria output {
@@ -137,5 +154,9 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     spawn execute { 
         # Run the  
         {"@[build%target]", ranks="@[TASKS]" } 
-    } 
+    }
+
+   #verify=move_output(TMPrt="@[TMPrt]",
+   #                TESTNAME="@[TEST_NAME]",
+   #                 DESTDIR="@[DESTDIR]")
 } 

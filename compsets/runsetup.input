@@ -93,7 +93,7 @@ embed bash restart_from_coldstart(RUNDIR,modules,DATM_INPUT,CNTL,RESTART_DIR) [[
 # a new embeded bash script to create input files at prerun from 
 # specifications in compset
 #########################################################################
-embed bash edit_inputs(CDATE,DT_CICE,RUNTYPE,DUMPFREQ_N,DUMPFREQ,DT_THERM,DT_DYNAM) [[[
+embed bash edit_inputs(CDATE,DT_CICE,RUNTYPE,DUMPFREQ_N,DUMPFREQ,DT_THERM,DT_DYNAM,WRT_RESTART) [[[
 
 python <<EOT
 import os
@@ -128,7 +128,8 @@ with open("INPUT/MOM_input_template",'rt') as inf:
  with open("INPUT/MOM_input",'wf') as outf:
    for x in inf.readlines():
     newline=x.replace('DT_THERM_MOM6',"@[DT_THERM]") \
-             .replace('DT_DYNAM_MOM6',"@[DT_DYNAM]") 
+             .replace('DT_DYNAM_MOM6',"@[DT_DYNAM]") \
+             .replace('WRT_MOM6_RST',"@[WRT_RESTART]")
     outf.write(newline)
 
 #diag_table
@@ -176,4 +177,14 @@ with open("ice_in_template",'rt') as inf:
 #print('@[CDATE] becomes '+str(dt))
 EOT
 
+]]]
+
+########################################################################
+## run at verify to move output to named location
+#########################################################################
+#
+embed bash move_output(TMPrt,TESTNAME,DESTDIR) [[[
+
+        mkdir -p "$DESTDIR"
+        mv "$TMPrt" "$DESTDIR"
 ]]]
