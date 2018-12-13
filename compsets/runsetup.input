@@ -3,7 +3,7 @@
 # coldstart
 #########################################################################
 
-embed bash coldstart(RUNDIR,modules,CNTL) [[[
+embed bash coldstart(RUNDIR,modules,DATM_INPUT,CNTL) [[[
         rm -rf "$RUNDIR"
         mkdir -p "$RUNDIR" "$CNTL"
         cd @[RUNDIR]
@@ -21,6 +21,9 @@ embed bash coldstart(RUNDIR,modules,CNTL) [[[
         #For CICE
         mkdir history
         mkdir restart
+        #For DATM
+        mkdir DATM_INPUT
+        ln -s $DATM_INPUT/* DATM_INPUT/
 
         export MPI_TYPE_DEPTH=20
         export OMP_STACKSIZE=512M
@@ -43,7 +46,7 @@ embed bash coldstart(RUNDIR,modules,CNTL) [[[
 # restart from coldstart
 #########################################################################
 
-embed bash restart_from_coldstart(RUNDIR,modules,CNTL,RESTART_DIR) [[[
+embed bash restart_from_coldstart(RUNDIR,modules,DATM_INPUT,CNTL,RESTART_DIR) [[[
 
    rm -rf "$RUNDIR"
    mkdir -p "$RUNDIR" "$CNTL"
@@ -62,6 +65,9 @@ embed bash restart_from_coldstart(RUNDIR,modules,CNTL,RESTART_DIR) [[[
    #For CICE
    mkdir history
    mkdir restart
+   #For DATM
+   mkdir DATM_INPUT
+   ln -s $DATM_INPUT/* DATM_INPUT/
 
    #For Mediator
    cp -f $RESTART_DIR/mediator*restart* $RUNDIR
@@ -81,4 +87,104 @@ embed bash restart_from_coldstart(RUNDIR,modules,CNTL,RESTART_DIR) [[[
             done
         fi
         ulimit -a
+]]]
+
+########################################################################
+# a new embeded bash script to create input files at prerun from 
+# specifications in compset
+#########################################################################
+embed bash edit_inputs(CDATE,DT_CICE,RUNTYPE,DUMPFREQ_N,DUMPFREQ,DT_THERM,DT_DYNAM,WRT_RESTART) [[[
+
+python <<EOT
+import os
+import datetime
+
+fmt='%Y%m%d%H'
+dt = datetime.datetime.strptime("@[CDATE]", fmt)
+tt = dt.timetuple()
+
+jday=tt.tm_yday
+year=tt.tm_year
+month=tt.tm_mon
+day=tt.tm_mday
+ymd=str(year)+str(month).zfill(2)+str(day).zfill(2)
+
+#ice_in
+istep0=(jday-1)*86400/int("@[DT_CICE]")
+
+with open("ice_in_template",'rt') as inf:
+ with open("ice_in",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('YEAR_INIT',str(year)) \
+             .replace('ISTEP0',str(istep0)) \
+             .replace('DT_CICE',"@[DT_CICE]") \
+             .replace('RUNTYPE',"@[RUNTYPE]") \
+             .replace('DUMPFREQ_N',"@[DUMPFREQ_N]") \
+             .replace('DUMPFREQ',"@[DUMPFREQ]")
+    outf.write(newline)
+
+#MOM_input
+with open("INPUT/MOM_input_template",'rt') as inf:
+ with open("INPUT/MOM_input",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('DT_THERM_MOM6',"@[DT_THERM]") \
+             .replace('DT_DYNAM_MOM6',"@[DT_DYNAM]") \
+             .replace('WRT_MOM6_RST',"@[WRT_RESTART]")
+    outf.write(newline)
+
+#diag_table
+with open("diag_table_template",'rt') as inf:
+ with open("diag_table",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('YMD',ymd) \
+             .replace('SYEAR',str(year).zfill(4)) \
+             .replace('SMONTH',str(month).zfill(2)) \
+             .replace('SDAY',str(day).zfill(2))
+    outf.write(newline)
+EOT
+]]]
+
+########################################################################
+#
+###########################################################################
+
+embed bash edit_ice_in(CDATE,DT_CICE,RUNTYPE,DUMPFREQ_N,DUMPFREQ) [[[
+
+python <<EOT
+import os
+import datetime
+
+fmt='%Y%m%d%H'
+dt = datetime.datetime.strptime("@[CDATE]", fmt)
+tt = dt.timetuple()
+
+jday=tt.tm_yday
+year=tt.tm_year
+istep0=(jday-1)*86400/int("@[DT_CICE]")
+
+with open("ice_in_template",'rt') as inf:
+ with open("ice_in",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace('YEAR_INIT',str(year)) \
+             .replace('ISTEP0',str(istep0)) \
+             .replace('DT_CICE',"@[DT_CICE]") \
+             .replace('RUNTYPE',"@[RUNTYPE]") \
+             .replace('DUMPFREQ_N',"@[DUMPFREQ_N]") \
+             .replace('DUMPFREQ',"@[DUMPFREQ]")
+    outf.write(newline)
+
+#dt = datetime.datetime.strptime("@[CDATE]", fmt)
+#print('@[CDATE] becomes '+str(dt))
+EOT
+
+]]]
+
+########################################################################
+## run at verify to move output to named location
+#########################################################################
+#
+embed bash move_output(TMPrt,TESTNAME,DESTDIR) [[[
+
+        mkdir -p "$DESTDIR"
+        mv "$TMPrt" "$DESTDIR"
 ]]]

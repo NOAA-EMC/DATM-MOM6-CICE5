@@ -1,0 +1,178 @@
+###########################################################################
+#
+###########################################################################
+
+load 'runsetup.input'
+
+############################################################################
+# 30d start @CDATE 
+############################################################################
+
+test cpld_datm_mom6_cice_30d: datm_mom6_cice.exe { 
+    use plat 
+    use datm_defaults 
+ 
+    test_size='long'
+    #walltime=28800   # seconds
+    walltime=9000   # seconds
+
+    TEST_DESCR="datm-mom6-cice5 - cold start" 
+    CNTL_NAME='RT-Baselines_cold_start' 
+ 
+    CPLFLX='.T.' 
+    CPL='.true.'
+    DAYS='31'
+    FHMAX='744'
+    DT_ATMOS='900'
+
+    #C384
+    IATM='1536'
+    JATM='768'
+    #Benchmark Nemsio, forecast hour increment
+    NEMSIO_SRC="BenchNemsio"
+    FILENAME_BASE='gfs.'
+    NFHOUT='6'
+
+    #C768
+    #IATM='3072'
+    #JATM='1536'
+    #Retro Nemsio, forecast hour increment
+    #NEMSIO_SRC="RetroNemsio"
+    #FILENAME_BASE='gdas.'
+    #NFHOUT='3'
+ 
+    RUNNAME=NEMSIO_SRC
+
+     SYEAR='2013'
+    SMONTH='07'
+      SDAY='01'
+     SHOUR='00'
+     #YYYYMMDDHH
+     CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
+
+    #For CICE5 ice_in 
+    DT_CICE='900'
+    RUNTYPE='initial'
+    # no restart
+    DUMPFREQ_N='35'
+    DUMPFREQ='d'
+    
+    #For MOM6
+    # to NOT dump a restart at the end of coldstart
+    # this doesn't seem to take effect, even when it is set
+    #WRITE_RESTART_MOM6='-1'
+    WRITE_RESTART_MOM6='1'
+    
+    #For MOM6
+    DT_THERM_MOM6='3600'
+    DT_DYNAM_MOM6='900'
+    
+    CPL_SLOW='3600'
+    CPL_FAST='900'
+    
+       COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
+    RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"       # Test work area 
+      CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area 
+
+         BL_INPUTS="@[plat%INPUTS]"
+
+            NEMSRC="/scratch4/NCEPDEV/ocean/save/Denise.Worthen/NEMS_INPUT0.1"
+        CICE_INPUT="@[NEMSRC]/cice_data/mx024"
+    Bin_input_data="/scratch4/NCEPDEV/nems/noscrub/Bin.Li/FROM_HPSS/@[CDATE]"
+        DATM_INPUT="@[NEMSRC]/DATM/@[NEMSIO_SRC]/@[CDATE]"
+
+          RTSRC="/scratch3/NCEPDEV/stmp2/Denise.Worthen/DATMRuns"
+           CSET="cpld_datm_mom6_cice_cold"
+             RT="@[RUNNAME]_cold_@[CDATE]/tmp"
+    RESTART_DIR="@[RTSRC]/@[RT]/@[CSET]"      #for mediator restarts only
+    
+    build=datm_mom6_cice.exe 
+ 
+    #prep=datm_prep( 
+    #    RUNDIR="@[RUNDIR]",modules="@[datm_mom6_cice.exe%modules.nems]", 
+    #    CNTL="@[CNTL]") 
+ 
+    prep=restart_from_coldstart(
+            RUNDIR="@[RUNDIR]",
+           modules="@[build%modules.nems]",
+        DATM_INPUT="@[DATM_INPUT]",
+              CNTL="@[CNTL]",
+       RESTART_DIR="@[RESTART_DIR]")
+
+    # - set total number of tasks to satisfy coupled application need 
+    TASKS=414
+    
+    nems_configure='med_atm_ocn_ice'
+    med_model='nems'
+    med_petlist_bounds="0 149"
+    atm_model='datm'
+    atm_petlist_bounds="0 149"
+    ocn_model='mom6'
+    ocn_petlist_bounds="150 389"
+    ice_model='cice'
+    ice_petlist_bounds="390 413"
+    coupling_interval_slow_sec="@[CPL_SLOW]"
+    coupling_interval_fast_sec="@[CPL_FAST]"
+
+    # move to
+    DESTNAM="@[RUNNAME]_30d_@[CDATE]"
+    DESTDIR="/scratch3/NCEPDEV/stmp2/Denise.Worthen/DATMRuns/@[DESTNAM]"
+    
+    filters input { 
+      #    WORK FILE  <=filter=   SOURCE FILE 
+                  'input.nml'  <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
+            'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
+             'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
+                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
+         'INPUT/MOM6_IC_TS.nc' <=copy=     "@[BL_INPUTS]/MOM6_IC/MOM6_IC_TS.nc"
+         'INPUT/grid_spec.nc'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/grid_spec.nc"
+                 'diag_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table"
+                 'data_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
+#for field availability
+            'datm_data_table'  <=copy=     "@[NEMSRC]/DATM/@[NEMSIO_SRC]/data_table.IN"
+#only the grid and mask from the Baseline
+    'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
+    'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
+#replace Baseline inputs; the ice_in expects a generic name for the restart file
+         'cice5_model.res.nc'  <=copy=     "@[Bin_input_data]/cice5_model_0.25.res_@[CDATE].nc"
+        'INPUT/MOM6_IC_TS.nc'  <=copy=     "@[Bin_input_data]/MOM6_IC_TS_@[CDATE].nc"
+#this ice_in_template will be edited in the prerun==>ice_in 
+            'ice_in_template'  <=copy=     "@[NEMSRC]/cice_data/mx024/ice_in_template"
+#this diag_table_template will be edited in the prerun==>diag_table 
+        'diag_table_template'  <=copy=     "@[NEMSRC]/mom6_data/diag_table_template"
+#        'diag_table_template'  <=copy=     "@[NEMSRC]/diag_table_template"
+#this MOM_input_template will be edited in the prerun==>INPUT/MOM_input 
+   'INPUT/MOM_input_template'  <=copy=     "@[NEMSRC]/mom6_data/MOM_input_template"
+#replace with coldstart restart
+         'cice5_model.res.nc'  <=copy=     "@[RESTART_DIR]/restart/iced.@[SYEAR]-@[SMONTH]-@[SDAY]-03600.nc"
+    } 
+ 
+    prerun=edit_inputs(CDATE="@[CDATE]",
+                     DT_CICE="@[DT_CICE]",
+                     RUNTYPE="@[RUNTYPE]",
+                  DUMPFREQ_N="@[DUMPFREQ_N]",
+                    DUMPFREQ="@[DUMPFREQ]",
+                    DT_THERM="@[DT_THERM_MOM6]",
+                    DT_DYNAM="@[DT_DYNAM_MOM6]",
+                 WRT_RESTART="@[WRITE_RESTART_MOM6]")
+
+    # Specify output files:
+    criteria output {
+        # WORKFILE                            .comparison. TARGET
+
+      # Executable validation.  This makes an MD5 sum of the datm.exe
+      # for comparison against the MD5 sum made in the build job.
+      # This is to ensure the executable did not change during the
+      # test suite.
+        "@[build%target]" .md5cmp. "@[datm_mom6_cice.exe%md5sum]" 
+    }
+ 
+    spawn execute { 
+        # Run the  
+        {"@[build%target]", ranks="@[TASKS]" } 
+    }
+
+   verify=move_output(TMPrt="@[TMPrt]",
+                   TESTNAME="@[TEST_NAME]",
+                    DESTDIR="@[DESTDIR]")
+}
