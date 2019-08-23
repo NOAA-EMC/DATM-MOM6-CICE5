@@ -1,9 +1,6 @@
 [submodule "DataComps"]
 	path = DataComps
 	url = gerrit:EMC_NEMSdatacomps
-[submodule "NEMS"]
-	path = NEMS
-	url = gerrit:NEMS
 [submodule "CICE_SRC"]
 	path = CICE_SRC
 	url = gerrit:EMC_CICE
@@ -13,3 +10,6 @@
 [submodule "FMS"]
 	path = FMS
 	url = git://github.com/NOAA-EMC/FMS
+[submodule "NEMS"]
+	path = NEMS
+	url = git@github.com:NOAA-EMC/NEMS.git

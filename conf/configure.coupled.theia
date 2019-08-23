@@ -44,7 +44,7 @@ LD = mpiifort -mkl=sequential
 # flags #
 #########
 # default is 64-bit OpenMP non-hydrostatic build using AVX2
-DEBUG =
+DEBUG = Y 
 REPRO =
 VERBOSE =
 OPENMP = Y

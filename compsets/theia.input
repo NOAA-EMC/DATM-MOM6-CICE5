@@ -1,0 +1,80 @@
+
+########################################################################
+
+# THEIA SUPPORT
+
+platform theia {   # SLURM support
+    use platform.defaults
+    MACHINE_ID='theia' # Name of this platform.
+    PARTITION='theia'
+    MPI='srun'
+
+    CPU_ACCOUNT='nems'
+    BUILD_QUEUE='&BUILDQ;' # Queue to use for compilation jobs
+    SHORT_TEST_QUEUE='&SHORTQ;' # Queue to use for short test jobs
+    LONG_TEST_QUEUE='&LONGQ;' # Queue to use for long test jobs
+
+    cores_per_node=24 # Number of cores per node on compute nodes
+    cpus_per_core=2
+
+    # The *nems locations are in NEMS checkout areas.
+    HOMEnems=PWD_UP5
+
+    # The *rt locations are auto-generated areas.
+    HOMErt=OUTPUT_PATH
+
+    # INPUTS is the input directory, which should contain fix and parm
+    # files, plus any restarts or other inputs.
+
+
+    BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/master-20190812"
+    BASELINE_TEMPLATE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/master-20190812"
+    INPUTS="@[BASELINE]"
+
+    # PLATFORM DETECTION -----------------------------------------------
+    embed bash detect [[[
+        # This function is used at PARSE TIME to detect whether we are
+        # on NOAA Theia.  It must be very fast and low resource usage
+        # since the parser runs it.
+        if ( ! which sbatch > /dev/null 2>&1 ) ; then
+            exit 1
+        fi
+        if [[ -d /scratch3 && -d /scratch4 && -d /contrib ]] ; then
+            exit 0
+        fi
+        exit 1
+    ]]]
+
+    # ROCOTO SUPPORT ---------------------------------------------------
+    rocoto={
+        install_dir="@[HOMErt]"
+        log_dir="@[TMPrt]/log"
+        scheduler="slurm"
+        entities=[[[
+  <!ENTITY SHORTQ "debug">
+  <!ENTITY LONGQ "debug">
+  <!ENTITY BUILDQ "debug"> <!-- NOTE: If you change this, you must change the partition too -->
+]]]
+        build_resources=[[[
+      <!-- Build job resources minus wallclock -->
+      <queue>@[BUILD_QUEUE]</queue>
+      <partition>@[PARTITION]</partition>
+      <cores>12</cores> <!-- 2 cores ensures exclusive access on Theia -->
+      <envar><name>PRODUTIL_RUN_NODESIZE</name><value>@[cores_per_node]</value></envar>
+]]]
+        short_test_resources=[[[
+      <!-- Short test job -->
+      <queue>@[SHORT_TEST_QUEUE]</queue>
+      <partition>@[PARTITION]</partition>
+      <memory></memory> <!-- Unlimited memory -->
+      <envar><name>PRODUTIL_RUN_NODESIZE</name><value>@[cores_per_node]</value></envar>
+]]]
+        long_test_resources=[[[
+      <!-- Long test job -->
+      <queue>@[LONG_TEST_QUEUE]</queue>
+      <partition>@[PARTITION]</partition>
+      <memory></memory> <!-- Unlimited memory -->
+      <envar><name>PRODUTIL_RUN_NODESIZE</name><value>@[cores_per_node]</value></envar>
+]]]
+    }
+}

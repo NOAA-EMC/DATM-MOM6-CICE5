@@ -1,7 +1,7 @@
 # DEFAULTS VALUES OVERRIDDEN BY PLATFORMS
 
 platform.defaults={
-    BUILD_WALLTIME=3600 # Wallclock limit in seconds for build jobs
+    BUILD_WALLTIME=1800 # Wallclock limit in seconds for build jobs
     DEFAULT_TEST_WALLTIME=1800 # Default wallclock limit in seconds for test jobs
 
     SRCnems="@[HOMEnems]/NEMS/src"
@@ -29,77 +29,8 @@ platform.defaults={
 #load 'wcoss.input'
 #load 'jet.input'
 #load 'gaea.input'
+load 'theia.input'
 
-########################################################################
-
-# THEIA SUPPORT
-
-platform theia {
-    use platform.defaults
-    MACHINE_ID='theia' # Name of this platform.
-
-    MPI='impi'
-
-    CPU_ACCOUNT='nems'
-    BUILD_QUEUE='&BUILDQ;' # Queue to use for compilation jobs
-    SHORT_TEST_QUEUE='&SHORTQ;' # Queue to use for short test jobs
-    LONG_TEST_QUEUE='&LONGQ;' # Queue to use for long test jobs
-
-    cores_per_node=24 # Number of cores per node on compute nodes
-    cpus_per_core=2
-
-    # The *nems locations are in NEMS checkout areas.
-    HOMEnems=PWD_UP5
-
-    # The *rt locations are auto-generated areas.
-    HOMErt=OUTPUT_PATH
-
-    # INPUTS is the input directory, which should contain fix and parm
-    # files, plus any restarts or other inputs.
-    BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/benchmark-20180913"
-    BASELINE_TEMPLATE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/DATM-MOM6-CICE5/benchmark-20180913"
-    INPUTS="@[BASELINE]"
-
-    # PLATFORM DETECTION -----------------------------------------------
-    embed bash detect [[[
-        # This function is used at PARSE TIME to detect whether we are
-        # on NOAA Theia.  It must be very fast and low resource usage
-        # since the parser runs it.
-        if [[ -d /scratch3 && -d /scratch4 && -d /contrib ]] ; then
-            exit 0
-        fi
-        exit 1
-    ]]]
-
-    # ROCOTO SUPPORT ---------------------------------------------------
-    rocoto={
-        install_dir="@[HOMErt]"
-        log_dir="@[TMPrt]/log"
-        scheduler="moabtorque"
-        entities=[[[
-  <!ENTITY SHORTQ "debug">
-  <!ENTITY LONGQ "batch">
-  <!ENTITY BUILDQ "service">
-]]]
-        build_resources=[[[
-      <!-- Build job resources minus wallclock -->
-      <queue>@[BUILD_QUEUE]</queue>
-      <memory></memory>
-      <cores>1</cores>
-]]]
-        short_test_resources=[[[
-    <!-- Short test job -->
-    <queue>@[SHORT_TEST_QUEUE]</queue>
-    <memory></memory> <!-- Unlimited memory -->
-]]]
-        long_test_resources=[[[
-    <!-- Long test job -->
-    <queue>@[LONG_TEST_QUEUE]</queue>
-    <memory></memory> <!-- Unlimited memory -->
-]]]
-    }
-
-}
 
 ########################################################################
 
