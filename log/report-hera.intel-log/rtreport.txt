@@ -1,0 +1,65 @@
+Run rocotostat...
+Generate report...
+WORKFLOW STARTED AT Thu Oct 17 14:59:17 2019 (+1571324357)
+Repository information:
+
+
+REPO TOP:
+feature/gaea                 65ededd [origin/feature/gaea]  	modified:   CICE_SRC  	modified:   DataComps  	modified:   MOM6  	modified:   NEMS  	modified:   compsets/cpld_datm_mom6_cice_cold  	modified:   CICE_SRC (untracked content)  	modified:   DataComps (untracked content)  	modified:   FMS (untracked content)  	modified:   MOM6 (untracked content)  	modified:   NEMS (untracked content)  	CICE.install.md5sum.gaea  	DATM.install.md5sum.gaea
+Fetch URL: gerrit:EMC_DATM-MOM6-CICE5
+M  MOM6
+ M compsets/all.input
+ M compsets/mom6cice5datm.input
+D  compsets/theia.input
+R  conf/configure.coupled.hera -> conf/configure.coupled.hera.intel
+D  conf/configure.coupled.theia
+R  conf/configure.datm.theia -> conf/configure.datm.hera
+ M coupled_DATM_MOM6_CICE.appBuilder
+R  modulefiles/hera/coupled -> modulefiles/hera.intel/coupled
+D  modulefiles/theia/coupled
+D  modulefiles/theia/standalone
+
+Entering 'CICE_SRC'
+develop fad2655 [origin/develop] Merge pull request #2 from JessicaMeixner-NOAA/hera
+Fetch URL: https://github.com/NOAA-EMC/CICE5
+
+Entering 'DataComps'
+master 1848cd8 [origin/master] correct Makefile
+Fetch URL: gerrit:EMC_NEMSdatacomps
+
+Entering 'FMS'
+(HEAD detached at d4937c8) d4937c8 mpp/include/mpp_gather.h: bugfix/workaround for Intel18 compiler, already in NOAA-GFDL/FMS master
+Fetch URL: https://github.com/NOAA-EMC/FMS
+
+Entering 'MOM6'
+master c0394b7 [origin/master] pointing MOM6 to tag EMC_MOM6_2019OCT04 which corresponding to GFDL dev-master-candidate-2019-08-30 modify compile.sh as there are file name changes in nuopc_driver directory
+Fetch URL: https://github.com/EMC-MOM6/NEMS-MOM6-FMS
+
+Entering 'NEMS'
+(HEAD detached at e05bf2a) e05bf2a Merge pull request #2 from DeniseWorthen/feature/separate_fluxes
+Fetch URL: https://github.com/NOAA-EMC/NEMS
+
+
+BUILD datm_mom6_cice.exe: SUCCEEDED
+
+TEST #1: PASS
+  Test cpld_datm_mom6_cice_5d starting at Thu Oct 17 15:11:26 UTC 2019 (datm-mom6-cice5 - 5day run)
+  Thu Oct 17 15:11:26 UTC 2019
+  Executable did not change during test suite:
+    File: /scratch1/NCEPDEV/stmp2/Jessica.Meixner/rtgen.376482/exec/datm_mom6_cice.exe
+    Expected md5sum: 2f87df783e6823fa4206dcd7f60c6753
+    Actual md5sum: 2f87df783e6823fa4206dcd7f60c6753
+  TEST PASSED AT Thu Oct 17 15:31:39 UTC 2019
+
+TEST #2: PASS
+  Test cpld_datm_mom6_cice_cold starting at Thu Oct 17 15:11:36 UTC 2019 (datm-mom6-cice5 - cold start)
+  Thu Oct 17 15:11:36 UTC 2019
+  Executable did not change during test suite:
+    File: /scratch1/NCEPDEV/stmp2/Jessica.Meixner/rtgen.376482/exec/datm_mom6_cice.exe
+    Expected md5sum: 2f87df783e6823fa4206dcd7f60c6753
+    Actual md5sum: 2f87df783e6823fa4206dcd7f60c6753
+  TEST PASSED AT Thu Oct 17 15:16:37 UTC 2019
+WORKFLOW REPORT AT Thu Oct 17 15:32:25 2019 (+1571326345)
+Tests: 0 failed, 2 passed out of 2
+Builds: 0 failed, 1 passed out of 1
+REGRESSION TEST WAS SUCCESSFUL

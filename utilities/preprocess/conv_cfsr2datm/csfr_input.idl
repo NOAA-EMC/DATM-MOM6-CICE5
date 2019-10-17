@@ -1,0 +1,209 @@
+;*************************************************************
+; IDL script for reading NetCDF file:
+;*************************************************************
+
+print, 'Warning:  If you have moved csfr_input.nc from /gpfs/dell2/emc/modeling/noscrub/Hyun-Chul.Lee/CFSR/Tmp/'+string(10B)+$
+	string(9B)+'idl will not be able to open the file unless you modify'+$
+	string(10B)+string(9B)+'the NCDF_OPEN line in this script to reflect the new path.'
+
+ncid = NCDF_OPEN('/gpfs/dell2/emc/modeling/noscrub/Hyun-Chul.Lee/CFSR/Tmp/csfr_input.nc')            ; Open The NetCDF file
+
+NCDF_VARGET, ncid,  0, latitude      ; Read in variable 'latitude'
+
+NCDF_VARGET, ncid,  1, longitude      ; Read in variable 'longitude'
+
+NCDF_VARGET, ncid,  2, time      ; Read in variable 'time'
+
+NCDF_VARGET, ncid,  3, UFLX_surface      ; Read in variable 'UFLX_surface'
+
+NCDF_VARGET, ncid,  4, VFLX_surface      ; Read in variable 'VFLX_surface'
+
+NCDF_VARGET, ncid,  5, SHTFL_surface      ; Read in variable 'SHTFL_surface'
+
+NCDF_VARGET, ncid,  6, LHTFL_surface      ; Read in variable 'LHTFL_surface'
+
+NCDF_VARGET, ncid,  7, TMP_surface      ; Read in variable 'TMP_surface'
+
+NCDF_VARGET, ncid,  8, SOILW_0M0D1mbelowground      ; Read in variable 'SOILW_0M0D1mbelowground'
+
+NCDF_VARGET, ncid,  9, SOILW_0D1M0D4mbelowground      ; Read in variable 'SOILW_0D1M0D4mbelowground'
+
+NCDF_VARGET, ncid,  10, TMP_0M0D1mbelowground      ; Read in variable 'TMP_0M0D1mbelowground'
+
+NCDF_VARGET, ncid,  11, TMP_0D1M0D4mbelowground      ; Read in variable 'TMP_0D1M0D4mbelowground'
+
+NCDF_VARGET, ncid,  12, WEASD_surface      ; Read in variable 'WEASD_surface'
+
+NCDF_VARGET, ncid,  13, DLWRF_surface      ; Read in variable 'DLWRF_surface'
+
+NCDF_VARGET, ncid,  14, ULWRF_surface      ; Read in variable 'ULWRF_surface'
+
+NCDF_VARGET, ncid,  15, ULWRF_topofatmosphere      ; Read in variable 'ULWRF_topofatmosphere'
+
+NCDF_VARGET, ncid,  16, USWRF_topofatmosphere      ; Read in variable 'USWRF_topofatmosphere'
+
+NCDF_VARGET, ncid,  17, USWRF_surface      ; Read in variable 'USWRF_surface'
+
+NCDF_VARGET, ncid,  18, DSWRF_surface      ; Read in variable 'DSWRF_surface'
+
+NCDF_VARGET, ncid,  19, DUVB_surface      ; Read in variable 'DUVB_surface'
+
+NCDF_VARGET, ncid,  20, CDUVB_surface      ; Read in variable 'CDUVB_surface'
+
+NCDF_VARGET, ncid,  21, TCDC_highcloudlayer      ; Read in variable 'TCDC_highcloudlayer'
+
+NCDF_VARGET, ncid,  22, PRES_highcloudtoplevel      ; Read in variable 'PRES_highcloudtoplevel'
+
+NCDF_VARGET, ncid,  23, PRES_highcloudbottomlevel      ; Read in variable 'PRES_highcloudbottomlevel'
+
+NCDF_VARGET, ncid,  24, TMP_highcloudtoplevel      ; Read in variable 'TMP_highcloudtoplevel'
+
+NCDF_VARGET, ncid,  25, TCDC_middlecloudlayer      ; Read in variable 'TCDC_middlecloudlayer'
+
+NCDF_VARGET, ncid,  26, PRES_middlecloudtoplevel      ; Read in variable 'PRES_middlecloudtoplevel'
+
+NCDF_VARGET, ncid,  27, PRES_middlecloudbottomlevel      ; Read in variable 'PRES_middlecloudbottomlevel'
+
+NCDF_VARGET, ncid,  28, TMP_middlecloudtoplevel      ; Read in variable 'TMP_middlecloudtoplevel'
+
+NCDF_VARGET, ncid,  29, TCDC_lowcloudlayer      ; Read in variable 'TCDC_lowcloudlayer'
+
+NCDF_VARGET, ncid,  30, PRES_lowcloudtoplevel      ; Read in variable 'PRES_lowcloudtoplevel'
+
+NCDF_VARGET, ncid,  31, PRES_lowcloudbottomlevel      ; Read in variable 'PRES_lowcloudbottomlevel'
+
+NCDF_VARGET, ncid,  32, TMP_lowcloudtoplevel      ; Read in variable 'TMP_lowcloudtoplevel'
+
+NCDF_VARGET, ncid,  33, PRATE_surface      ; Read in variable 'PRATE_surface'
+
+NCDF_VARGET, ncid,  34, CPRAT_surface      ; Read in variable 'CPRAT_surface'
+
+NCDF_VARGET, ncid,  35, GFLUX_surface      ; Read in variable 'GFLUX_surface'
+
+NCDF_VARGET, ncid,  36, LAND_surface      ; Read in variable 'LAND_surface'
+
+NCDF_VARGET, ncid,  37, ICEC_surface      ; Read in variable 'ICEC_surface'
+
+NCDF_VARGET, ncid,  38, UGRD_10maboveground      ; Read in variable 'UGRD_10maboveground'
+
+NCDF_VARGET, ncid,  39, VGRD_10maboveground      ; Read in variable 'VGRD_10maboveground'
+
+NCDF_VARGET, ncid,  40, TMP_2maboveground      ; Read in variable 'TMP_2maboveground'
+
+NCDF_VARGET, ncid,  41, SPFH_2maboveground      ; Read in variable 'SPFH_2maboveground'
+
+NCDF_VARGET, ncid,  42, PRES_surface      ; Read in variable 'PRES_surface'
+
+NCDF_VARGET, ncid,  43, TMAX_2maboveground      ; Read in variable 'TMAX_2maboveground'
+
+NCDF_VARGET, ncid,  44, TMIN_2maboveground      ; Read in variable 'TMIN_2maboveground'
+
+NCDF_VARGET, ncid,  45, QMAX_2maboveground      ; Read in variable 'QMAX_2maboveground'
+
+NCDF_VARGET, ncid,  46, QMIN_2maboveground      ; Read in variable 'QMIN_2maboveground'
+
+NCDF_VARGET, ncid,  47, WATR_surface      ; Read in variable 'WATR_surface'
+
+NCDF_VARGET, ncid,  48, PEVPR_surface      ; Read in variable 'PEVPR_surface'
+
+NCDF_VARGET, ncid,  49, CWORK_entireatmosphere_consideredasasinglelayer_      ; Read in variable 'CWORK_entireatmosphere_consideredasasinglelayer_'
+
+NCDF_VARGET, ncid,  50, UMGWD_surface      ; Read in variable 'UMGWD_surface'
+
+NCDF_VARGET, ncid,  51, VMGWD_surface      ; Read in variable 'VMGWD_surface'
+
+NCDF_VARGET, ncid,  52, HPBL_surface      ; Read in variable 'HPBL_surface'
+
+NCDF_VARGET, ncid,  53, PWAT_entireatmosphere_consideredasasinglelayer_      ; Read in variable 'PWAT_entireatmosphere_consideredasasinglelayer_'
+
+NCDF_VARGET, ncid,  54, ALBDO_surface      ; Read in variable 'ALBDO_surface'
+
+NCDF_VARGET, ncid,  55, TCDC_entireatmosphere_consideredasasinglelayer_      ; Read in variable 'TCDC_entireatmosphere_consideredasasinglelayer_'
+
+NCDF_VARGET, ncid,  56, TCDC_convectivecloudlayer      ; Read in variable 'TCDC_convectivecloudlayer'
+
+NCDF_VARGET, ncid,  57, TCDC_boundarylayercloudlayer      ; Read in variable 'TCDC_boundarylayercloudlayer'
+
+NCDF_VARGET, ncid,  58, ICETK_surface      ; Read in variable 'ICETK_surface'
+
+NCDF_VARGET, ncid,  59, SOILW_0D4M1mbelowground      ; Read in variable 'SOILW_0D4M1mbelowground'
+
+NCDF_VARGET, ncid,  60, SOILW_1M2mbelowground      ; Read in variable 'SOILW_1M2mbelowground'
+
+NCDF_VARGET, ncid,  61, TMP_0D4M1mbelowground      ; Read in variable 'TMP_0D4M1mbelowground'
+
+NCDF_VARGET, ncid,  62, TMP_1M2mbelowground      ; Read in variable 'TMP_1M2mbelowground'
+
+NCDF_VARGET, ncid,  63, SOILL_0M0D1mbelowground      ; Read in variable 'SOILL_0M0D1mbelowground'
+
+NCDF_VARGET, ncid,  64, SOILL_0D1M0D4mbelowground      ; Read in variable 'SOILL_0D1M0D4mbelowground'
+
+NCDF_VARGET, ncid,  65, SOILL_0D4M1mbelowground      ; Read in variable 'SOILL_0D4M1mbelowground'
+
+NCDF_VARGET, ncid,  66, SOILL_1M2mbelowground      ; Read in variable 'SOILL_1M2mbelowground'
+
+NCDF_VARGET, ncid,  67, SNOD_surface      ; Read in variable 'SNOD_surface'
+
+NCDF_VARGET, ncid,  68, CNWAT_surface      ; Read in variable 'CNWAT_surface'
+
+NCDF_VARGET, ncid,  69, SFCR_surface      ; Read in variable 'SFCR_surface'
+
+NCDF_VARGET, ncid,  70, VEG_surface      ; Read in variable 'VEG_surface'
+
+NCDF_VARGET, ncid,  71, VGTYP_surface      ; Read in variable 'VGTYP_surface'
+
+NCDF_VARGET, ncid,  72, SOTYP_surface      ; Read in variable 'SOTYP_surface'
+
+NCDF_VARGET, ncid,  73, SLTYP_surface      ; Read in variable 'SLTYP_surface'
+
+NCDF_VARGET, ncid,  74, FRICV_surface      ; Read in variable 'FRICV_surface'
+
+NCDF_VARGET, ncid,  75, HGT_surface      ; Read in variable 'HGT_surface'
+
+NCDF_VARGET, ncid,  76, CRAIN_surface      ; Read in variable 'CRAIN_surface'
+
+NCDF_VARGET, ncid,  77, SFEXC_surface      ; Read in variable 'SFEXC_surface'
+
+NCDF_VARGET, ncid,  78, VEGT_surface      ; Read in variable 'VEGT_surface'
+
+NCDF_VARGET, ncid,  79, SSRUN_surface      ; Read in variable 'SSRUN_surface'
+
+NCDF_VARGET, ncid,  80, TMP_1hybridlevel      ; Read in variable 'TMP_1hybridlevel'
+
+NCDF_VARGET, ncid,  81, SPFH_1hybridlevel      ; Read in variable 'SPFH_1hybridlevel'
+
+NCDF_VARGET, ncid,  82, UGRD_1hybridlevel      ; Read in variable 'UGRD_1hybridlevel'
+
+NCDF_VARGET, ncid,  83, VGRD_1hybridlevel      ; Read in variable 'VGRD_1hybridlevel'
+
+NCDF_VARGET, ncid,  84, HGT_1hybridlevel      ; Read in variable 'HGT_1hybridlevel'
+
+NCDF_VARGET, ncid,  85, EVBS_surface      ; Read in variable 'EVBS_surface'
+
+NCDF_VARGET, ncid,  86, AKHS_surface      ; Read in variable 'AKHS_surface'
+
+NCDF_VARGET, ncid,  87, AKMS_surface      ; Read in variable 'AKMS_surface'
+
+NCDF_VARGET, ncid,  88, SBSNO_surface      ; Read in variable 'SBSNO_surface'
+
+NCDF_VARGET, ncid,  89, SNOWC_surface      ; Read in variable 'SNOWC_surface'
+
+NCDF_VARGET, ncid,  90, SOILM_0M2mbelowground      ; Read in variable 'SOILM_0M2mbelowground'
+
+NCDF_VARGET, ncid,  91, DSWRF_topofatmosphere      ; Read in variable 'DSWRF_topofatmosphere'
+
+NCDF_VARGET, ncid,  92, CSULF_topofatmosphere      ; Read in variable 'CSULF_topofatmosphere'
+
+NCDF_VARGET, ncid,  93, CSUSF_topofatmosphere      ; Read in variable 'CSUSF_topofatmosphere'
+
+NCDF_VARGET, ncid,  94, CSDLF_surface      ; Read in variable 'CSDLF_surface'
+
+NCDF_VARGET, ncid,  95, CSUSF_surface      ; Read in variable 'CSUSF_surface'
+
+NCDF_VARGET, ncid,  96, CSDSF_surface      ; Read in variable 'CSDSF_surface'
+
+NCDF_VARGET, ncid,  97, CSULF_surface      ; Read in variable 'CSULF_surface'
+
+NCDF_VARGET, ncid,  98, SNOHF_surface      ; Read in variable 'SNOHF_surface'
+
+NCDF_CLOSE, ncid      ; Close the NetCDF file

@@ -1,4 +1,8 @@
-#
+load 'platforms.input'
+load 'nemscommon.input'
+
+########################################################################
+
 build datm_mom6_cice.exe { 
     # Use NEMSAppBuilder to build a coupled app.   
     use plat 

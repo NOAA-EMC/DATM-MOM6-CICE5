@@ -1,6 +1,3 @@
-load 'platforms.input'
-load 'nemscommon.input'
-
 load 'mom6cice5datm.input'
 
 run cpld_datm_mom6_cice_cold @ coupled, cold,    standard, baseline

@@ -29,7 +29,7 @@ platform.defaults={
 #load 'wcoss.input'
 #load 'jet.input'
 #load 'gaea.input'
-load 'theia.input'
+load 'hera.input'
 
 
 ########################################################################
@@ -38,4 +38,4 @@ load 'theia.input'
 # from each of the listed platforms.
 
 #autodetect plat (/ gaea.c3, gaea.c4, xjet, wcoss.cray, theia, wcoss.phase2, wcoss.phase1 /)
-autodetect plat (/ theia /)
+autodetect plat (/ hera.intel /)

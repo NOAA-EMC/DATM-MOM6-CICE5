@@ -1,6 +1,6 @@
 ## NEMS configuration file
 ##
-## Platform: Theia
+## Platform: Hera
 ## Compiler: Intel with IntelMPI
 
 SHELL=/bin/sh
@@ -97,8 +97,11 @@ FFLAGS += -i4 -real-size 64 -no-prec-div -no-prec-sqrt
 endif
 
 ifeq ($(AVX2),Y)
-FFLAGS += -xCORE-AVX2 -qno-opt-dynamic-align
-CFLAGS += -xCORE-AVX2 -qno-opt-dynamic-align
+# Don't use the AVX512 flags yet on hera
+#FFLAGS += -xCORE-AVX2 -qno-opt-dynamic-align
+#CFLAGS += -xCORE-AVX2 -qno-opt-dynamic-align
+FFLAGS += -xHOST -qno-opt-dynamic-align
+CFLAGS += -xHOST -qno-opt-dynamic-align
 else
 FFLAGS += -xHOST -qno-opt-dynamic-align
 CFLAGS += -xHOST -qno-opt-dynamic-align
@@ -168,3 +171,5 @@ FFLAGS += $(ESMF_INC)
 CPPFLAGS += -traditional
 EXTLIBS = $(NCEPLIBS) $(ESMF_LIB) $(LDFLAGS) $(NETCDF_LIB)
 endif
+
+
