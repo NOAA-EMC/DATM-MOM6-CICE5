@@ -39,5 +39,5 @@ datm_defaults = {
 # Available compsets
 
 load 'cpld_datm_mom6_cice_cold'
-load 'cpld_datm_mom6_cice_5d'
-load 'cpld_datm_mom6_cice_30d'
+load 'cpld_datm_mom6_cice_3d'
+load 'cpld_datm_mom6_cice_hot'

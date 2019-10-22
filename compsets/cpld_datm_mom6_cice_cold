@@ -19,37 +19,26 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     CPL='.true.'
     DAYS='0.041666666'
     FHMAX='1'
-    DT_ATMOS='900'
+    DT_ATMOS='450'
     USE_RESTART_TIME='.false.'
 
+    #DATM Variables: 
+    IATM='1760'  #lon
+    JATM='880'   #lat
+    DATM_SRC="CFSR_v0"       #source of datm
+    FILENAME_BASE='cfsr.'    #prefix
+    NFHOUT='6'   #forecast hour increment
 
-    #C384
-    IATM='1536'
-    JATM='768'
-    #Benchmark Nemsio, forecast hour increment
-    NEMSIO_SRC="BenchNemsio"
-    FILENAME_BASE='gfs.'
-    NFHOUT='6'
-
-    #C768
-    #IATM='3072'
-    #JATM='1536'
-    #Retro Nemsio, forecast hour increment
-    #NEMSIO_SRC="RetroNemsio"
-    #FILENAME_BASE='gdas.'
-    #NFHOUT='3'
-
-    RUNNAME=NEMSIO_SRC
-
-     SYEAR='2013'
-    SMONTH='07'
+     SYEAR='2011'
+    SMONTH='10'
       SDAY='01'
      SHOUR='00'
-     #YYYYMMDDHH
      CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
+     YYYYMM="@[SYEAR]@[SMONTH]"
+
 
     #For CICE5 ice_in coldstart
-    DT_CICE='900'
+    DT_CICE="@[DT_ATMOS]"
     RUNTYPE='initial'
     NPROC_ICE='48'
     # to dump a restart at the end of coldstart
@@ -57,17 +46,20 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     DUMPFREQ='s'
     USE_RESTART_TIME='.false.'
     FRAZIL_FWSALT='.false.' #setting to true will allow Frazil FW and Salt to be included in fluxes sent to ocean
+    ICEICSOURCE='cfsr'
 
     #For MOM6
-    DT_THERM_MOM6='3600'
+    DT_THERM_MOM6='1800'
     DT_DYNAM_MOM6='900'
+    MOM6_RESTART_SETTING='r'
    
-    CPL_SLOW='3600'
-    CPL_FAST='900'
+    CPL_SLOW="@[DT_THERM_MOM6]"
+    CPL_FAST="@[DT_ATMOS]"
     
        COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area 
     RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"          # Test work area 
       CNTL="@[plat%BASELINE]/@[CNTL_NAME]"       # Control baseline area 
+   CNTLMED="@[plat%BASELINE]/MEDIATOR_@[CDATE]"  # Control/Mediator area
 
          BL_INPUTS="@[plat%INPUTS]"
 
@@ -99,20 +91,21 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
             'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
              'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
                     'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
+#do we even need the data_tabl? could it be a blank file..?" 
                  'data_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
 #DATM Files 
-            'datm_data_table'  <=copy=     "@[BL_INPUTS]/DATM/@[NEMSIO_SRC]/data_table.IN"
-               'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[NEMSIO_SRC]/@[CDATE]"
+            'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
+               'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[YYYYMM]"
 #grid and mask ice files
-    'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/grid_cice_NEMS_mx025.nc"
-    'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE/kmtu_cice_NEMS_mx025.nc"
+    'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
+    'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
 #IC/restart files for ice and ocean
-         'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE/cice5_model_0.25.res_@[CDATE].nc"
-        'INPUT/MOM6_IC_TS.nc'  <=copy=     "@[BL_INPUTS]/MOM6_IC/MOM6_IC_TS_@[CDATE].nc"
+         'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
+                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_IC/@[CDATE]"
 #the *_template files will be edited in the prerun
-            'ice_in_template'  <=copy=     "@[BL_INPUTS]/CICE/ice_in_template"
-        'diag_table_template'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/diag_table_template"
-   'INPUT/MOM_input_template'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/MOM_input_template"
+            'ice_in_template'  <=copy=     "@[PARMnems]/ice_in_template"
+        'diag_table_template'  <=copy=     "@[PARMnems]/diag_table_template"
+   'INPUT/MOM_input_template'  <=copy=     "@[PARMnems]/MOM_input_template"
     } 
  
     prerun=edit_inputs(CDATE="@[CDATE]",
@@ -128,8 +121,16 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
 
     # Specify output files:
     criteria output {
-        # WORKFILE                            .comparison. TARGET
-
+        # WORKFILE                      .comparison. TARGET
+        'mediator_FBaccumAtmOcn_restart.nc' .bitcmp. "@[CNTLMED]/"
+        'mediator_FBaccumAtm_restart.nc'    .bitcmp. "@[CNTLMED]/"
+        'mediator_FBaccumIce_restart.nc'    .bitcmp. "@[CNTLMED]/"
+        'mediator_FBaccumOcn_restart.nc'    .bitcmp. "@[CNTLMED]/"
+        'mediator_FBAtm_a_restart.nc'       .bitcmp. "@[CNTLMED]/"
+        'mediator_FBAtmOcn_o_restart.nc'    .bitcmp. "@[CNTLMED]/"
+        'mediator_FBIce_i_restart.nc'       .bitcmp. "@[CNTLMED]/"
+        'mediator_FBOcn_o_restart.nc'       .bitcmp. "@[CNTLMED]/"
+        'mediator_scalars_restart.txt'      .bitcmp. "@[CNTLMED]/"
       # Executable validation.  This makes an MD5 sum of the datm.exe
       # for comparison against the MD5 sum made in the build job.
       # This is to ensure the executable did not change during the

@@ -15,7 +15,7 @@ MED_attributes::
   DumpFields = false
   DumpRHs = false
   coldstart = false
-  restart_interval = 0
+  restart_interval = 86400
   ProfileMemory = false
 ::
 
@@ -32,7 +32,7 @@ OCN_model:                      @[ocn_model]
 OCN_petlist_bounds:             @[ocn_petlist_bounds]
 OCN_attributes::
   DumpFields = false
-  restart_interval = 9999999
+  restart_interval = 86400
   ProfileMemory = false
 ::
 

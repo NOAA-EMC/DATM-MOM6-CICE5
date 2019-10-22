@@ -1,6 +1,5 @@
 load 'mom6cice5datm.input'
 
-run cpld_datm_mom6_cice_cold @ coupled, cold,    standard, baseline
-run cpld_datm_mom6_cice_5d  @ coupled, warm5,    standard, baseline
-#run cpld_datm_mom6_cice_30d @ coupled, warm30,   standard, baseline
-
+run cpld_datm_mom6_cice_cold @ coupled, cold, standard, baseline
+run cpld_datm_mom6_cice_3d   @ coupled, warm, standard, baseline
+run cpld_datm_mom6_cice_hot   @ coupled, hot,  standard, baseline
