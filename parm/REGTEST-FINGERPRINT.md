@@ -18,3 +18,4 @@ Change log:
 
 * June 21, 2018 - Initial set-up
 * Oct. 18, 2019 - Adding CFSR DATM inputs
+* Nov. 06, 2019 - Updated CFSR DATM inputs

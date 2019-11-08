@@ -25,7 +25,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     #DATM Variables: 
     IATM='1760'  #lon
     JATM='880'   #lat
-    DATM_SRC="CFSR_v0"       #source of datm
+    DATM_SRC="CFSR"       #source of datm
     FILENAME_BASE='cfsr.'    #prefix
     NFHOUT='6'   #forecast hour increment
 
@@ -45,7 +45,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     DUMPFREQ_N='3600'
     DUMPFREQ='s'
     USE_RESTART_TIME='.false.'
-    FRAZIL_FWSALT='.false.' #setting to true will allow Frazil FW and Salt to be included in fluxes sent to ocean
+    FRAZIL_FWSALT='.true.' #setting to true will allow Frazil FW and Salt to be included in fluxes sent to ocean
     ICEICSOURCE='cfsr'
 
     #For MOM6
@@ -86,26 +86,22 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     coupling_interval_fast_sec="@[CPL_FAST]"
     
     filters input { 
-      #    WORK FILE  <=filter=   SOURCE FILE 
+               #    WORK FILE  <=filter=   SOURCE FILE 
                   'input.nml'  <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
             'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
              'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
                     'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
-#do we even need the data_tabl? could it be a blank file..?" 
-                 'data_table'  <=copy=     "@[BL_INPUTS]/MOM6_FIX_025deg/data_table"
-#DATM Files 
+                 'data_table'  <=copy=     "@[PARMnems]/data_table.IN"
             'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
                'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[YYYYMM]"
-#grid and mask ice files
     'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
     'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
-#IC/restart files for ice and ocean
          'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
                     'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_IC/@[CDATE]"
-#the *_template files will be edited in the prerun
             'ice_in_template'  <=copy=     "@[PARMnems]/ice_in_template"
         'diag_table_template'  <=copy=     "@[PARMnems]/diag_table_template"
    'INPUT/MOM_input_template'  <=copy=     "@[PARMnems]/MOM_input_template"
+         'INPUT/MOM_override'  <=copy=     "@[PARMnems]/MOM_override"
     } 
  
     prerun=edit_inputs(CDATE="@[CDATE]",
