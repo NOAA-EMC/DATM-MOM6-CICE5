@@ -1,1 +1,12 @@
 conv_gefs2datm
+
+
+Input data (GEFS) sources
+
+in HPSS : /3year/NCEPDEV/GEFSRR/gefsrr_replay_${YYYYstream}stream/${YYYYMMDDHH}.tar 
+in WCOSS : (venus)/gpfs/dell2/emc/modeling/noscrub/Hyun-Chul.Lee/GEFS/Reanal
+
+Output data (DATM) archive
+in HPSS : /5year/NCEPDEV/marineda/DATM_INPUT/GEFS/${YYYYMM}/gefs.${YYYYMMDDHH}.nc
+in Hera : /scratch2/NCEPDEV/marineda/DATM_INPUT/GEFS/${YYYYMM}/gefs.${YYYYMMDDHH}.nc 
+
