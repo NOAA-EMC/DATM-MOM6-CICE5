@@ -10,3 +10,21 @@ Output data (DATM) archive
 in HPSS : /5year/NCEPDEV/marineda/DATM_INPUT/GEFS/${YYYYMM}/gefs.${YYYYMMDDHH}.nc
 in Hera : /scratch2/NCEPDEV/marineda/DATM_INPUT/GEFS/${YYYYMM}/gefs.${YYYYMMDDHH}.nc 
 
+
+To conver from GEFS to DATM (netCDF),
+
+1) compile code 
+csh ./comp_f77_code.csh conv_gefs2datm
+
+2) modify the run script of conv_gefs2datm.fort.csh
+
+set sdir = !<-- source of GEFS
+set tdir = !<-- output dir
+set wdir = !<-- work dir
+etc
+
+set symd = 20130529 !<-- start date
+set eymd = 20190831 !<-- end date
+
+3) run the script
+csh ./conv_gefs2datm.fort.csh
