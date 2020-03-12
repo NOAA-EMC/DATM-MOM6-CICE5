@@ -1,0 +1,233 @@
+#---- Followings are missing or failed in opening GEFS NEMSio data from HPSS archive
+#---- hyun-chul.lee@noaa.gov
+
+Followings were all recovered from errors,  by gary.bates@noaa.gov
+
+
+2000103100 --> recovered (01/22)
+2000103118 --> recovered (01/23)
+2001121118 --> recovered (01/29)
+2004062712 --> recovered (01/29)
+2004062718 --> recovered (01/29)
+2004100500 --> recovered (01/29)
+2004100518 --> recovered (01/29)
+2005080512 --> recovered (01/29)
+2005082000 --> recovered (01/29)
+2005082200 --> recovered (01/29)
+2009080612 --> recovered (02/04)
+2009080618 --> recovered (02/04)
+2009080700 --> recovered (02/04)
+2010121512 --> recovered (02/04)
+2012120212 --> recovered (01/23)
+2013051800 --> recovered (02/04)
+2015022712 --> recovered (02/04)
+2015083018 --> recovered (02/04)
+2016043000 --> recovered (02/04)
+2017031512 --> recovered (02/04)
+2017031618 --> recovered (02/04)
+2017031812 --> recovered (02/04)
+2018041700 --> recovered (01/22)
+2019070806 --> recovered (02/04)
+
+
+#---- massages in error
+
+
+2000103100
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2000103100.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2000103100.tar 2000103100/bfg_2000103100_fhr00_control
+
+
+2000103118
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2000103118.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2000103118.tar 2000103118/bfg_2000103118_fhr00_control
+
+
+2001121118
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2001121118.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_1999stream/2001121118.tar 2001121118/bfg_2001121118_fhr00_control
+
+
+2004062712
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004062712.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004062712.tar 2004062712/bfg_2004062712_fhr00_control
+
+
+2004062718
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004062718.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004062718.tar 2004062718/bfg_2004062718_fhr00_control
+
+
+2004100500
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004100500.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004100500.tar 2004100500/bfg_2004100500_fhr00_control
+
+
+2004100518
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004100518.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2004100518.tar 2004100518/bfg_2004100518_fhr00_control
+
+
+2005080512
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005080512.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005080512.tar 2005080512/bfg_2005080512_fhr00_control
+
+
+2005082000
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005082000.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005082000.tar 2005082000/bfg_2005082000_fhr00_control
+
+
+2005082200
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005082200.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2003stream/2005082200.tar 2005082200/bfg_2005082200_fhr00_control
+
+
+2009080612
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080612.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080612.tar 2009080612/bfg_2009080612_fhr00_control
+
+
+2009080618
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080618.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080618.tar 2009080618/bfg_2009080618_fhr00_control
+
+
+2009080700
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080700.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2009080700.tar 2009080700/bfg_2009080700_fhr00_control
+
+
+2010121512
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2010121512.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2007stream/2010121512.tar 2010121512/bfg_2010121512_fhr00_control
+
+
+2012120212
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2012120212.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2012120212.tar 2012120212/bfg_2012120212_fhr00_control
+
+
+2013051800
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2013051800.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2013051800.tar 2013051800/bfg_2013051800_fhr00_control
+
+
+2015022712
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] Archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2015022712.tar size = 23691833856
+ERROR:        is inconsistent with size of 23691907584 from Index File /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2015022712.tar.idx
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2015022712.tar 2015022712/bfg_2015022712_fhr00_control
+
+
+2015083018
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2015083018.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2011stream/2015083018.tar 2015083018/bfg_2015083018_fhr00_control
+
+
+2016043000
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2016043000.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2016043000.tar 2016043000/bfg_2016043000_fhr00_control
+
+
+2017031512
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031512.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031512.tar 2017031512/bfg_2017031512_fhr00_control
+
+
+2017031618
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+Opening archive file                 
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031618.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031618.tar 2017031618/bfg_2017031618_fhr00_control
+
+
+2017031812
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] error -5 opening HPSS archive file /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031812.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2017031812.tar 2017031812/bfg_2017031812_fhr00_control
+
+
+2018041700
+-rw-r--r-- 1 Hyun-Chul.Lee climate    262144 Dec 26 11:41 bfg_2018041700_fhr00_control
+-rw-r--r-- 1 Hyun-Chul.Lee climate 632302296 Sep  8 20:44 bfg_2018041706_fhr00_control
+-rw-r--r-- 1 Hyun-Chul.Lee climate 632302296 Sep  8 20:54 bfg_2018041712_fhr00_control
+-rw-r--r-- 1 Hyun-Chul.Lee climate 632302296 Sep  8 21:05 bfg_2018041718_fhr00_control
+ Error: 
+ NetCDF: Variable not found                                                     
+
+
+2019070806
+[connecting to hpsscore1.fairmont.rdhpcs.noaa.gov/1217]
+ERROR: [FATAL] no such HPSS archive file: /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2019070806.tar
+HTAR: HTAR FAILED
+###WARNING  htar returned non-zero exit status.
+            72 = /apps/hpss/bin/htar -T 4 -xvf /3year/NCEPDEV/GEFSRR/gefsrr_replay_2015stream/2019070806.tar 2019070806/bfg_2019070806_fhr00_control
+
+
+
+
+
