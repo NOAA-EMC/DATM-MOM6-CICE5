@@ -1,7 +1,6 @@
 #! /bin/csh -x
 
 module load netcdf/4.6.1
-module load wgrib2/2.0.8
 
 set hdir = #<-- set home dir
 set sdir = #<-- set input source dir
