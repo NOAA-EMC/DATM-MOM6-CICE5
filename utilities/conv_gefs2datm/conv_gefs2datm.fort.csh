@@ -1,18 +1,17 @@
 #! /bin/csh -x
 
 module load netcdf/4.6.1
+module load wgrib2/2.0.8
 
 set hdir = #<-- set home dir
 set sdir = #<-- set input source dir
 set tdir = #<-- set dir for output
 set wdir = #<-- set work dir
-set grb2 = /home/Hyun-Chul.Lee/Tools/wgrib2
 
 #<-- set intial date
 set symd = 20130529
 #<-- set end date
 set eymd = 20190831
-
 
 cd $wdir
 
