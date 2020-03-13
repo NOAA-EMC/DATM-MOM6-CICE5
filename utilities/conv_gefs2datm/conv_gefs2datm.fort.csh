@@ -1,31 +1,16 @@
 #! /bin/csh -x
-#-- hyun-chul.lee@noaa.gov
 
-module load NetCDF/4.5.0
+module load netcdf/4.6.1
 
-set hdir = /scratch2/NCEPDEV/climate/Hyun-Chul.Lee/GEFS
-set sdir = ${hdir}/Reanal
-set tdir = ${hdir}/GEFS2DATM
-set wdir = ${hdir}/Work
+set hdir = #<-- set home dir
+set sdir = #<-- set input source dir
+set tdir = #<-- set dir for output
+set wdir = #<-- set work dir
 set grb2 = /home/Hyun-Chul.Lee/Tools/wgrib2
 
-#set symd = 20180101
-#set eymd = 20180131
-
-#set symd = 20130701
-#set eymd = 20130731
-
-#set symd = 20171001
-#set eymd = 20171031
-
-#set symd = 20000102
-#set eymd = 20031231
-
-#set symd = 20040102
-#set eymd = 20111231
-
-#set symd = 20120101
+#<-- set intial date
 set symd = 20130529
+#<-- set end date
 set eymd = 20190831
 
 
