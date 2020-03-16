@@ -17,7 +17,8 @@ C C We are reading
       integer NX,NY,NT,nerr,NDIM,i,j,k,NSTR
       parameter (NX = 1536, NY = 768, NT = 1, NDIM = 3)
       real*4 :: latitude(NY), longitude(NX)
-      integer time(NT),NF_64BIT_OFFSET,vi_indx
+C      integer time(NT),NF_64BIT_OFFSET,vi_indx
+      integer time(NT),vi_indx
       real coef,Tcel,Hn,term1,term2,g0,Rsp
       real, dimension(NX,NY,NT) ::
      &  dlwrf_avesfc,
