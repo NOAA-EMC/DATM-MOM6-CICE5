@@ -1,16 +1,17 @@
 #! /bin/csh -x
 
-module load netcdf/4.6.1
+module load intel
+module load netcdf
 
 set hdir = #<-- set home dir
 set sdir = #<-- set input source dir
 set tdir = #<-- set dir for output
 set wdir = #<-- set work dir
 
-#<-- set intial date
+#<-- set intial date YYYYMMDD
 set symd = 20130529
-#<-- set end date
-set eymd = 20190831
+#<-- set end date YYYYMMDD
+set eymd = 20190831 
 
 cd $wdir
 
@@ -32,4 +33,3 @@ ncdump gefs_output.nc | sed -e "5s#^.time = 1 ;#time = UNLIMITED ; // (1 current
   end
   set ymd = `date -d "${ymd} 1 day" +%Y%m%d`
 end
-
