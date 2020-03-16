@@ -1,4 +1,6 @@
 #! /bin/csh
+module load intel/19.0.4.243
+module load impi/2019.0.4
 
 set name = $1
 #--- in hera 
