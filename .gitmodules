@@ -3,13 +3,13 @@
 	url = https://github.com/NOAA-EMC/CICE5
 [submodule "FMS"]
 	path = FMS
-	url = https://github.com/NOAA-EMC/FMS
+	url = https://github.com/NOAA-GFDL/FMS
 [submodule "NEMS"]
 	path = NEMS
 	url = https://github.com/NOAA-EMC/NEMS
 [submodule "DATM"]
 	path = DATM
-	url = https://github.com/NOAA-EMC/NEMSdatm
+	url = https://github.com/DeniseWorthen/NEMSdatm
 [submodule "MOM6"]
 	path = MOM6
 	url = https://github.com/NOAA-EMC/MOM6-interface
