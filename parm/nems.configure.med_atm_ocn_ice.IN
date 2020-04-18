@@ -17,6 +17,7 @@ MED_attributes::
   coldstart = false
   restart_interval = 86400
   ProfileMemory = false
+  AoMedFlux = true
 ::
 
 # ATM #

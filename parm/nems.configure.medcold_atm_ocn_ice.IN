@@ -17,6 +17,7 @@ MED_attributes::
   DumpRHs = false
   coldstart = true
   ProfileMemory = false
+  AoMedFlux = true
 ::
 
 # ATM #
