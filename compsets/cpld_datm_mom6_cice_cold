@@ -49,8 +49,10 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     ICEICSOURCE='cfsr'
 
     #For MOM6
-    DT_THERM_MOM6='1800'
-    DT_DYNAM_MOM6='900'
+    #DT_THERM_MOM6='1800'
+    #DT_DYNAM_MOM6='900'
+    DT_THERM_MOM6='450'
+    DT_DYNAM_MOM6='450'
     MOM6_RESTART_SETTING='r'
    
     CPL_SLOW="@[DT_THERM_MOM6]"
@@ -74,12 +76,12 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     TASKS=360
     
     nems_configure='medcold_atm_ocn_ice'
-    med_model='nems'
-    med_petlist_bounds="0 71"
     atm_model='datm'
-    atm_petlist_bounds="0 71"
+    atm_petlist_bounds="0 43 "
+    med_model='nems'
+    med_petlist_bounds="44 191"
     ocn_model='mom6'
-    ocn_petlist_bounds="72 311"
+    ocn_petlist_bounds="192 311"
     ice_model='cice'
     ice_petlist_bounds="312 359"
     coupling_interval_slow_sec="@[CPL_SLOW]"

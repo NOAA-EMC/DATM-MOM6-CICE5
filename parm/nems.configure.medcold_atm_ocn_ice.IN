@@ -48,8 +48,6 @@ ICE_attributes::
 runSeq::
   @@[coupling_interval_slow_sec]
     @@[coupling_interval_fast_sec]
-      MED MedPhase_prep_atm
-      MED -> ATM :remapMethod=redist
       ATM
       ATM -> MED :remapMethod=redist
       MED MedPhase_prep_ice
