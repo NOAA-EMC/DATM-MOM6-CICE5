@@ -41,4 +41,4 @@ module load g2/3.1.1
 ## load ESMF library for above compiler / MPI combination
 ## use pre-compiled EMSF library for above compiler / MPI combination
 ##
-module load esmflocal/8.0.1.10bs
+module load esmflocal/8.0.0.para
