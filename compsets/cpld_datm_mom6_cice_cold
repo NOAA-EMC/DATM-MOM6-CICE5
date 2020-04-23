@@ -13,7 +13,7 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     use datm_defaults 
  
     TEST_DESCR="datm-mom6-cice5 - cold start" 
-    CNTL_NAME='RT-Baselines_cold_start' 
+    CNTL_NAME='RT-Baselines_cold_start_GEFS' 
  
     CPLFLX='.T.' 
     CPL='.true.'
@@ -23,10 +23,14 @@ test cpld_datm_mom6_cice_cold: datm_mom6_cice.exe {
     USE_RESTART_TIME='.false.'
 
     #DATM Variables: 
-    IATM='1760'  #lon
-    JATM='880'   #lat
-    DATM_SRC="CFSR"       #source of datm
-    FILENAME_BASE='cfsr.'    #prefix
+    #IATM='1760'  #lon
+    #JATM='880'   #lat
+    #DATM_SRC="CFSR"       #source of datm
+    #FILENAME_BASE='cfsr.'    #prefix
+    IATM=1536
+    JATM=768
+    DATM_SRC="GEFS"
+    FILENAME_BASE='gefs.'
     NFHOUT='6'   #forecast hour increment
 
      SYEAR='2011'
