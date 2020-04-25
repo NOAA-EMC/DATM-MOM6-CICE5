@@ -1,0 +1,43 @@
+    # - set total number of tasks to satisfy coupled application need 
+    TASKS=280
+    
+    # - nems.configure ---
+    nems_configure='medcold_atm_ocn_ice'
+    coupling_interval_slow_sec="@[CPL_SLOW]"
+    coupling_interval_fast_sec="@[CPL_FAST]"
+    
+    filters input { 
+               #    WORK FILE  <=filter=   SOURCE FILE 
+                  'input.nml'  <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
+            'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
+             'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
+                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
+                 'data_table'  <=copy=     "@[PARMnems]/data_table.IN"
+            'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
+               'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[SYEAR]@[SMONTH]"
+    'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
+    'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
+         'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
+                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_IC/@[CDATE]"
+            'ice_in_template'  <=copy=     "@[PARMnems]/ice_in_template"
+        'diag_table_template'  <=copy=     "@[PARMnems]/diag_table_template"
+   'INPUT/MOM_input_template'  <=copy=     "@[PARMnems]/MOM_input_template"
+         'INPUT/MOM_override'  <=copy=     "@[PARMnems]/MOM_override"
+    } 
+ 
+
+    # Edit the templates for the compset parameters
+    prerun=edit_inputs(CDATE="@[CDATE]",
+                     DT_CICE="@[DT_CICE]",
+                   NPROC_ICE="@[NPROC_ICE]",
+                     RUNTYPE="@[RUNTYPE]",
+            USE_RESTART_TIME="@[USE_RESTART_TIME]",
+               FRAZIL_FWSALT="@[FRAZIL_FWSALT]",
+                       RUNID="@[RUNID]",
+               CICE_HIST_AVG="@[CICE_HIST_AVG]",
+                  DUMPFREQ_N="@[DUMPFREQ_N]",
+                    DUMPFREQ="@[DUMPFREQ]",
+                    DT_THERM="@[DT_THERM_MOM6]",
+                    DT_DYNAM="@[DT_DYNAM_MOM6]",
+           MOM6_RIVER_RUNOFF="@[MOM6_RIVER_RUNOFF]")
+    

@@ -33,7 +33,8 @@ OCN_model:                      @[ocn_model]
 OCN_petlist_bounds:             @[ocn_petlist_bounds]
 OCN_attributes::
   DumpFields = false
-  restart_interval = 86400
+  restart_option = nhours
+  restart_n = 24
   ProfileMemory = false
 ::
 
@@ -53,8 +54,6 @@ runSeq::
     OCN
     @@[coupling_interval_fast_sec]
       MED MedPhase_prep_ice
-      MED MedPhase_prep_atm
-      MED -> ATM :remapMethod=redist
       MED -> ICE :remapMethod=redist
       ATM
       ICE

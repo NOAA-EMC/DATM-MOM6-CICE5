@@ -28,39 +28,17 @@ platform hera.intel {
 
     #BASELINE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/master-20191106"
     #BASELINE_TEMPLATE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/master-20191106"
-    BASELINE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/update-20200127"
-    BASELINE_TEMPLATE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/update-20200127"
+    BASELINE="/scratch2/NCEPDEV/climate/Denise.Worthen/update-20200425"
+    BASELINE_TEMPLATE="/scratch2/NCEPDEV/climate/Denise.Worthen/update-2020042"
     INPUTS="@[BASELINE]"
 
-    default_resources={
-        TASKS=150
+    default_cpl={
+        TASKS=280
         TPN=40
-        INPES=3
-        JNPES=8
-        THRD=1
-        WRTTASK_PER_GROUP=6
-        atm_petlist_bounds="0 149"
-        wav_petlist_bounds="150 191"
-        CPLTASKS=192
-    }
-    default_stretched_resources={
-        TASKS=48
-        TPN=12
-        INPES=2
-        JNPES=4
-        THRD=1
-    }
-    default_nested_resources={
-	use default_stretched_resources
-        TASKS=96
-    }
-    default_threaded_resources={
-        TASKS=84
-        TPN=20
-        INPES=3
-        JNPES=4
-        THRD=2
-        WRTTASK_PER_GROUP=12
+        atm_petlist_bounds="0 40"
+        med_petlist_bounds="40 111"
+        ocn_petlist_bounds="112 231"
+        ice_petlist_bounds="232 279"
     }
 
     # PLATFORM DETECTION -----------------------------------------------

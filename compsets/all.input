@@ -1,5 +1,10 @@
 load 'mom6cice5datm.input'
 
-#run cpld_datm_mom6_cice_cold @ coupled, cold, standard, baseline
-run cpld_datm_mom6_cice_3d   @ coupled, warm, standard, baseline
-#run cpld_datm_mom6_cice_hot   @ coupled, hot,  standard, baseline
+########################################################################
+#Run the standard Regression tests
+
+#run cpld_datm_mom6_cice5_cold_cfsr @ coupled, cold, standard, baseline
+#run cpld_datm_mom6_cice5_cold_gefs @ coupled, cold, standard, baseline
+
+run cpld_datm_mom6_cice5_2d_cfsr   @ coupled, warm, standard, baseline
+run cpld_datm_mom6_cice5_2d_gefs   @ coupled, warm, standard, baseline
