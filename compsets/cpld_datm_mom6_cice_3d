@@ -13,7 +13,7 @@ test cpld_datm_mom6_cice_3d: datm_mom6_cice.exe {
     use datm_defaults 
  
     TEST_DESCR="datm-mom6-cice5 - 3 day run" 
-    CNTL_NAME='RT-Baselines_3d' 
+    CNTL_NAME='RT-Baselines_3d_CFSR' 
  
     CPLFLX='.T.' 
     CPL='.true.'
