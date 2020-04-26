@@ -1,5 +1,5 @@
 ############################################################################
-# 3 day run starting on @CDATE 
+# 2 day run starting on @CDATE 
 ############################################################################
 
 test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe { 
@@ -48,6 +48,7 @@ test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe {
                  'data_table'  <=copy=     "@[PARMnems]/data_table"
             'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
                'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[SYEAR]@[SMONTH]"
+                'DATM_INPUT/'  <=copy=     "@[BL_INPUTS]/DATM/@[FILENAME_BASE]SCRIP.nc"
     'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
     'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
          'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
@@ -55,7 +56,7 @@ test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe {
             'ice_in_template'  <=copy=     "@[PARMnems]/ice_in_template"
         'diag_table_template'  <=copy=     "@[PARMnems]/diag_table_template"
    'INPUT/MOM_input_template'  <=copy=     "@[PARMnems]/MOM_input_template"
-                          '*'  <=copyfrom= "@[BL_INPUTS]/MEDIATOR_@[CDATE]"
+                          '*'  <=copyfrom= "@[BL_INPUTS]/MEDIATOR_@[DATM_SRC]"
     } 
  
 

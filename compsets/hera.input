@@ -35,8 +35,8 @@ platform hera.intel {
     default_cpl={
         TASKS=280
         TPN=40
-        atm_petlist_bounds="0 40"
-        med_petlist_bounds="40 111"
+        atm_petlist_bounds="0 15"
+        med_petlist_bounds="16 111"
         ocn_petlist_bounds="112 231"
         ice_petlist_bounds="232 279"
     }

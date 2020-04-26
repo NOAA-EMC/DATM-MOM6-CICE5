@@ -48,6 +48,7 @@ test cpld_datm_mom6_cice5_cold: datm_mom6_cice.exe {
                  'data_table'  <=copy=     "@[PARMnems]/data_table"
             'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
                'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[SYEAR]@[SMONTH]"
+                'DATM_INPUT/'  <=copy=     "@[BL_INPUTS]/DATM/@[FILENAME_BASE]SCRIP.nc"
     'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
     'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
          'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
