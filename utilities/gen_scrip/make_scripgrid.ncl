@@ -29,7 +29,7 @@ begin
  ;   dname = "GEFS"
  maskname = "slmsksfc"
 
-  gridsrc = "/scratch2/NCEPDEV/climate/Denise.Worthen/update-20200425/DATM/"
+  gridsrc = "/scratch2/NCEPDEV/marineda/godas_input/DATM_INPUT/"
  ; the file containing the grid center grid lat,lons
  gridfile = gridsrc+dname+"/201110/"+name+".2011100100.nc"
 
