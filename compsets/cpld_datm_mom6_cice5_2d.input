@@ -35,7 +35,7 @@ test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe {
     TASKS=280
     
     # - nems.configure ---
-    nems_configure='medcold_atm_ocn_ice'
+    nems_configure='med_atm_ocn_ice'
     coupling_interval_slow_sec="@[CPL_SLOW]"
     coupling_interval_fast_sec="@[CPL_FAST]"
     

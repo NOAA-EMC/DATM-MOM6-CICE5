@@ -29,7 +29,7 @@ platform hera.intel {
     #BASELINE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/master-20191106"
     #BASELINE_TEMPLATE="/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/master-20191106"
     BASELINE="/scratch2/NCEPDEV/climate/Denise.Worthen/update-20200425"
-    BASELINE_TEMPLATE="/scratch2/NCEPDEV/climate/Denise.Worthen/update-2020042"
+    BASELINE_TEMPLATE="/scratch2/NCEPDEV/climate/Denise.Worthen/update-20200425"
     INPUTS="@[BASELINE]"
 
     default_cpl={

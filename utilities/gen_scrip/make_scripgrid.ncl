@@ -29,10 +29,12 @@ begin
  ;   dname = "GEFS"
  maskname = "slmsksfc"
 
-  gridsrc = "/scratch2/NCEPDEV/marineda/godas_input/DATM_INPUT/"
+  gridsrc = "/scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/update-20200127/DATM/"
  ; the file containing the grid center grid lat,lons
  gridfile = gridsrc+dname+"/201110/"+name+".2011100100.nc"
-
+ ; the output directory for the generated SCRIP file
+   dirout = "/scratch2/NCEPDEV/climate/Denise.Worthen/update-20200425/DATM/"
+ 
  ; intermediate and temporary files
     fland = dname+"_imask.nc"
      fskl = dname+".skl"
@@ -46,10 +48,10 @@ begin
   if (isfilepresent("out.nc")) then
     system("rm out.nc")
   end if
-  print(fland)
-  print(fskl)
+  ;print(fland)
+  ;print(fskl)
  ; output SCRIP file
-  fscrip = gridsrc+name+".SCRIP.nc"
+  fscrip = dirout+name+".SCRIP.nc"
   ;Remove the file if it already existed.
   if (isfilepresent(fscrip)) then
     system("rm " + fscrip)
@@ -61,6 +63,7 @@ begin
  nckscmd = "ncks -v "+maskname+" "+gridfile+" "+fland
  print(nckscmd)
  system(nckscmd)
+ ; remove the time dimension
  nckscmd = "ncwa -O -a time "+fland+"  "+fland
  system(nckscmd)
  nckscmd = "ncks -O -x -v time "+fland+"  "+fland
@@ -73,6 +76,21 @@ begin
  lmask = gf->slmsksfc(:,:)
  grid_imask = tointeger(where(lmask .eq. 1, 1, 0))
  printVarSummary(grid_imask)
+
+ ; determine the N:S orientation of the grid
+ dims = getvardimnames(lmask)
+ ;print(dims)
+ if(str_lower(dims(0)) .eq. "lat" .or. dims(0) .eq. "latitude")then
+  lats = gf->$dims(0)$
+  ;print(lats)
+  ; define a string to set the lat_drc flag
+  if(lats(0) .gt. lats(1))then
+   n2s = "#lat_drc=n2s "
+   print("************* creating a  N:S grid with "+n2s+"*************")
+  else
+   n2s = " "
+  end if
+ end if
 
  ; obtain the grid size
  dims = dimsizes(lmask)
@@ -89,7 +107,7 @@ begin
  ;print(oned_imask)
 
  ; create the SCRIP file with the magic command
- nckscmd = "ncks -O --rgr skl="+fskl+" --rgr scrip="+fscrip+" --rgr latlon="+ny+","+nx+"#lat_typ=gss "+fland+"  out2.nc"
+  nckscmd = "ncks -O --rgr skl="+fskl+" --rgr scrip="+fscrip+" --rgr latlon="+ny+","+nx+"#lat_typ=gss"+n2s+fland+"  out2.nc"
  print(nckscmd)
  system(nckscmd)
 
@@ -100,4 +118,15 @@ begin
  ; replace and rewrite
  imask := oned_imask
  gf->grid_imask = (/imask/)
+
+ ; clean up
+     fskl = dname+".skl"
+  ;Remove the files if exist
+  if (isfilepresent(fskl)) then
+    system("rm " + fskl)
+  end if
+  if (isfilepresent("out2.nc")) then
+    system("rm out2.nc")
+  end if
+
 end
