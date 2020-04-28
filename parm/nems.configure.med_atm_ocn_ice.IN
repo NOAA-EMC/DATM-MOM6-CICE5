@@ -12,7 +12,7 @@ EARTH_attributes::
 MED_model:                      @[med_model]
 MED_petlist_bounds:             @[med_petlist_bounds]
 MED_attributes::
-  DumpFields = true
+  DumpFields = false
   DumpRHs = false
   coldstart = false
   restart_interval = 86400
