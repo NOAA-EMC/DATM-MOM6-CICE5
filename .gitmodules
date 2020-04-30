@@ -6,10 +6,10 @@
 	url = https://github.com/NOAA-GFDL/FMS
 [submodule "NEMS"]
 	path = NEMS
-	url = https://github.com/NOAA-EMC/NEMS
+	url = https://github.com/DeniseWorthen/NEMS
 [submodule "DATM"]
 	path = DATM
-	url = https://github.com/DeniseWorthen/NEMSdatm
+	url = https://github.com/NOAA-EMC/NEMSdatm
 [submodule "MOM6"]
 	path = MOM6
 	url = https://github.com/NOAA-EMC/MOM6-interface

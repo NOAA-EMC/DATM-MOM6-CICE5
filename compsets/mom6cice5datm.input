@@ -80,6 +80,9 @@ datm_defaults = {
     JATM='768'
     NFHOUT='6'
 
+    # in seconds
+    RESTART_INTERVAL="86400"
+    
     MOM6_RESTART_SETTING='r'
     MOM6_RIVER_RUNOFF='True'
     NPROC_ICE='48'

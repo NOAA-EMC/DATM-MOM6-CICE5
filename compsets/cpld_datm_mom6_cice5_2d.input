@@ -19,6 +19,12 @@ test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe {
     DAYS='2'
     FHMAX='48'
 
+    # Restart interval, mediator and MOM6
+    RESTART_INTERVAL="86400"
+    # CICE
+    DUMPFREQ='s'
+    DUMPFREQ_N="@[RESTART_INTERVAL]"
+
     # - set component and coupling timesteps
     DT_CICE="@[DT_ATMOS]"
     CPL_SLOW="@[DT_THERM_MOM6]"
