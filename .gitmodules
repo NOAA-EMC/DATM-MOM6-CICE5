@@ -4,6 +4,7 @@
 [submodule "FMS"]
 	path = FMS
 	url = https://github.com/NOAA-GFDL/FMS
+        branch = master
 [submodule "NEMS"]
 	path = NEMS
 	url = https://github.com/DeniseWorthen/NEMS
