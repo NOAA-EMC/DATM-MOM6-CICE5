@@ -119,6 +119,26 @@ begin
  imask := oned_imask
  gf->grid_imask = (/imask/)
 
+ ; retrieve grid values and print
+ loncenter = gf->grid_center_lon
+ latcenter = gf->grid_center_lat
+ loncorner = gf->grid_corner_lon
+ latcorner = gf->grid_corner_lat
+
+ print(dname+" SCRIP grid lon centers  "+ min(loncenter)+" : "+max(loncenter))
+ print(dname+" SCRIP grid lat centers  "+ min(latcenter)+" : "+max(latcenter))
+ print(dname+" SCRIP grid lon corners  "+ min(loncorner)+" : "+max(loncorner))
+ print(dname+" SCRIP grid lat corners  "+ min(latcorner)+" : "+max(latcorner))
+
+ ; add global attributes
+ nl = integertochar(10)  ; newline character
+ globalAtt             = True
+ globalAtt@history     = nl+\
+                         "created on "+systemfunc("date")+"  "+ nl+\
+                         "using source file "+gridfile
+ fileattdef( gf, globalAtt )
+
+
  ; clean up
      fskl = dname+".skl"
   ;Remove the files if exist
