@@ -7,7 +7,7 @@
         branch = master
 [submodule "NEMS"]
 	path = NEMS
-	url = https://github.com/DeniseWorthen/NEMS
+	url = https://github.com/NOAA-EMC/NEMS
 [submodule "DATM"]
 	path = DATM
 	url = https://github.com/NOAA-EMC/NEMSdatm
