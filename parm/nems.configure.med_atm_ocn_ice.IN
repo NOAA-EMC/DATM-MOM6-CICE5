@@ -15,14 +15,16 @@ MED_attributes::
   DumpFields = false
   DumpRHs = false
   coldstart = false
-  restart_interval = 86400
+  restart_interval = @[RESTART_INTERVAL]
   ProfileMemory = false
+  AoMedFlux = true
 ::
 
 # ATM #
 ATM_model:                      @[atm_model]
 ATM_petlist_bounds:             @[atm_petlist_bounds]
 ATM_attributes::
+  coldstart = false
   DumpFields = false
   ProfileMemory = false
 ::
@@ -32,7 +34,8 @@ OCN_model:                      @[ocn_model]
 OCN_petlist_bounds:             @[ocn_petlist_bounds]
 OCN_attributes::
   DumpFields = false
-  restart_interval = 86400
+  restart_option = nseconds
+  restart_n = @[RESTART_INTERVAL]
   ProfileMemory = false
 ::
 
@@ -52,8 +55,6 @@ runSeq::
     OCN
     @@[coupling_interval_fast_sec]
       MED MedPhase_prep_ice
-      MED MedPhase_prep_atm
-      MED -> ATM :remapMethod=redist
       MED -> ICE :remapMethod=redist
       ATM
       ICE
