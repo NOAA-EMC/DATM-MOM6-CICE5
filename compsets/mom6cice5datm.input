@@ -2,6 +2,45 @@ load 'platforms.input'
 load 'nemscommon.input'
 
 ########################################################################
+embed bash datmprep(RUNDIR,modules,CNTL) [[[
+        rm -rf "$RUNDIR"
+        mkdir -p "$RUNDIR" "$CNTL"
+        cd @[RUNDIR]
+
+        set +e
+
+        source @[plat%SRCnems]/conf/module-setup.sh.inc
+        module purge
+        module use $( dirname $modules )
+        module load $( basename $modules )
+
+        mkdir RESTART INPUT 
+        #For MOM6
+        mkdir MOM6_OUTPUT
+        #For CICE
+        mkdir history
+        #For DATM
+        mkdir DATM_INPUT
+
+        export MPI_TYPE_DEPTH=20
+        export OMP_STACKSIZE=512M
+        export ESMF_RUNTIME_COMPLIANCECHECK=OFF:depth=4
+        export ESMF_RUNTIME_PROFILE=ON
+        export ESMF_RUNTIME_PROFILE_OUTPUT=SUMMARY
+
+	# Set the stack limit as high as we can.
+        if [[ $( ulimit -s ) != unlimited ]] ; then
+	    for try_limit in 20000 18000 12000 9000 6000 3000 1500 1000 800 ; do
+	        if [[ ! ( $( ulimit -s ) -gt $(( try_limit * 1000 )) ) ]] ; then
+		    ulimit -s $(( try_limit * 1000 ))
+	    else
+		    break
+	        fi
+	    done
+        fi
+
+	ulimit -a
+]]]
 
 build datm_mom6_cice.exe { 
     # Use NEMSAppBuilder to build a coupled app.   
@@ -21,23 +60,164 @@ build datm_mom6_cice.exe {
 
 datm_defaults = {
 
-    SYEAR='2016'
-    SMONTH='07'
+    med_model="nems"
+    atm_model="datm"
+    ocn_model="mom6"
+    ice_model="cice"
+
+    SYEAR='2011'
+    SMONTH='10'
     SDAY='01'
     SHOUR='00'
+    CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
+
     DT_ATMOS='900'
     FHMAX='1'
 
+    DATM_SRC="GEFS"       
+    FILENAME_BASE='gefs.'
     IATM='1536'
     JATM='768'
-    FILENAME_BASE='gfs.'
     NFHOUT='6'
+
+    # in seconds
+    RESTART_INTERVAL="86400"
+    
+    MOM6_RESTART_SETTING='r'
+    MOM6_RIVER_RUNOFF='True'
+    NPROC_ICE='48'
+    DT_ATMOS='900'
+    DT_DYNAM_MOM6='900'
+    DT_THERM_MOM6='1800'
+# defaults for CICE runtype and restart writing
+    RUNTYPE='initial'
+    DUMPFREQ='d'
+    DUMPFREQ_N='1'
+    USE_RESTART_TIME='.false.'
+# setting to true will allow Frazil FW and Salt to be
+# included in fluxes sent to ocean
+    FRAZIL_FWSALT='.true.'
+# default to write CICE average history files
+    CICE_HIST_AVG='.true.'
+# default setting for runid
+    RUNID='cpcice'
+   ICEICSOURCE='cpc'
+# default mediator component (NEMS mediator)
+    MEDCOMP=''
 }
 
 ########################################################################
 
+embed bash edit_inputs(CDATE,DT_CICE,NPROC_ICE,RUNTYPE,USE_RESTART_TIME,FRAZIL_FWSALT,RUNID,CICE_HIST_AVG,DUMPFREQ_N,DUMPFREQ,DT_THERM,DT_DYNAM,MOM6_RIVER_RUNOFF) [[[ 
+
+python <<EOT
+import os
+import datetime
+
+fmt='%Y%m%d%H'
+dt = datetime.datetime.strptime("@[CDATE]", fmt)
+tt = dt.timetuple()
+
+# ice_calendar subroutine does not allow for writing restarts 
+# at hour frequencies
+# if DUMPFREQ is set as "h", then convert DUMPFREQ_N to seconds and
+# reset DUMPFREQ to "s"
+if("@[DUMPFREQ]" == "h"):
+ dumpn = int("@[DUMPFREQ_N]")
+ DUMPFREQ_N = str(dumpn*3600)
+ DUMPFREQ = "s"
+else:
+ DUMPFREQ_N = str("@[DUMPFREQ_N]")
+ DUMPFREQ = str("@[DUMPFREQ]")
+#
+
+jday=tt.tm_yday
+year=tt.tm_year
+month=tt.tm_mon
+day=tt.tm_mday
+hour=tt.tm_hour
+ymd=str(year)+str(month).zfill(2)+str(day).zfill(2)
+
+#ice_in
+istep0=((jday-1)*86400 + hour*3600)/int("@[DT_CICE]")
+
+with open("ice_in_template",'rt') as inf:
+ with open("ice_in",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace("YEAR_INIT",str(year)) \
+             .replace("ISTEP0",str(istep0)) \
+             .replace("DT_CICE","@[DT_CICE]") \
+             .replace("NPROC_ICE","@[NPROC_ICE]") \
+             .replace("RUNTYPE","@[RUNTYPE]") \
+             .replace("RUNID","@[RUNID]") \
+             .replace("CICE_HIST_AVG","@[CICE_HIST_AVG]") \
+             .replace("USE_RESTART_TIME","@[USE_RESTART_TIME]") \
+             .replace("DUMPFREQ_N",DUMPFREQ_N) \
+             .replace("DUMPFREQ",DUMPFREQ) \
+             .replace("FRAZIL_FWSALT","@[FRAZIL_FWSALT]")
+    outf.write(newline)
+
+#MOM_input
+with open("INPUT/MOM_input_template",'rt') as inf:
+ with open("INPUT/MOM_input",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace("DT_THERM_MOM6","@[DT_THERM]") \
+             .replace("DT_DYNAM_MOM6","@[DT_DYNAM]") \
+             .replace("MOM6_RIVER_RUNOFF","@[MOM6_RIVER_RUNOFF]")
+    outf.write(newline)
+
+#diag_table
+with open("diag_table_template",'rt') as inf:
+ with open("diag_table",'wf') as outf:
+   for x in inf.readlines():
+    newline=x.replace("YMD",ymd) \
+             .replace("SYEAR",str(year).zfill(4)) \
+             .replace("SMONTH",str(month).zfill(2)) \
+             .replace("SDAY",str(day).zfill(2))
+    outf.write(newline)
+EOT
+]]]
+########################################################################
+
 # Available compsets
 
-load 'cpld_datm_mom6_cice_cold'
-load 'cpld_datm_mom6_cice_3d'
-load 'cpld_datm_mom6_cice_hot'
+load 'cpld_datm_mom6_cice5_cold.input'
+load 'cpld_datm_mom6_cice5_2d.input'
+
+######################################################################## 
+# cold gefs 
+
+test cpld_datm_mom6_cice5_cold_gefs: datm_mom6_cice.exe { 
+    use cpld_datm_mom6_cice5_cold 
+
+}
+######################################################################## 
+# cold cfsr 
+
+test cpld_datm_mom6_cice5_cold_cfsr: datm_mom6_cice.exe { 
+    use cpld_datm_mom6_cice5_cold 
+
+    DATM_SRC="CFSR"       
+    FILENAME_BASE='cfsr.'    
+    IATM='1760'  
+    JATM='880'  
+
+}
+########################################################################
+# 2d gefs
+
+test cpld_datm_mom6_cice5_2d_gefs: datm_mom6_cice.exe {
+    use cpld_datm_mom6_cice5_2d
+
+    }
+########################################################################
+# 2d cfsr
+
+test cpld_datm_mom6_cice5_2d_cfsr: datm_mom6_cice.exe {
+    use cpld_datm_mom6_cice5_2d
+
+    DATM_SRC="CFSR"       
+    FILENAME_BASE='cfsr.'    
+    IATM='1760'  
+    JATM='880'  
+    }

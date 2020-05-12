@@ -13,17 +13,18 @@ MED_model:                      @[med_model]
 MED_petlist_bounds:             @[med_petlist_bounds]
 MED_attributes::
   Verbosity = 0
-  DumpFields = true
+  DumpFields = false
   DumpRHs = false
   coldstart = true
   ProfileMemory = false
+  AoMedFlux = true
 ::
 
 # ATM #
 ATM_model:                      @[atm_model]
 ATM_petlist_bounds:             @[atm_petlist_bounds]
 ATM_attributes::
-  DumpFields = true
+  DumpFields = false
   ProfileMemory = false
 ::
 
@@ -31,7 +32,7 @@ ATM_attributes::
 OCN_model:                      @[ocn_model]
 OCN_petlist_bounds:             @[ocn_petlist_bounds]
 OCN_attributes::
-  DumpFields = true
+  DumpFields = false
   ProfileMemory = false
 ::
 
@@ -39,7 +40,7 @@ OCN_attributes::
 ICE_model:                      @[ice_model]
 ICE_petlist_bounds:             @[ice_petlist_bounds]
 ICE_attributes::
-  DumpFields = true
+  DumpFields = false
   ProfileMemory = false
 ::
 
@@ -47,8 +48,6 @@ ICE_attributes::
 runSeq::
   @@[coupling_interval_slow_sec]
     @@[coupling_interval_fast_sec]
-      MED MedPhase_prep_atm
-      MED -> ATM :remapMethod=redist
       ATM
       ATM -> MED :remapMethod=redist
       MED MedPhase_prep_ice
