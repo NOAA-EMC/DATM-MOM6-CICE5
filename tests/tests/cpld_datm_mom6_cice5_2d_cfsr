@@ -1,0 +1,52 @@
+#
+#  CPLD_DATM_MOM6_CICE_2D_ATM_FLUX test
+#
+
+export TEST_DESCR="Fully coupled DATM-MOM6-CICE system - 2d_warm"
+
+export CNTL_DIR="RT-Baselines_2d_CFSR"
+export CNTLMED_DIR="MEDIATOR_CFSR"
+
+export LIST_FILES="RESTART/MOM.res.nc \
+                   RESTART/MOM.res_1.nc \
+                   RESTART/MOM.res_2.nc \
+                   RESTART/MOM.res_3.nc \
+                   RESTART/iced.2011-10-03-00000.nc \
+                   mediator_FBAtmOcn_o_restart.nc \
+                   mediator_FBAtm_a_restart.nc \
+                   mediator_FBIce_i_restart.nc \
+                   mediator_FBOcn_o_restart.nc \
+                   mediator_FBaccumAtmOcn_restart.nc \
+                   mediator_FBaccumAtm_restart.nc \
+                   mediator_FBaccumIce_restart.nc \
+                   mediator_FBaccumOcn_restart.nc"
+export_datm
+export_cpl
+
+export FILENAME_BASE='cfsr.'
+export DATM_SRC='CFSR'
+export IATM='1760'
+export JATM='880'
+
+export DAYS="2"
+export FHMAX="48"
+export FDIAG="6"
+export WLCLK=30
+
+# set component and coupling timesteps
+export DT_CICE=${DT_ATMOS}
+export CPL_SLOW=${DT_THERM_MOM6}
+export CPL_FAST=${DT_ATMOS}
+
+# write a CICE restart at DAYS
+export DUMPFREQ_N=${DAYS}
+export DUMPFREQ="d"
+
+# nems.configure
+export NEMS_CONFIGURE="nems.configure.med_atm_ocn_ice.IN"
+export coupling_interval_slow_sec=${CPL_SLOW}
+export coupling_interval_fast_sec=${CPL_FAST}
+
+export FV3_RUN=cpld_datm_mom6_cice5_cfsr.IN
+
+export MED_restart_data='MEDIATOR_CFSR'
