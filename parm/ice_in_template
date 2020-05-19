@@ -4,19 +4,19 @@
   , year_init      = YEAR_INIT
   , istep0         = ISTEP0
   , dt             = DT_CICE
-  , npt            = 999
+  , npt            = NPT
   , ndtd           = 1
   , runtype        = 'RUNTYPE' 
   , runid          = 'RUNID' 
-  , ice_ic         = 'cice5_model.res.nc'
+  , ice_ic         = 'ICE_IC_NAME'
   , restart        = .true.
   , restart_ext    = .false.
   , use_restart_time = USE_RESTART_TIME
   , restart_format = 'nc'
   , lcdf64         = .false.
-  , restart_dir    = './RESTART/'
+  , restart_dir    = './restart/'
   , restart_file   = 'iced'
-  , pointer_file   = './ice.restart_file'
+  , pointer_file   = './restart/ice.restart_file'
   , dumpfreq       = 'DUMPFREQ'
   , dumpfreq_n     =  DUMPFREQ_N
   , dump_last      = .false.  
@@ -43,8 +43,8 @@
 &grid_nml
     grid_format  = 'nc'
   , grid_type    = 'displaced_pole'
-  , grid_file    = 'grid_cice_NEMS_mx025.nc'
-  , kmt_file     = 'kmtu_cice_NEMS_mx025.nc'
+  , grid_file    = 'ICE_GRID_FILE'
+  , kmt_file     = 'ICE_KMT_FILE'
   , kcatbound    = 0
 /
 
@@ -71,8 +71,8 @@
   , restart_pond_cesm = .false.
   , tr_pond_topo = .false.
   , restart_pond_topo = .false.
-  , tr_pond_lvl  = .true.
-  , restart_pond_lvl  = .false.
+  , tr_pond_lvl  = TR_POND_LVL
+  , restart_pond_lvl  = RESTART_POND_LVL
   , tr_aero      = .false.
   , restart_aero = .false.
 /

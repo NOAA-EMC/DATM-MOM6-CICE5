@@ -12,9 +12,9 @@ EARTH_attributes::
 MED_model:                      @[med_model]
 MED_petlist_bounds:             @[med_petlist_bounds]
 MED_attributes::
-  DumpFields = false
+  DumpFields = @[DumpFields]
   DumpRHs = false
-  coldstart = false
+  coldstart = @[coldstart]
   restart_interval = @[RESTART_INTERVAL]
   ProfileMemory = false
   AoMedFlux = true
@@ -24,8 +24,8 @@ MED_attributes::
 ATM_model:                      @[atm_model]
 ATM_petlist_bounds:             @[atm_petlist_bounds]
 ATM_attributes::
-  coldstart = false
-  DumpFields = false
+  coldstart = @[coldstart]
+  DumpFields = @[DumpFields]
   ProfileMemory = false
 ::
 
