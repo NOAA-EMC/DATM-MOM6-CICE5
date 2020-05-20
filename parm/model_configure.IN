@@ -1,5 +1,5 @@
 total_member:            1 
-print_esmf:              .true.
+print_esmf:              .false.
 PE_MEMBER01:             @[TASKS]
 start_year:              @[SYEAR]
 start_month:             @[SMONTH]
@@ -17,6 +17,6 @@ atm_coupling_interval_sec:  @[coupling_interval_fast_sec]
 iatm: @[IATM]
 jatm: @[JATM]
 
-cdate0: @[CDATE]
+cdate0: @[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]
 nfhout: @[NFHOUT]
 filename_base: @[FILENAME_BASE]

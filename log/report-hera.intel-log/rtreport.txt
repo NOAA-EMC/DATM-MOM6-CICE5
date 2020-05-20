@@ -1,15 +1,23 @@
 Run rocotostat...
 Generate report...
-WORKFLOW STARTED AT Tue May 12 14:25:40 2020 (+1589293540)
+WORKFLOW STARTED AT Wed May 20 09:37:48 2020 (+1589967468)
 Repository information:
 
 
 REPO TOP:
-develop       f01cf2d [origin/develop] Merge pull request #1 from NOAA-EMC/develop
-Fetch URL: https://github.com/DeniseWorthen/DATM-MOM6-CICE5.git
- M compsets/all.input
+develop 50315c3 [origin/develop] Update components and app (#14)
+Fetch URL: https://github.com/binli2337/DATM-MOM6-CICE5
+ M compsets/cpld_datm_mom6_cice5_2d.input
+ M compsets/hera.input
  M log/report-hera.intel-log/build_datm_mom6_cice.exe.log
  M log/report-hera.intel-log/rtreport.txt
+ M parm/model_configure.IN
+ M tests/rt.sh
+ M tests/rt_utils.sh
+ M tests/tests/cpld_datm_mom6_cice5_2d_cfsr
+ M tests/tests/cpld_datm_mom6_cice5_2d_gefs
+ M tests/tests/cpld_datm_mom6_cice5_cold_cfsr
+ M tests/tests/cpld_datm_mom6_cice5_cold_gefs
 
 Entering 'CICE_SRC'
 (HEAD detached at 468841a) 468841a Porting CICE5 to orion (#18)
@@ -35,8 +43,8 @@ Fetch URL: https://github.com/NOAA-EMC/NEMS
 BUILD datm_mom6_cice.exe: SUCCEEDED
 
 TEST #1: PASS
-  Test cpld_datm_mom6_cice5_cold_cfsr starting at Tue May 12 14:32:47 UTC 2020 (datm-mom6-cice5 - cold start)
-  Tue May 12 14:32:47 UTC 2020
+  Test cpld_datm_mom6_cice5_cold_cfsr starting at Wed May 20 09:46:46 UTC 2020 (datm-mom6-cice5 - cold start)
+  Wed May 20 09:46:46 UTC 2020
   mediator_FBaccumAtmOcn_restart.nc: bit-for-bit identical
   mediator_FBaccumAtm_restart.nc: bit-for-bit identical
   mediator_FBaccumIce_restart.nc: bit-for-bit identical
@@ -47,14 +55,14 @@ TEST #1: PASS
   mediator_FBOcn_o_restart.nc: bit-for-bit identical
   mediator_scalars_restart.txt: bit-for-bit identical
   Executable did not change during test suite:
-    File: /scratch1/NCEPDEV/stmp2/Denise.Worthen/DATM/rtgen.20890/exec/datm_mom6_cice.exe
-    Expected md5sum: a8905238c6ffcd5c73642e4db594ce1e
-    Actual md5sum: a8905238c6ffcd5c73642e4db594ce1e
-  TEST PASSED AT Tue May 12 14:36:08 UTC 2020
+    File: /scratch1/NCEPDEV/stmp2/Bin.Li/scrub/rtgen.255425/exec/datm_mom6_cice.exe
+    Expected md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+    Actual md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+  TEST PASSED AT Wed May 20 09:49:59 UTC 2020
 
 TEST #2: PASS
-  Test cpld_datm_mom6_cice5_2d_cfsr starting at Tue May 12 14:32:48 UTC 2020 (datm-mom6-cice5 - 2 day run)
-  Tue May 12 14:32:48 UTC 2020
+  Test cpld_datm_mom6_cice5_2d_cfsr starting at Wed May 20 09:46:46 UTC 2020 (datm-mom6-cice5 - 2 day run)
+  Wed May 20 09:46:46 UTC 2020
   mediator_FBAtmOcn_o_restart.nc: bit-for-bit identical
   mediator_FBAtm_a_restart.nc: bit-for-bit identical
   mediator_FBIce_i_restart.nc: bit-for-bit identical
@@ -69,15 +77,16 @@ TEST #2: PASS
   RESTART/MOM.res_2.nc: bit-for-bit identical
   RESTART/MOM.res_3.nc: bit-for-bit identical
   RESTART/iced.2011-10-03-00000.nc: bit-for-bit identical
+  ocn_2011_10_02_21.nc: bit-for-bit identical
   Executable did not change during test suite:
-    File: /scratch1/NCEPDEV/stmp2/Denise.Worthen/DATM/rtgen.20890/exec/datm_mom6_cice.exe
-    Expected md5sum: a8905238c6ffcd5c73642e4db594ce1e
-    Actual md5sum: a8905238c6ffcd5c73642e4db594ce1e
-  TEST PASSED AT Tue May 12 14:57:12 UTC 2020
+    File: /scratch1/NCEPDEV/stmp2/Bin.Li/scrub/rtgen.255425/exec/datm_mom6_cice.exe
+    Expected md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+    Actual md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+  TEST PASSED AT Wed May 20 10:10:14 UTC 2020
 
 TEST #3: PASS
-  Test cpld_datm_mom6_cice5_cold_gefs starting at Tue May 12 14:36:16 UTC 2020 (datm-mom6-cice5 - cold start)
-  Tue May 12 14:36:16 UTC 2020
+  Test cpld_datm_mom6_cice5_cold_gefs starting at Wed May 20 09:50:28 UTC 2020 (datm-mom6-cice5 - cold start)
+  Wed May 20 09:50:28 UTC 2020
   mediator_FBaccumAtmOcn_restart.nc: bit-for-bit identical
   mediator_FBaccumAtm_restart.nc: bit-for-bit identical
   mediator_FBaccumIce_restart.nc: bit-for-bit identical
@@ -88,14 +97,14 @@ TEST #3: PASS
   mediator_FBOcn_o_restart.nc: bit-for-bit identical
   mediator_scalars_restart.txt: bit-for-bit identical
   Executable did not change during test suite:
-    File: /scratch1/NCEPDEV/stmp2/Denise.Worthen/DATM/rtgen.20890/exec/datm_mom6_cice.exe
-    Expected md5sum: a8905238c6ffcd5c73642e4db594ce1e
-    Actual md5sum: a8905238c6ffcd5c73642e4db594ce1e
-  TEST PASSED AT Tue May 12 14:39:31 UTC 2020
+    File: /scratch1/NCEPDEV/stmp2/Bin.Li/scrub/rtgen.255425/exec/datm_mom6_cice.exe
+    Expected md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+    Actual md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+  TEST PASSED AT Wed May 20 09:53:37 UTC 2020
 
 TEST #4: PASS
-  Test cpld_datm_mom6_cice5_2d_gefs starting at Tue May 12 14:39:48 UTC 2020 (datm-mom6-cice5 - 2 day run)
-  Tue May 12 14:39:48 UTC 2020
+  Test cpld_datm_mom6_cice5_2d_gefs starting at Wed May 20 09:53:52 UTC 2020 (datm-mom6-cice5 - 2 day run)
+  Wed May 20 09:53:52 UTC 2020
   mediator_FBAtmOcn_o_restart.nc: bit-for-bit identical
   mediator_FBAtm_a_restart.nc: bit-for-bit identical
   mediator_FBIce_i_restart.nc: bit-for-bit identical
@@ -110,12 +119,13 @@ TEST #4: PASS
   RESTART/MOM.res_2.nc: bit-for-bit identical
   RESTART/MOM.res_3.nc: bit-for-bit identical
   RESTART/iced.2011-10-03-00000.nc: bit-for-bit identical
+  ocn_2011_10_02_21.nc: bit-for-bit identical
   Executable did not change during test suite:
-    File: /scratch1/NCEPDEV/stmp2/Denise.Worthen/DATM/rtgen.20890/exec/datm_mom6_cice.exe
-    Expected md5sum: a8905238c6ffcd5c73642e4db594ce1e
-    Actual md5sum: a8905238c6ffcd5c73642e4db594ce1e
-  TEST PASSED AT Tue May 12 15:03:46 UTC 2020
-WORKFLOW REPORT AT Tue May 12 15:04:21 2020 (+1589295861)
+    File: /scratch1/NCEPDEV/stmp2/Bin.Li/scrub/rtgen.255425/exec/datm_mom6_cice.exe
+    Expected md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+    Actual md5sum: 5b9d74ddc221ddcd56b4c09e4a6812db
+  TEST PASSED AT Wed May 20 10:16:51 UTC 2020
+WORKFLOW REPORT AT Wed May 20 10:18:43 2020 (+1589969923)
 Tests: 0 failed, 4 passed out of 4
 Builds: 0 failed, 1 passed out of 1
 REGRESSION TEST WAS SUCCESSFUL
