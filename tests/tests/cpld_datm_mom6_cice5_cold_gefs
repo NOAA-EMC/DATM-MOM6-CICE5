@@ -31,8 +31,8 @@ export DT_CICE=${DT_ATMOS}
 export CPL_SLOW=${DT_THERM_MOM6}
 export CPL_FAST=${DT_ATMOS}
 
-# write a CICE restart at FHMAX
-export DUMPFREQ_N=1
+# no cice restart file
+export DUMPFREQ_N=2
 export DUMPFREQ="d"
 
 # nems.configure

@@ -5,13 +5,14 @@
 export TEST_DESCR="Fully coupled DATM-MOM6-CICE system - 2d_warm"
 
 export CNTL_DIR="RT-Baselines_2d_CFSR"
-export CNTLMED_DIR="MEDIATOR_CFSR"
+export CNTLMED_DIR="RT-Baselines_2d_CFSR/RESTART"
 
 export LIST_FILES="RESTART/MOM.res.nc \
                    RESTART/MOM.res_1.nc \
                    RESTART/MOM.res_2.nc \
                    RESTART/MOM.res_3.nc \
                    RESTART/iced.2011-10-03-00000.nc \
+                   ocn_2011_10_02_21.nc \
                    mediator_FBAtmOcn_o_restart.nc \
                    mediator_FBAtm_a_restart.nc \
                    mediator_FBIce_i_restart.nc \
@@ -31,7 +32,7 @@ export JATM='880'
 export DAYS="2"
 export FHMAX="48"
 export FDIAG="6"
-export WLCLK=30
+export WLCLK=45
 
 # set component and coupling timesteps
 export DT_CICE=${DT_ATMOS}

@@ -342,7 +342,7 @@ check_results() {
       printf %s " Comparing " $i " ....."
 
       crst=''
-      if [[ $i =~ MOM6_RESTART/ || $i =~ restart ]]; then
+      if [[ $i =~ RESTART/ ]]; then
         crst=RESTART/$(basename $i)
       fi
 
@@ -358,27 +358,15 @@ check_results() {
         echo ".......MISSING baseline"
         test_status='FAIL'
 
-      elif [[ ( $COMPILER == "gnu" || $COMPILER == "pgi" ) && $i == "RESTART/fv_core.res.nc" ]] ; then
-
-        # Although identical in ncdiff, RESTART/fv_core.res.nc differs in byte 469, line 3,
-        # for the fv3_control_32bit test between each run (without changing the source code)
-        # for GNU and PGI compilers - skip comparison.
+      elif [[ ( $COMPILER == "gnu" || $COMPILER == "pgi" ) ]] ; then
         echo ".......SKIP for gnu/pgi compilers" >> ${REGRESSIONTEST_LOG}
         echo ".......SKIP for gnu/pgi compilers"
-
-      elif [[ $COMPILER == "pgi"  && ( $i == "RESTART/fv_BC_sw.res.nest02.nc" || $i == "RESTART/fv_BC_ne.res.nest02.nc" ) ]] ; then
-
-        # Although identical in ncdiff, RESTART/fv_BC_sw.res.nest02.nc differs in byte 6897, line 17
-        # (similar for fv_BC_ne.res.nest02.nc) for the fv3_stretched_nest test between each run
-        # (without changing the source code) for the PGI compiler - skip comparison.
-        echo ".......SKIP for pgi compiler" >> ${REGRESSIONTEST_LOG}
-        echo ".......SKIP for pgi compiler"
 
       else
 
         if [[ $i =~ mediator ]]; then
           d=$( cmp ${RTPWD}/${CNTLMED_DIR}/$i ${RUNDIR}/$i | wc -l )
-        elif [[ $i =~ MOM6_RESTART/ || $i =~ restart ]]; then
+        elif [[ $i =~ RESTART/ ]]; then
           d=$( cmp ${RTPWD}/${CNTL_DIR}/$crst ${RUNDIR}/$i | wc -l )
         else
           d=$( cmp ${RTPWD}/${CNTL_DIR}/$i ${RUNDIR}/$i | wc -l )
@@ -414,12 +402,10 @@ check_results() {
     for i in ${LIST_FILES} ; do
       printf %s " Moving " $i " ....."   >> ${REGRESSIONTEST_LOG}
       if [[ -f ${RUNDIR}/$i ]] ; then
-        if [[ $i =~ MOM6_RESTART/ ]]; then
+        if [[ $i =~ RESTART/ ]]; then
           cp ${RUNDIR}/$i ${NEW_BASELINE}/${CNTL_DIR}/RESTART/$(basename $i)
         elif [[ $i =~ mediator ]]; then
           cp ${RUNDIR}/$i ${NEW_BASELINE}/${CNTLMED_DIR}
-        elif [[ $i =~ restart ]]; then
-          cp ${RUNDIR}/$i ${NEW_BASELINE}/${CNTL_DIR}/RESTART/$(basename $i)
         else
           cp ${RUNDIR}/${i} ${NEW_BASELINE}/${CNTL_DIR}/${i}
         fi
