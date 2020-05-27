@@ -84,20 +84,21 @@ test cpld_datm_mom6_cice5_2d: datm_mom6_cice.exe {
     # Specify output files:
     criteria output {
         # WORKFILE                            .comparison. TARGET
-        'mediator_FBAtmOcn_o_restart.nc'    .bitcmp. "@[CNTL]"
-        'mediator_FBAtm_a_restart.nc'       .bitcmp. "@[CNTL]"
-        'mediator_FBIce_i_restart.nc'       .bitcmp. "@[CNTL]"
-        'mediator_FBOcn_o_restart.nc'       .bitcmp. "@[CNTL]"
-        'mediator_FBaccumAtmOcn_restart.nc' .bitcmp. "@[CNTL]"
-        'mediator_FBaccumAtm_restart.nc'    .bitcmp. "@[CNTL]"
-        'mediator_FBaccumIce_restart.nc'    .bitcmp. "@[CNTL]"
-        'mediator_FBaccumOcn_restart.nc'    .bitcmp. "@[CNTL]"
-        'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]"
-        'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]"
-        'RESTART/MOM.res_1.nc'              .bitcmp. "@[CNTL]"
-        'RESTART/MOM.res_2.nc'              .bitcmp. "@[CNTL]"
-        'RESTART/MOM.res_3.nc'              .bitcmp. "@[CNTL]"
-        'RESTART/iced.2011-10-03-00000.nc'  .bitcmp. "@[CNTL]"
+        'mediator_FBAtmOcn_o_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBAtm_a_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBIce_i_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBOcn_o_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBaccumAtmOcn_restart.nc' .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBaccumAtm_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBaccumIce_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+        'mediator_FBaccumOcn_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/MOM.res_1.nc'              .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/MOM.res_2.nc'              .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/MOM.res_3.nc'              .bitcmp. "@[CNTL]/RESTART"
+        'RESTART/iced.2011-10-03-00000.nc'  .bitcmp. "@[CNTL]/RESTART"
+        'ocn_2011_10_02_21.nc'              .bitcmp. "@[CNTL]"
       # Executable validation.  This makes an MD5 sum of the datm.exe
       # for comparison against the MD5 sum made in the build job.
       # This is to ensure the executable did not change during the

@@ -1,0 +1,44 @@
+#
+#  CPLD_DATM_MOM6_CICE_COLD test
+#
+
+export TEST_DESCR="Fully coupled DATM-MOM6-CICE system - cold start"
+
+export CNTL_DIR="RT-Baselines_cold_start_GEFS"
+export CNTLMED_DIR="MEDIATOR_GEFS"
+
+export LIST_FILES="mediator_FBaccumAtmOcn_restart.nc \
+                   mediator_FBaccumAtm_restart.nc \
+                   mediator_FBaccumIce_restart.nc \
+                   mediator_FBaccumOcn_restart.nc \
+                   mediator_FBAtm_a_restart.nc \
+                   mediator_FBAtmOcn_o_restart.nc \
+                   mediator_FBIce_i_restart.nc \
+                   mediator_FBOcn_o_restart.nc \
+                   mediator_scalars_restart.txt"
+
+export_datm
+export_cpl
+export DAYS=0.041666666
+export FHMAX=1 # Note this needs to be at least 2x CPL_SLOW
+export DATM_SRC="GEFS"
+export FILENAME_BASE='gefs.'
+#export IATM=1760
+#export JATM=880
+
+# set component and coupling timesteps
+export DT_CICE=${DT_ATMOS}
+export CPL_SLOW=${DT_THERM_MOM6}
+export CPL_FAST=${DT_ATMOS}
+
+# no cice restart file
+export DUMPFREQ_N=2
+export DUMPFREQ="d"
+
+# nems.configure
+export NEMS_CONFIGURE="nems.configure.medcold_atm_ocn_ice.IN"
+export coupling_interval_slow_sec=${CPL_SLOW}
+export coupling_interval_fast_sec=${CPL_FAST}
+
+export FV3_RUN=cpld_datm_mom6_cice5_gefs.IN
+export MED_restart_data=''
