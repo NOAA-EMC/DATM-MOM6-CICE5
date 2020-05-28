@@ -84,7 +84,7 @@ if [[ $MACHINE_ID = wcoss ]]; then
   STMP=/ptmpp$pex
   PTMP=/ptmpp$pex
   SCHEDULER=lsf
-# cp datm_conf/fv3_bsub.IN_wcoss datm_conf/fv3_bsub.IN
+# cp datm_conf/datm_bsub.IN_wcoss datm_conf/datm_bsub.IN
 
 elif [[ $MACHINE_ID = wcoss_cray ]]; then
 
@@ -92,7 +92,7 @@ elif [[ $MACHINE_ID = wcoss_cray ]]; then
   module load xt-lsfhpc
 
   module use $PATHTR/modulefiles/${MACHINE_ID}
-  module load fv3
+  module load coupled
 
   module load python/2.7.14
 
@@ -118,7 +118,7 @@ elif [[ $MACHINE_ID = wcoss_cray ]]; then
       PTMP=/gpfs/hps3/ptmp
   fi
   SCHEDULER=lsf
-  cp datm_conf/fv3_bsub.IN_wcoss_cray datm_conf/fv3_bsub.IN
+  cp datm_conf/datm_bsub.IN_wcoss_cray datm_conf/datm_bsub.IN
 
 elif [[ $MACHINE_ID = wcoss_dell_p3 ]]; then
 
@@ -126,7 +126,7 @@ elif [[ $MACHINE_ID = wcoss_dell_p3 ]]; then
   module load lsf/10.1
 
   module use $PATHTR/modulefiles/${MACHINE_ID}
-  module load fv3
+  module load coupled
 
   module load python/2.7.14
 
@@ -148,7 +148,7 @@ elif [[ $MACHINE_ID = wcoss_dell_p3 ]]; then
   STMP=/gpfs/dell2/stmp
   PTMP=/gpfs/dell2/ptmp
   SCHEDULER=lsf
-  cp datm_conf/fv3_bsub.IN_wcoss_dell_p3 datm_conf/fv3_bsub.IN
+  cp datm_conf/datm_bsub.IN_wcoss_dell_p3 datm_conf/datm_bsub.IN
 
 elif [[ $MACHINE_ID = gaea.* ]]; then
 
@@ -171,7 +171,7 @@ elif [[ $MACHINE_ID = gaea.* ]]; then
 
   # default scheduler on Gaea
   SCHEDULER=slurm
-  cp datm_conf/fv3_slurm.IN_gaea datm_conf/fv3_slurm.IN
+  cp datm_conf/datm_slurm.IN_gaea datm_conf/datm_slurm.IN
 
 elif [[ $MACHINE_ID = hera.* ]]; then
 
@@ -193,8 +193,7 @@ elif [[ $MACHINE_ID = hera.* ]]; then
   ECFLOW_START=/scratch2/NCEPDEV/fv3-cam/Dusan.Jovic/ecflow/bin/ecflow_start.sh
   ECF_PORT=$(( $(id -u) + 1500 ))
   QUEUE=batch
-#  ACCNR=fv3-cpu
-#  ACCNR=marine-cpu
+  #ACCNR=marine-cpu
   PARTITION=
   dprefix=/scratch1/NCEPDEV
   DISKNM=$dprefix/nems/emc.nemspara/RT
@@ -202,14 +201,14 @@ elif [[ $MACHINE_ID = hera.* ]]; then
   PTMP=$dprefix/stmp2
 
   SCHEDULER=slurm
-  cp datm_conf/fv3_slurm.IN_hera datm_conf/fv3_slurm.IN
+  cp datm_conf/datm_slurm.IN_hera datm_conf/datm_slurm.IN
 
 elif [[ $MACHINE_ID = orion.* ]]; then
 
   source $PATHTR/NEMS/src/conf/module-setup.sh.inc
 
   module use $PATHTR/modulefiles/${MACHINE_ID}
-  module load fv3
+  module load coupled
   module load gcc/8.3.0
 
   # Re-instantiate COMPILER in case it gets deleted by module purge
@@ -224,22 +223,23 @@ elif [[ $MACHINE_ID = orion.* ]]; then
   ECFLOW_START=/work/noaa/fv3-cam/djovic/ecflow/bin/ecflow_start.sh
   ECF_PORT=$(( $(id -u) + 1500 ))
   QUEUE=batch
+#  ACCNR=marine-cpu
 #  ACCNR= # detected in detect_machine.sh
   PARTITION=orion
   dprefix=/work/noaa/stmp/${USER}
-  DISKNM=/work/noaa/stmp/jminsuk/RT
-  STMP=$dprefix/stmp
-  PTMP=$dprefix/stmp
+  DISKNM=/work/noaa/stmp/libin/RT
+  STMP=$dprefix/test
+  PTMP=$dprefix/test
 
   SCHEDULER=slurm
-  cp datm_conf/fv3_slurm.IN_orion datm_conf/fv3_slurm.IN
+  cp datm_conf/datm_slurm.IN_orion datm_conf/datm_slurm.IN
 
 elif [[ $MACHINE_ID = jet.* ]]; then
 
   source $PATHTR/NEMS/src/conf/module-setup.sh.inc
 
   module use $PATHTR/modulefiles/${MACHINE_ID}
-  module load fv3
+  module load coupled
 
   # Re-instantiate COMPILER in case it gets deleted by module purge
   COMPILER=${NEMS_COMPILER:-intel}
@@ -263,7 +263,7 @@ elif [[ $MACHINE_ID = jet.* ]]; then
 
   # default scheduler on Jet
   SCHEDULER=slurm
-  cp datm_conf/fv3_slurm.IN_jet datm_conf/fv3_slurm.IN
+  cp datm_conf/datm_slurm.IN_jet datm_conf/datm_slurm.IN
 
 elif [[ $MACHINE_ID = cheyenne.* ]]; then
 
@@ -280,7 +280,7 @@ elif [[ $MACHINE_ID = cheyenne.* ]]; then
   STMP=$dprefix
   PTMP=$dprefix
   SCHEDULER=pbs
-  cp datm_conf/fv3_qsub.IN_cheyenne datm_conf/fv3_qsub.IN
+  cp datm_conf/datm_qsub.IN_cheyenne datm_conf/datm_qsub.IN
 
 elif [[ $MACHINE_ID = stampede.* ]]; then
 
@@ -299,7 +299,7 @@ elif [[ $MACHINE_ID = stampede.* ]]; then
   SCHEDULER=sbatch
   MPIEXEC=ibrun
   MPIEXECOPTS=
-  cp datm_conf/fv3_qsub.IN_stampede datm_conf/fv3_qsub.IN
+  cp datm_conf/datm_qsub.IN_stampede datm_conf/datm_qsub.IN
 
 else
   die "Unknown machine ID, please edit detect_machine.sh file"
@@ -539,7 +539,7 @@ while read -r line; do
 
       [[ $SET_ID != ' ' && $SET != *${SET_ID}* ]] && continue
       [[ $MACHINES != ' ' && $MACHINES != "${MACHINE_ID}" ]] && continue
-      [[ $CREATE_BASELINE == true && $CB != *fv3* ]] && continue
+      [[ $CREATE_BASELINE == true && $CB != *datm* ]] && continue
 
       COMPILE_NR_DEP=${COMPILE_NR}
       (( COMPILE_NR += 1 ))
@@ -723,7 +723,7 @@ else
    echo ; echo REGRESSION TEST WAS SUCCESSFUL
   (echo ; echo REGRESSION TEST WAS SUCCESSFUL) >> ${REGRESSIONTEST_LOG}
 
-  rm -f fv3_*.x fv3_*.exe modules.fv3_*
+  rm -f datm_*.x datm_*.exe modules.datm_*
   [[ ${KEEP_RUNDIR} == false ]] && rm -rf ${RUNDIR_ROOT}
   [[ ${ROCOTO} == true ]] && rm -f ${ROCOTO_XML} ${ROCOTO_DB} *_lock.db
 fi
