@@ -26,8 +26,6 @@ export_cpl
 
 export FILENAME_BASE='gefs.'
 export DATM_SRC='GEFS'
-export IATM='1760'
-export JATM='880'
 
 export DAYS="2"
 export FHMAX="48"

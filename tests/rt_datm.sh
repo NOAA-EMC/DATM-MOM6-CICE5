@@ -25,8 +25,8 @@ SRCD="${PATHTR}"
 RUND="${RUNDIR}"
 
 # Set up the run directory
-atparse < ${PATHRT}/datm_conf/${FV3_RUN} > fv3_run
-source ./fv3_run
+atparse < ${PATHRT}/datm_conf/${FV3_RUN} > datm_run
+source ./datm_run
 atparse < ${PATHTR}/parm/input.mom6.nml.IN > input.nml
 atparse < ${PATHTR}/parm/model_configure.IN > model_configure
 atparse < ${PATHTR}/parm/${NEMS_CONFIGURE:-nems.configure} > nems.configure
@@ -38,30 +38,30 @@ cp ${PATHTR}/parm/data_table data_table
 cp ${PATHTR}/parm/datm_data_table.IN datm_data_table
 
 if [[ $SCHEDULER = 'moab' ]]; then
-  atparse < $PATHRT/datm_conf/fv3_msub.IN > job_card
+  atparse < $PATHRT/datm_conf/datm_msub.IN > job_card
 elif [[ $SCHEDULER = 'pbs' ]]; then
   NODES=$(( TASKS / TPN ))
   if (( NODES * TPN < TASKS )); then
     NODES=$(( NODES + 1 ))
   fi
-  atparse < $PATHRT/datm_conf/fv3_qsub.IN > job_card
+  atparse < $PATHRT/datm_conf/datm_qsub.IN > job_card
 elif [[ $SCHEDULER = 'sbatch' ]]; then
   NODES=$(( TASKS / TPN ))
   if (( NODES * TPN < TASKS )); then
     NODES=$(( NODES + 1 ))
   fi
-  atparse < $PATHRT/datm_conf/fv3_qsub.IN > job_card
+  atparse < $PATHRT/datm_conf/datm_qsub.IN > job_card
 elif [[ $SCHEDULER = 'slurm' ]]; then
   NODES=$(( TASKS / TPN ))
   if (( NODES * TPN < TASKS )); then
     NODES=$(( NODES + 1 ))
   fi
-  atparse < $PATHRT/datm_conf/fv3_slurm.IN > job_card
+  atparse < $PATHRT/datm_conf/datm_slurm.IN > job_card
 elif [[ $SCHEDULER = 'lsf' ]]; then
   if (( TASKS < TPN )); then
     TPN=${TASKS}
   fi
-  atparse < $PATHRT/datm_conf/fv3_bsub.IN > job_card
+  atparse < $PATHRT/datm_conf/datm_bsub.IN > job_card
 fi
 
 ################################################################################
