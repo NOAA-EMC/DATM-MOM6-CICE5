@@ -1,0 +1,40 @@
+#
+#  CPLD_DATM_MOM6_CICE_2D_ATM_FLUX test
+#
+
+export TEST_DESCR="DATM-MOM6-CICE system - 20-day run"
+
+export CNTL_DIR="test_case_20d_GEFS"
+export CNTLMED_DIR="test_case_20d_GEFS/RESTART"
+
+export LIST_FILES=""
+export_datm
+export_cpl
+
+export FILENAME_BASE='gefs.'
+export DATM_SRC='GEFS'
+export RESTART_INTERVAL=432000
+
+export DAYS="20"
+export FHMAX="480"
+export FDIAG="6"
+export WLCLK=240
+
+# set component and coupling timesteps
+export DT_CICE=${DT_ATMOS}
+export CPL_SLOW=${DT_THERM_MOM6}
+export CPL_FAST=${DT_ATMOS}
+
+# write a CICE restart at DAYS
+export DUMPFREQ_N=${DAYS}
+export DUMPFREQ="d"
+
+# nems.configure
+export NEMS_CONFIGURE="nems.configure.med_atm_ocn_ice.IN"
+export coupling_interval_slow_sec=${CPL_SLOW}
+export coupling_interval_fast_sec=${CPL_FAST}
+
+export FV3_RUN=test_case_gefs.IN
+
+export MED_restart_data='MEDIATOR_GEFS'
+export regression_test='NO'
