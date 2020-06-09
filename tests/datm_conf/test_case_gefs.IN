@@ -1,0 +1,25 @@
+mkdir INPUT DATM_INPUT RESTART history MOM6_OUTPUT
+
+# FV3 fixed input
+cp    @[RTPWD]/DATM/gefs.SCRIP.nc DATM_INPUT
+export IATM=1536
+export JATM=768
+
+# MOM6 fixed input
+cp    @[RTPWD]/MOM6_FIX_025deg/* ./INPUT
+
+# CICE5 fixed input
+cp    @[RTPWD]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc .
+cp    @[RTPWD]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc .
+
+# ICs
+ln -s @[RTPWD]/DATM/GEFS/201110/gefs*nc DATM_INPUT/
+ln -s @[RTPWD]/DATM/GEFS/201111/gefs*nc DATM_INPUT/
+ln -s @[RTPWD]/DATM/GEFS/201112/gefs*nc DATM_INPUT/
+cp    @[RTPWD]/MOM6_IC/2011100100/MOM*.nc ./INPUT
+cp    @[RTPWD]/CICE_IC/cice5_model_0.25.cpc*.nc cice5_model.res.nc
+
+# WARM START
+if [[ ! $MED_restart_data == '' ]]; then
+  cp  @[RTPWD]/MEDIATOR_GEFS/mediator_* .
+fi
