@@ -26,6 +26,7 @@ ATM_petlist_bounds:             @[atm_petlist_bounds]
 ATM_attributes::
   DumpFields = false
   ProfileMemory = false
+  dbug_flag = 0
 ::
 
 # OCN #
