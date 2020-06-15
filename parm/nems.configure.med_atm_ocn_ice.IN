@@ -27,6 +27,7 @@ ATM_attributes::
   coldstart = false
   DumpFields = false
   ProfileMemory = false
+  DebugFlag = 0
 ::
 
 # OCN #
