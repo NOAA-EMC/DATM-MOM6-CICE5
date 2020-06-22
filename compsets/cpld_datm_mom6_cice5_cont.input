@@ -1,0 +1,127 @@
+############################################################################
+# 2 day run starting on @CDATE 
+############################################################################
+
+test cpld_datm_mom6_cice5_cont: datm_mom6_cice.exe { 
+    use plat 
+    use plat%default_cpl
+    use datm_defaults 
+ 
+    TEST_DESCR="datm-mom6-cice5 - 2 day run" 
+    CNTL_NAME="RT-Baselines_2d_@[DATM_SRC]" 
+ 
+       COM="@[plat%COMrt]/@[TEST_NAME]"            # Test result area
+    RUNDIR="@[plat%TMPrt]/@[TEST_NAME]"            # Test work area
+      CNTL="@[plat%BASELINE]/@[CNTL_NAME]"         # Control baseline area
+   CNTLMED="@[plat%BASELINE]/MEDIATOR_@[DATM_SRC]"  # Control/Mediator area 
+ BL_INPUTS="@[plat%INPUTS]"
+  
+ #  DAYS='15'
+ #  FHMAX='360'
+
+    # Restart interval, mediator and MOM6
+ #  RESTART_INTERVAL="1296000"
+    # CICE
+    DUMPFREQ='s'
+    DUMPFREQ_N="@[RESTART_INTERVAL]"
+
+    # - set component and coupling timesteps
+    DT_CICE="@[DT_ATMOS]"
+    CPL_SLOW="@[DT_THERM_MOM6]"
+    CPL_FAST="@[DT_ATMOS]"
+
+    build=datm_mom6_cice.exe
+
+    prep=datmprep(
+            RUNDIR="@[RUNDIR]",
+           modules="@[build%modules.nems]",
+              CNTL="@[CNTL]")
+
+    # - set total number of tasks to satisfy coupled application need 
+    TASKS=280
+    
+    # - nems.configure ---
+    nems_configure='med_atm_ocn_ice'
+    coupling_interval_slow_sec="@[CPL_SLOW]"
+    coupling_interval_fast_sec="@[CPL_FAST]"
+  
+ #  DATM_INPUT_dir="/scratch2/NCEPDEV/marineda/DATM_INPUT"
+ #  DATM_SCRIP_dir="/scratch2/NCEPDEV/climate/Hyun-Chul.Lee/update-20200425/DATM"
+ #  REST_LOC_RUN="/scratch2/NCEPDEV/stmp1/Hyun-Chul.Lee/scrub"
+ #  PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.248922/tmp/cpld_datm_mom6_cice5_15d_gefs"
+
+    
+    filters input { 
+               #    WORK FILE  <=filter=   SOURCE FILE 
+                  'input.nml'  <=atparse=  "@[PARMnems]/input.mom6.nml.IN" 
+            'model_configure'  <=atparse=  "@[PARMnems]/model_configure.IN" 
+             'nems.configure'  <=atparse=  "@[PARMnems]/nems.configure.@[nems_configure].IN" 
+                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_FIX_025deg"
+                 'data_table'  <=copy=     "@[PARMnems]/data_table"
+            'datm_data_table'  <=copy=     "@[PARMnems]/datm_data_table.IN"
+               'DATM_INPUT/*'  <=copyfrom= "@[DATM_INPUT_dir]/@[DATM_SRC]/@[SYEAR]@[SMONTH]"
+               'DATM_INPUT/*'  <=copyfrom= "@[DATM_INPUT_dir]/@[DATM_SRC]/@[PYEAR]@[PMONTH]"
+                'DATM_INPUT/'  <=copy=     "@[DATM_SCRIP_dir]/@[FILENAME_BASE]SCRIP.nc"
+#              'DATM_INPUT/*'  <=copyfrom= "@[BL_INPUTS]/DATM/@[DATM_SRC]/@[SYEAR]@[SMONTH]"
+#               'DATM_INPUT/'  <=copy=     "@[BL_INPUTS]/DATM/@[FILENAME_BASE]SCRIP.nc"
+    'grid_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/grid_cice_NEMS_mx025.nc"
+    'kmtu_cice_NEMS_mx025.nc'  <=copy=     "@[BL_INPUTS]/CICE_FIX_mx025/kmtu_cice_NEMS_mx025.nc"
+            'ice_in_template'  <=copy=     "@[PARMnems]/ice_in_template"
+        'diag_table_template'  <=copy=     "@[PARMnems]/diag_table_template"
+   'INPUT/MOM_input_template'  <=copy=     "@[PARMnems]/MOM_input_template"
+#         'cice5_model.res.nc'  <=copy=     "@[BL_INPUTS]/CICE_IC/cice5_model_0.25.@[ICEICSOURCE].res_@[CDATE].nc"
+#                    'INPUT/*'  <=copyfrom= "@[BL_INPUTS]/MOM6_IC/@[CDATE]"
+#                          '*'  <=copyfrom= "@[BL_INPUTS]/MEDIATOR_@[DATM_SRC]"
+                 'mediator_*'  <=copyfrom= "@[PATHFROMPREVIOUSRUN]"
+         'cice5_model.res.nc'  <=copy=     "@[PATHFROMPREVIOUSRUN]/cice5_model.res.nc"
+                    'INPUT/*'  <=copyfrom= "@[PATHFROMPREVIOUSRUN]/RESTART"
+
+    } 
+ 
+
+    # Edit the templates for the compset parameters
+    prerun=edit_inputs(CDATE="@[CDATE]",
+                     DT_CICE="@[DT_CICE]",
+                   NPROC_ICE="@[NPROC_ICE]",
+                     RUNTYPE="@[RUNTYPE]",
+            USE_RESTART_TIME="@[USE_RESTART_TIME]",
+               FRAZIL_FWSALT="@[FRAZIL_FWSALT]",
+                       RUNID="@[RUNID]",
+               CICE_HIST_AVG="@[CICE_HIST_AVG]",
+                  DUMPFREQ_N="@[DUMPFREQ_N]",
+                    DUMPFREQ="@[DUMPFREQ]",
+                    DT_THERM="@[DT_THERM_MOM6]",
+                    DT_DYNAM="@[DT_DYNAM_MOM6]",
+           MOM6_RIVER_RUNOFF="@[MOM6_RIVER_RUNOFF]")
+ 
+    # Specify output files:
+    criteria output {
+        # WORKFILE                            .comparison. TARGET
+  #     'mediator_FBAtmOcn_o_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBAtm_a_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBIce_i_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBOcn_o_restart.nc'       .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBaccumAtmOcn_restart.nc' .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBaccumAtm_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBaccumIce_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+  #     'mediator_FBaccumOcn_restart.nc'    .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/MOM.res.nc'                .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/MOM.res_1.nc'              .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/MOM.res_2.nc'              .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/MOM.res_3.nc'              .bitcmp. "@[CNTL]/RESTART"
+  #     'RESTART/iced.2011-10-03-00000.nc'  .bitcmp. "@[CNTL]/RESTART"
+  #     'ocn_2011_10_02_21.nc'              .bitcmp. "@[CNTL]"
+      # Executable validation.  This makes an MD5 sum of the datm.exe
+      # for comparison against the MD5 sum made in the build job.
+      # This is to ensure the executable did not change during the
+      # test suite.
+        "@[build%target]" .md5cmp. "@[datm_mom6_cice.exe%md5sum]" 
+    }
+ 
+    spawn execute { 
+        # Run the  
+        {"@[build%target]", ranks="@[TASKS]" } 
+    }
+
+} 
