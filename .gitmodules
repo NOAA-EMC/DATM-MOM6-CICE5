@@ -7,11 +7,11 @@
         branch = master
 [submodule "NEMS"]
 	path = NEMS
-	url = https://github.com/hyunchul386/NEMSdatm
+	url = https://github.com/hyunchul386/NEMS
   branch = feature/bulk_flux
 [submodule "DATM"]
 	path = DATM
-	url = https://github.com/hyunchul386/DATM
+	url = https://github.com/hyunchul386/NEMSdatm
   branch = feature/bulk_flux
 [submodule "MOM6"]
 	path = MOM6
