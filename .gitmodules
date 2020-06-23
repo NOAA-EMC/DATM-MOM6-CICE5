@@ -7,10 +7,12 @@
         branch = master
 [submodule "NEMS"]
 	path = NEMS
-	url = https://github.com/hyunchul386/NEMS
+	url = https://github.com/hyunchul386/NEMSdatm
+  branch = feature/bulk_flux
 [submodule "DATM"]
 	path = DATM
-	url = https://github.com/hyunchul386/NEMSdatm
+	url = https://github.com/hyunchul386/DATM
+  branch = feature/bulk_flux
 [submodule "MOM6"]
 	path = MOM6
 	url = https://github.com/NOAA-EMC/MOM6-interface
