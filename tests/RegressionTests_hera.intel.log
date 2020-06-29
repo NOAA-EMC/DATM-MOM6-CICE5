@@ -1,10 +1,10 @@
-Fri Jun 12 15:51:26 UTC 2020
+Mon Jun 29 18:20:17 UTC 2020
 Start Regression test
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_cold_start_CFSR
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/MEDIATOR_CFSR
-working dir  = /scratch1/NCEPDEV/stmp2/Denise.Worthen/S2S_RT/rt_51930/cpld_datm_mom6_cice5_cold_cfsr
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_cold_start_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/MEDIATOR_CFSR
+working dir  = /scratch1/NCEPDEV/stmp2/Jun.Wang/S2S_RT/rt_309840/cpld_datm_mom6_cice5_cold_cfsr
 Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -14,13 +14,17 @@ Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
  Comparing mediator_FBAtmOcn_o_restart.nc .........OK
  Comparing mediator_FBIce_i_restart.nc .........OK
  Comparing mediator_FBOcn_o_restart.nc .........OK
+ Comparing mediator_FBHyd_h_restart.nc .........OK
+ Comparing mediator_FBLnd_l_restart.nc .........OK
+ Comparing mediator_FBaccumHyd_restart.nc .........OK
+ Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
 Test 001 cpld_datm_mom6_cice5_cold_cfsr PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_cold_start_GEFS
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/MEDIATOR_GEFS
-working dir  = /scratch1/NCEPDEV/stmp2/Denise.Worthen/S2S_RT/rt_51930/cpld_datm_mom6_cice5_cold_gefs
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_cold_start_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/MEDIATOR_GEFS
+working dir  = /scratch1/NCEPDEV/stmp2/Jun.Wang/S2S_RT/rt_309840/cpld_datm_mom6_cice5_cold_gefs
 Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -30,13 +34,17 @@ Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
  Comparing mediator_FBAtmOcn_o_restart.nc .........OK
  Comparing mediator_FBIce_i_restart.nc .........OK
  Comparing mediator_FBOcn_o_restart.nc .........OK
+ Comparing mediator_FBHyd_h_restart.nc .........OK
+ Comparing mediator_FBLnd_l_restart.nc .........OK
+ Comparing mediator_FBaccumHyd_restart.nc .........OK
+ Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
 Test 002 cpld_datm_mom6_cice5_cold_gefs PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_2d_CFSR
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_2d_CFSR/RESTART
-working dir  = /scratch1/NCEPDEV/stmp2/Denise.Worthen/S2S_RT/rt_51930/cpld_datm_mom6_cice5_2d_cfsr
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_CFSR/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Jun.Wang/S2S_RT/rt_309840/cpld_datm_mom6_cice5_2d_cfsr
 Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -52,12 +60,17 @@ Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
  Comparing mediator_FBaccumAtm_restart.nc .........OK
  Comparing mediator_FBaccumIce_restart.nc .........OK
  Comparing mediator_FBaccumOcn_restart.nc .........OK
+ Comparing mediator_FBHyd_h_restart.nc .........OK
+ Comparing mediator_FBLnd_l_restart.nc .........OK
+ Comparing mediator_FBaccumHyd_restart.nc .........OK
+ Comparing mediator_FBaccumLnd_restart.nc .........OK
+ Comparing mediator_scalars_restart.txt .........OK
 Test 003 cpld_datm_mom6_cice5_2d_cfsr PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_2d_GEFS
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200518/RT-Baselines_2d_GEFS/RESTART
-working dir  = /scratch1/NCEPDEV/stmp2/Denise.Worthen/S2S_RT/rt_51930/cpld_datm_mom6_cice5_2d_gefs
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_GEFS/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Jun.Wang/S2S_RT/rt_309840/cpld_datm_mom6_cice5_2d_gefs
 Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -73,9 +86,12 @@ Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
  Comparing mediator_FBaccumAtm_restart.nc .........OK
  Comparing mediator_FBaccumIce_restart.nc .........OK
  Comparing mediator_FBaccumOcn_restart.nc .........OK
+ Comparing mediator_FBHyd_h_restart.nc .........OK
+ Comparing mediator_FBLnd_l_restart.nc .........OK
+ Comparing mediator_FBaccumHyd_restart.nc .........OK
+ Comparing mediator_FBaccumLnd_restart.nc .........OK
+ Comparing mediator_scalars_restart.txt .........OK
 Test 004 cpld_datm_mom6_cice5_2d_gefs PASS
 
 
 REGRESSION TEST WAS SUCCESSFUL
-Fri Jun 12 16:24:48 UTC 2020
-Elapsed time: 00h:33m:25s. Have a nice day!
