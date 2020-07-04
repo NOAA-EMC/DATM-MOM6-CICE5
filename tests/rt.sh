@@ -309,7 +309,6 @@ mkdir -p ${STMP}/${USER}
 
 # Different own baseline directories for different compilers
 NEW_BASELINE=${STMP}/${USER}/S2S_RT/REGRESSION_TEST
-#if [[ $MACHINE_ID = cheyenne.* ]] || [[ $MACHINE_ID = jet.* ]] || [[ $MACHINE_ID = gaea.* ]]; then
 if [[ $MACHINE_ID = hera.* ]] || [[ $MACHINE_ID = orion.* ]] || [[ $MACHINE_ID = cheyenne.* ]]; then
     NEW_BASELINE=${NEW_BASELINE}_${COMPILER^^}
 fi
@@ -394,7 +393,7 @@ if [[ $CREATE_BASELINE == true ]]; then
   echo "copy baseline inputs form: ${RTPWD}"
   echo "                     to:   ${NEW_BASELINE}"
 
-  rsync -a "${RTPWD}"/DATM_* "${NEW_BASELINE}"/
+  rsync -a "${RTPWD}"/DATM "${NEW_BASELINE}"/
   rsync -a "${RTPWD}"/MOM6_* "${NEW_BASELINE}"/
   rsync -a "${RTPWD}"/CICE_* "${NEW_BASELINE}"/
 
@@ -664,6 +663,7 @@ EOF
       export PARTITION=${PARTITION}
       export ROCOTO=${ROCOTO}
       export LOG_DIR=${LOG_DIR}
+      export DEP_RUN=${DEP_RUN}
 EOF
 
       if [[ $ROCOTO == true ]]; then

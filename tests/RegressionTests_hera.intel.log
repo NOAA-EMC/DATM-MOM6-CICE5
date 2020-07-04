@@ -1,0 +1,39 @@
+Sat Jul  4 16:42:53 UTC 2020
+Start Regression test
+
+
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_cold_start_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/MEDIATOR_CFSR
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_150687/cpld_datm_mom6_cice5_cold_cfsr
+Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/RT-Baselines_cold_start_CFSR/RESTART
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/MEDIATOR_CFSR
+ Moving mediator_FBaccumAtmOcn_restart.nc ..... Moving mediator_FBaccumAtm_restart.nc ..... Moving mediator_FBaccumIce_restart.nc ..... Moving mediator_FBaccumOcn_restart.nc ..... Moving mediator_FBAtm_a_restart.nc ..... Moving mediator_FBAtmOcn_o_restart.nc ..... Moving mediator_FBIce_i_restart.nc ..... Moving mediator_FBOcn_o_restart.nc ..... Moving mediator_FBHyd_h_restart.nc ..... Moving mediator_FBLnd_l_restart.nc ..... Moving mediator_FBaccumHyd_restart.nc ..... Moving mediator_FBaccumLnd_restart.nc ..... Moving mediator_scalars_restart.txt .....Test 001 cpld_datm_mom6_cice5_cold_cfsr PASS
+
+
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_cold_start_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/MEDIATOR_GEFS
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_150687/cpld_datm_mom6_cice5_cold_gefs
+Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/RT-Baselines_cold_start_GEFS/RESTART
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/MEDIATOR_GEFS
+ Moving mediator_FBaccumAtmOcn_restart.nc ..... Moving mediator_FBaccumAtm_restart.nc ..... Moving mediator_FBaccumIce_restart.nc ..... Moving mediator_FBaccumOcn_restart.nc ..... Moving mediator_FBAtm_a_restart.nc ..... Moving mediator_FBAtmOcn_o_restart.nc ..... Moving mediator_FBIce_i_restart.nc ..... Moving mediator_FBOcn_o_restart.nc ..... Moving mediator_FBHyd_h_restart.nc ..... Moving mediator_FBLnd_l_restart.nc ..... Moving mediator_FBaccumHyd_restart.nc ..... Moving mediator_FBaccumLnd_restart.nc ..... Moving mediator_scalars_restart.txt .....Test 002 cpld_datm_mom6_cice5_cold_gefs PASS
+
+
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_CFSR/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_150687/cpld_datm_mom6_cice5_2d_cfsr
+Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/RT-Baselines_2d_CFSR/RESTART
+ Moving RESTART/MOM.res.nc ..... Moving RESTART/MOM.res_1.nc ..... Moving RESTART/MOM.res_2.nc ..... Moving RESTART/MOM.res_3.nc ..... Moving RESTART/iced.2011-10-03-00000.nc ..... Moving ocn_2011_10_02_21.nc ..... Moving mediator_FBAtmOcn_o_restart.nc ..... Moving mediator_FBAtm_a_restart.nc ..... Moving mediator_FBIce_i_restart.nc ..... Moving mediator_FBOcn_o_restart.nc ..... Moving mediator_FBaccumAtmOcn_restart.nc ..... Moving mediator_FBaccumAtm_restart.nc ..... Moving mediator_FBaccumIce_restart.nc ..... Moving mediator_FBaccumOcn_restart.nc ..... Moving mediator_FBHyd_h_restart.nc ..... Moving mediator_FBLnd_l_restart.nc ..... Moving mediator_FBaccumHyd_restart.nc ..... Moving mediator_FBaccumLnd_restart.nc ..... Moving mediator_scalars_restart.txt .....Test 003 cpld_datm_mom6_cice5_2d_cfsr PASS
+
+
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200629/RT-Baselines_2d_GEFS/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_150687/cpld_datm_mom6_cice5_2d_gefs
+Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
+ mkdir -p /scratch1/NCEPDEV/stmp4/Bin.Li/S2S_RT/REGRESSION_TEST_INTEL/RT-Baselines_2d_GEFS/RESTART
+ Moving RESTART/MOM.res.nc ..... Moving RESTART/MOM.res_1.nc ..... Moving RESTART/MOM.res_2.nc ..... Moving RESTART/MOM.res_3.nc ..... Moving RESTART/iced.2011-10-03-00000.nc ..... Moving ocn_2011_10_02_21.nc ..... Moving mediator_FBAtmOcn_o_restart.nc ..... Moving mediator_FBAtm_a_restart.nc ..... Moving mediator_FBIce_i_restart.nc ..... Moving mediator_FBOcn_o_restart.nc ..... Moving mediator_FBaccumAtmOcn_restart.nc ..... Moving mediator_FBaccumAtm_restart.nc ..... Moving mediator_FBaccumIce_restart.nc ..... Moving mediator_FBaccumOcn_restart.nc ..... Moving mediator_FBHyd_h_restart.nc ..... Moving mediator_FBLnd_l_restart.nc ..... Moving mediator_FBaccumHyd_restart.nc ..... Moving mediator_FBaccumLnd_restart.nc ..... Moving mediator_scalars_restart.txt .....Test 004 cpld_datm_mom6_cice5_2d_gefs PASS
+
+
+REGRESSION TEST WAS SUCCESSFUL
