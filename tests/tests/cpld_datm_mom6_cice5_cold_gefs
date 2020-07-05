@@ -15,7 +15,12 @@ export LIST_FILES="mediator_FBaccumAtmOcn_restart.nc \
                    mediator_FBAtmOcn_o_restart.nc \
                    mediator_FBIce_i_restart.nc \
                    mediator_FBOcn_o_restart.nc \
+                   mediator_FBHyd_h_restart.nc \
+                   mediator_FBLnd_l_restart.nc \
+                   mediator_FBaccumHyd_restart.nc \
+                   mediator_FBaccumLnd_restart.nc \
                    mediator_scalars_restart.txt"
+
 
 export_datm
 export_cpl

@@ -309,7 +309,6 @@ mkdir -p ${STMP}/${USER}
 
 # Different own baseline directories for different compilers
 NEW_BASELINE=${STMP}/${USER}/S2S_RT/REGRESSION_TEST
-#if [[ $MACHINE_ID = cheyenne.* ]] || [[ $MACHINE_ID = jet.* ]] || [[ $MACHINE_ID = gaea.* ]]; then
 if [[ $MACHINE_ID = hera.* ]] || [[ $MACHINE_ID = orion.* ]] || [[ $MACHINE_ID = cheyenne.* ]]; then
     NEW_BASELINE=${NEW_BASELINE}_${COMPILER^^}
 fi
@@ -394,10 +393,9 @@ if [[ $CREATE_BASELINE == true ]]; then
   echo "copy baseline inputs form: ${RTPWD}"
   echo "                     to:   ${NEW_BASELINE}"
 
-  rsync -a "${RTPWD}"/DATM_* "${NEW_BASELINE}"/
+  rsync -a "${RTPWD}"/DATM "${NEW_BASELINE}"/
   rsync -a "${RTPWD}"/MOM6_* "${NEW_BASELINE}"/
   rsync -a "${RTPWD}"/CICE_* "${NEW_BASELINE}"/
-  rsync -a "${RTPWD}"/CPL_* "${NEW_BASELINE}"/
 
   # FIXME: move these namelist files to parm directory
   #rsync -a "${RTPWD}"/fv3_stretched_nest_quilt/INPUT "${NEW_BASELINE}"/fv3_stretched_nest_quilt/
@@ -420,8 +418,6 @@ rm -f fail_test
 LOG_DIR=${PATHRT}/log_$MACHINE_ID
 rm -rf ${LOG_DIR}
 mkdir ${LOG_DIR}
-
-#rm -f ../fv3.exe
 
 if [[ $ROCOTO == true ]]; then
 
@@ -579,7 +575,7 @@ while read -r line; do
 
       [[ $SET_ID != ' ' && $SET != *${SET_ID}* ]] && continue
       [[ $MACHINES != ' ' && $MACHINES != "${MACHINE_ID}" ]] && continue
-      [[ $CREATE_BASELINE == true && $CB != *fv3* ]] && continue
+      [[ $CREATE_BASELINE == true && $CB != *datm* ]] && continue
       [[ ${ROCOTO} == true || ${ECFLOW} == true ]] && continue
 
       (( COMPILE_NR += 1 ))
@@ -619,7 +615,7 @@ while read -r line; do
     [[ -e "tests/$TEST_NAME" ]] || die "run test file tests/$TEST_NAME does not exist"
     [[ $SET_ID != ' ' && $SET != *${SET_ID}* ]] && continue
     [[ $MACHINES != ' ' && $MACHINES != *${MACHINE_ID}* ]] && continue
-    [[ $CREATE_BASELINE == true && $CB != *fv3* ]] && continue
+    [[ $CREATE_BASELINE == true && $CB != *datm* ]] && continue
 
     # skip all *_appbuild runs if rocoto or ecFlow is used. FIXME
     if [[ ${ROCOTO} == true && ${ECFLOW} == true ]]; then
@@ -667,6 +663,7 @@ EOF
       export PARTITION=${PARTITION}
       export ROCOTO=${ROCOTO}
       export LOG_DIR=${LOG_DIR}
+      export DEP_RUN=${DEP_RUN}
 EOF
 
       if [[ $ROCOTO == true ]]; then
@@ -707,7 +704,11 @@ fi
 ## regression test is either failed or successful
 ##
 set +e
-cat ${LOG_DIR}/compile_*.log                   >  ${COMPILE_LOG}
+cd ${LOG_DIR}
+if [[ -e compile_${COMPILE_NR}.log ]]; then
+cat ${LOG_DIR}/compile_${COMPILE_NR}.log       >  ${COMPILE_LOG}
+cd ${PATHRT}
+fi
 cat ${LOG_DIR}/rt_*.log                        >> ${REGRESSIONTEST_LOG}
 if [[ -e fail_test ]]; then
   echo "FAILED TESTS: "
@@ -723,7 +724,9 @@ else
    echo ; echo REGRESSION TEST WAS SUCCESSFUL
   (echo ; echo REGRESSION TEST WAS SUCCESSFUL) >> ${REGRESSIONTEST_LOG}
 
-  rm -f datm_*.x datm_*.exe modules.datm_*
+  #rm -f datm_*.x datm_*.exe modules.datm_*
+  mkdir MODULES_AND_EXE
+  mv datm_*.exe modules.datm_* MODULES_AND_EXE
   [[ ${KEEP_RUNDIR} == false ]] && rm -rf ${RUNDIR_ROOT}
   [[ ${ROCOTO} == true ]] && rm -f ${ROCOTO_XML} ${ROCOTO_DB} *_lock.db
 fi

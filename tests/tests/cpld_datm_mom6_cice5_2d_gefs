@@ -20,7 +20,13 @@ export LIST_FILES="RESTART/MOM.res.nc \
                    mediator_FBaccumAtmOcn_restart.nc \
                    mediator_FBaccumAtm_restart.nc \
                    mediator_FBaccumIce_restart.nc \
-                   mediator_FBaccumOcn_restart.nc"
+                   mediator_FBaccumOcn_restart.nc \
+                   mediator_FBHyd_h_restart.nc \
+                   mediator_FBLnd_l_restart.nc \
+                   mediator_FBaccumHyd_restart.nc \
+                   mediator_FBaccumLnd_restart.nc \
+                   mediator_scalars_restart.txt"
+
 export_datm
 export_cpl
 
