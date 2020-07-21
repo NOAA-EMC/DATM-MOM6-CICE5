@@ -1,10 +1,10 @@
-Thu Jul  9 11:23:32 UTC 2020
+Tue Jul 21 19:32:32 UTC 2020
 Start Regression test
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_cold_start_CFSR
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/MEDIATOR_CFSR
-working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_173886/cpld_datm_mom6_cice5_cold_cfsr
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_cold_start_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/MEDIATOR_CFSR
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_203069/cpld_datm_mom6_cice5_cold_cfsr
 Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -22,9 +22,9 @@ Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
 Test 001 cpld_datm_mom6_cice5_cold_cfsr PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_cold_start_GEFS
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/MEDIATOR_GEFS
-working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_173886/cpld_datm_mom6_cice5_cold_gefs
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_cold_start_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/MEDIATOR_GEFS
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_203069/cpld_datm_mom6_cice5_cold_gefs
 Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -42,9 +42,9 @@ Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
 Test 002 cpld_datm_mom6_cice5_cold_gefs PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_2d_CFSR
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_2d_CFSR/RESTART
-working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_173886/cpld_datm_mom6_cice5_2d_cfsr
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_CFSR
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_CFSR/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_203069/cpld_datm_mom6_cice5_2d_cfsr
 Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -68,9 +68,9 @@ Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
 Test 003 cpld_datm_mom6_cice5_2d_cfsr PASS
 
 
-baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_2d_GEFS
-mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200708/RT-Baselines_2d_GEFS/RESTART
-working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_173886/cpld_datm_mom6_cice5_2d_gefs
+baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_GEFS
+mediator baseline dir = /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_GEFS/RESTART
+working dir  = /scratch1/NCEPDEV/stmp2/Bin.Li/S2S_RT/rt_203069/cpld_datm_mom6_cice5_2d_gefs
 Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -95,5 +95,3 @@ Test 004 cpld_datm_mom6_cice5_2d_gefs PASS
 
 
 REGRESSION TEST WAS SUCCESSFUL
-Thu Jul  9 12:29:03 UTC 2020
-Elapsed time: 01h:05m:34s. Have a nice day!
