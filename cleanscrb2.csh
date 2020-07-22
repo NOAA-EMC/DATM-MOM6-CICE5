@@ -17,9 +17,10 @@ if (-d ${fdir}/tmp/${cdir}/DATM_INPUT) /bin/rm -r ${fdir}/tmp/${cdir}/DATM_INPUT
 if (-d ${fdir}/tmp/${cdir}/history) /bin/rm -r ${fdir}/tmp/${cdir}/history
 
 
-#cd ${fdir}/tmp
-#/bin/rm -r MOM6_OUTPUT RESTART INPUT
-#/bin/rm PET* SST* array* *mediator* cice5_model.res.nc
+cd ${fdir}/tmp
+
+/bin/rm -r MOM6_OUTPUT RESTART INPUT
+/bin/rm PET* SST* array* *mediator* cice5_model.res.nc
 
 
 

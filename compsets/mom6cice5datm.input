@@ -182,6 +182,7 @@ EOT
 # Available compsets
 
 load 'cpld_datm_mom6_cice5_cold.input'
+load 'cpld_datm_mom6_cice5_1d.input'
 load 'cpld_datm_mom6_cice5_2d.input'
 load 'cpld_datm_mom6_cice5_15d.input'
 load 'cpld_datm_mom6_cice5_cont.input'
@@ -228,6 +229,30 @@ test cpld_datm_mom6_cice5_2d_cfsr: datm_mom6_cice.exe {
     FILENAME_BASE='cfsr.'    
     IATM='1760'  
     JATM='880'  
+    }
+
+########################################################################
+# 1d cfsr
+
+test cpld_datm_mom6_cice5_1d_cfsr: datm_mom6_cice.exe {
+    use cpld_datm_mom6_cice5_1d
+
+    DATM_SRC="CFSR"       
+    FILENAME_BASE='cfsr.'    
+    IATM='1760'  
+    JATM='880'  
+    }
+
+########################################################################
+# 1d gefs
+
+test cpld_datm_mom6_cice5_1d_gefs: datm_mom6_cice.exe {
+    use cpld_datm_mom6_cice5_1d
+
+    DATM_SRC="GEFS"       
+    FILENAME_BASE='gefs.'    
+    IATM='1536'  
+    JATM='768'  
     }
 
 ########################################################################
@@ -287,7 +312,14 @@ test cpld_datm_mom6_cice5_15d_cfsr_cont: datm_mom6_cice.exe {
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.198101/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.218258/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.14162/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
-    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.181214/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.181214/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.102786/tmp/cpld_datm_mom6_cice5_15d_cfsr"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.164504/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.111887/tmp/cpld_datm_mom6_cice5_15d_cfsr"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.38719/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.210058/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.170789/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
+    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.276198/tmp/cpld_datm_mom6_cice5_15d_cfsr_cont"
 
     }
 ########################################################################
@@ -305,14 +337,14 @@ test cpld_datm_mom6_cice5_15d_gefs_cont: datm_mom6_cice.exe {
     FHMAX='360'
     RESTART_INTERVAL="1296000"
 
-    SYEAR='2011'
-    SMONTH='12'
-    SDAY='15'
+    SYEAR='2012'
+    SMONTH='05'
+    SDAY='13'
     SHOUR='00'
     CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
 
     PYEAR='2012'
-    PMONTH='01'
+    PMONTH='06'
 
     DATM_INPUT_dir="/scratch2/NCEPDEV/marineda/DATM_INPUT"
     DATM_SCRIP_dir="/scratch2/NCEPDEV/climate/Hyun-Chul.Lee/update-20200425/DATM"
@@ -326,7 +358,22 @@ test cpld_datm_mom6_cice5_15d_gefs_cont: datm_mom6_cice.exe {
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.311250/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.204831/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.267631/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
-    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.140002/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.140002/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.69073/tmp/cpld_datm_mom6_cice5_15d_gefs"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.27193/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.114040/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.70150/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.89356/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.206293/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.296687/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.246915/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.85093/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.158034/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.126388/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.107833/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.199694/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.57471/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.242676/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
 
     }
 ########################################################################
