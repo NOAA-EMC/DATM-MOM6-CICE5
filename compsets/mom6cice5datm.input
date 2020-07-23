@@ -338,13 +338,13 @@ test cpld_datm_mom6_cice5_15d_gefs_cont: datm_mom6_cice.exe {
     RESTART_INTERVAL="1296000"
 
     SYEAR='2012'
-    SMONTH='05'
-    SDAY='13'
+    SMONTH='06'
+    SDAY='12'
     SHOUR='00'
     CDATE="@[SYEAR]@[SMONTH]@[SDAY]@[SHOUR]"
 
     PYEAR='2012'
-    PMONTH='06'
+    PMONTH='07'
 
     DATM_INPUT_dir="/scratch2/NCEPDEV/marineda/DATM_INPUT"
     DATM_SCRIP_dir="/scratch2/NCEPDEV/climate/Hyun-Chul.Lee/update-20200425/DATM"
@@ -373,7 +373,8 @@ test cpld_datm_mom6_cice5_15d_gefs_cont: datm_mom6_cice.exe {
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.107833/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.199694/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
    #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.57471/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
-    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.242676/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+   #PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.242676/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
+    PATHFROMPREVIOUSRUN="@[REST_LOC_RUN]/rtgen.249797/tmp/cpld_datm_mom6_cice5_15d_gefs_cont"
 
     }
 ########################################################################
