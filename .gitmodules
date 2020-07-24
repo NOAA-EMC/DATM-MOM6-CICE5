@@ -1,17 +1,17 @@
 [submodule "CICE_SRC"]
 	path = CICE_SRC
-	url = https://github.com/NOAA-EMC/CICE5
+	url = https://github.com/hyunchul386/CICE5
 [submodule "FMS"]
 	path = FMS
-	url = https://github.com/NOAA-GFDL/FMS
+	url = https://github.com/hyunchul386/FMS
         branch = master
 [submodule "NEMS"]
 	path = NEMS
-	url = https://github.com/NOAA-EMC/NEMS
+	url = https://github.com/hyunchul386/NEMS
         branch = develop
 [submodule "DATM"]
 	path = DATM
-	url = https://github.com/NOAA-EMC/NEMSdatm
+	url = https://github.com/hyunchul386/NEMSdatm
 [submodule "MOM6"]
 	path = MOM6
-	url = https://github.com/NOAA-EMC/MOM6-interface
+	url = https://github.com/hyunchul386/MOM6-interface
