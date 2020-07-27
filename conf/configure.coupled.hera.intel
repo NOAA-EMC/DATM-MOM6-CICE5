@@ -168,7 +168,7 @@ LDFLAGS += $(LIBS)
 
 ifdef InNemsMakefile
 FFLAGS += $(ESMF_INC)
-CPPFLAGS += -traditional
+CPPFLAGS += -DDATM -traditional
 EXTLIBS = $(NCEPLIBS) $(ESMF_LIB) $(LDFLAGS) $(NETCDF_LIB)
 endif
 
