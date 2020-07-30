@@ -12,7 +12,7 @@ Provide a clear and concise description of what the problem is.
 
 
 ## Solution
-Add a clear and concise description of what you want to happen.
+Describe the solution you would like or are proposing.
 
 
 ## Related issues and PRs
