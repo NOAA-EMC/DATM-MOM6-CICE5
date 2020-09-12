@@ -1,11 +1,11 @@
-Sat Sep 12 11:18:03 CDT 2020
+Sat Sep 12 10:50:35 CDT 2020
 Start Regression test
 
 
-baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_CFSR
-mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_CFSR
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_cold_cfsr
-Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_100_CFSR
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_100_CFSR
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_138255/cpld_datm_mom6_cice5_100_cold_cfsr
+Checking test 001 cpld_datm_mom6_cice5_100_cold_cfsr results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
  Comparing mediator_FBaccumIce_restart.nc .........OK
@@ -19,13 +19,13 @@ Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
  Comparing mediator_FBaccumHyd_restart.nc .........OK
  Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
-Test 001 cpld_datm_mom6_cice5_cold_cfsr PASS
+Test 001 cpld_datm_mom6_cice5_100_cold_cfsr PASS
 
 
-baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_GEFS
-mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_GEFS
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_cold_gefs
-Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_100_GEFS
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_100_GEFS
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_138255/cpld_datm_mom6_cice5_100_cold_gefs
+Checking test 002 cpld_datm_mom6_cice5_100_cold_gefs results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
  Comparing mediator_FBaccumIce_restart.nc .........OK
@@ -39,17 +39,14 @@ Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
  Comparing mediator_FBaccumHyd_restart.nc .........OK
  Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
-Test 002 cpld_datm_mom6_cice5_cold_gefs PASS
+Test 002 cpld_datm_mom6_cice5_100_cold_gefs PASS
 
 
-baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_CFSR
-mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_CFSR/RESTART
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_2d_cfsr
-Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_100_2d_CFSR
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_100_2d_CFSR/RESTART
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_138255/cpld_datm_mom6_cice5_100_2d_cfsr
+Checking test 003 cpld_datm_mom6_cice5_100_2d_cfsr results ....
  Comparing RESTART/MOM.res.nc .........OK
- Comparing RESTART/MOM.res_1.nc .........OK
- Comparing RESTART/MOM.res_2.nc .........OK
- Comparing RESTART/MOM.res_3.nc .........OK
  Comparing RESTART/iced.2011-10-03-00000.nc .........OK
  Comparing ocn_2011_10_02_21.nc .........OK
  Comparing mediator_FBAtmOcn_o_restart.nc .........OK
@@ -65,17 +62,14 @@ Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
  Comparing mediator_FBaccumHyd_restart.nc .........OK
  Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
-Test 003 cpld_datm_mom6_cice5_2d_cfsr PASS
+Test 003 cpld_datm_mom6_cice5_100_2d_cfsr PASS
 
 
-baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_GEFS
-mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_GEFS/RESTART
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_2d_gefs
-Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_100_2d_GEFS
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_100_2d_GEFS/RESTART
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_138255/cpld_datm_mom6_cice5_100_2d_gefs
+Checking test 004 cpld_datm_mom6_cice5_100_2d_gefs results ....
  Comparing RESTART/MOM.res.nc .........OK
- Comparing RESTART/MOM.res_1.nc .........OK
- Comparing RESTART/MOM.res_2.nc .........OK
- Comparing RESTART/MOM.res_3.nc .........OK
  Comparing RESTART/iced.2011-10-03-00000.nc .........OK
  Comparing ocn_2011_10_02_21.nc .........OK
  Comparing mediator_FBAtmOcn_o_restart.nc .........OK
@@ -91,9 +85,9 @@ Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
  Comparing mediator_FBaccumHyd_restart.nc .........OK
  Comparing mediator_FBaccumLnd_restart.nc .........OK
  Comparing mediator_scalars_restart.txt .........OK
-Test 004 cpld_datm_mom6_cice5_2d_gefs PASS
+Test 004 cpld_datm_mom6_cice5_100_2d_gefs PASS
 
 
 REGRESSION TEST WAS SUCCESSFUL
-Sat Sep 12 12:24:31 CDT 2020
-Elapsed time: 01h:06m:29s. Have a nice day!
+Sat Sep 12 11:08:55 CDT 2020
+Elapsed time: 00h:18m:22s. Have a nice day!
