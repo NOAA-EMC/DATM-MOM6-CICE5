@@ -1,0 +1,61 @@
+#
+#  CPLD_DATM_MOM6_CICE_2D_ATM_FLUX test
+#
+
+export TEST_DESCR="Fully coupled DATM-MOM6-CICE system - 2d_warm"
+
+export CNTL_DIR="RT-Baselines_100_2d_GEFS"
+export CNTLMED_DIR="RT-Baselines_100_2d_GEFS/RESTART"
+
+export LIST_FILES="RESTART/MOM.res.nc \
+                   RESTART/iced.2011-10-03-00000.nc \
+                   ocn_2011_10_02_21.nc \
+                   mediator_FBAtmOcn_o_restart.nc \
+                   mediator_FBAtm_a_restart.nc \
+                   mediator_FBIce_i_restart.nc \
+                   mediator_FBOcn_o_restart.nc \
+                   mediator_FBaccumAtmOcn_restart.nc \
+                   mediator_FBaccumAtm_restart.nc \
+                   mediator_FBaccumIce_restart.nc \
+                   mediator_FBaccumOcn_restart.nc \
+                   mediator_FBHyd_h_restart.nc \
+                   mediator_FBLnd_l_restart.nc \
+                   mediator_FBaccumHyd_restart.nc \
+                   mediator_FBaccumLnd_restart.nc \
+                   mediator_scalars_restart.txt"
+
+export_datm
+export_cpl
+
+export FILENAME_BASE='gefs.'
+export DATM_SRC='GEFS'
+
+export DAYS="2"
+export FHMAX="48"
+export FDIAG="6"
+export WLCLK=45
+
+# set component and coupling timesteps
+export DT_CICE=${DT_ATMOS}
+export CPL_SLOW=${DT_THERM_MOM6}
+export CPL_FAST=${DT_ATMOS}
+
+export MOM6_RIVER_RUNOFF='False'
+export TASKS=256
+export ice_petlist_bounds="232 255"
+export NPROC_ICE='24'
+export grid_cice_NEMS_mx="grid_cice_NEMS_mx100.nc"
+export kmtu_cice_NEMS_mx="kmtu_cice_NEMS_mx100.nc"
+
+# write a CICE restart at DAYS
+export DUMPFREQ_N=${DAYS}
+export DUMPFREQ="d"
+
+# nems.configure
+export NEMS_CONFIGURE="nems.configure.med_atm_ocn_ice.IN"
+export coupling_interval_slow_sec=${CPL_SLOW}
+export coupling_interval_fast_sec=${CPL_FAST}
+
+export FV3_RUN=cpld_datm_mom6_cice5_100_gefs.IN
+
+export MED_restart_data='MEDIATOR_100_GEFS'
