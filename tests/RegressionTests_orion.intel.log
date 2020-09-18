@@ -1,10 +1,10 @@
-Sat Jul 25 19:49:09 CDT 2020
+Sat Sep 12 11:18:03 CDT 2020
 Start Regression test
 
 
-baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_cold_start_CFSR
-mediator baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/MEDIATOR_CFSR
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_247398/cpld_datm_mom6_cice5_cold_cfsr
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_CFSR
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_CFSR
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_cold_cfsr
 Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -22,9 +22,9 @@ Checking test 001 cpld_datm_mom6_cice5_cold_cfsr results ....
 Test 001 cpld_datm_mom6_cice5_cold_cfsr PASS
 
 
-baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_cold_start_GEFS
-mediator baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/MEDIATOR_GEFS
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_247398/cpld_datm_mom6_cice5_cold_gefs
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_cold_start_GEFS
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/MEDIATOR_GEFS
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_cold_gefs
 Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
  Comparing mediator_FBaccumAtmOcn_restart.nc .........OK
  Comparing mediator_FBaccumAtm_restart.nc .........OK
@@ -42,9 +42,9 @@ Checking test 002 cpld_datm_mom6_cice5_cold_gefs results ....
 Test 002 cpld_datm_mom6_cice5_cold_gefs PASS
 
 
-baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_CFSR
-mediator baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_CFSR/RESTART
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_247398/cpld_datm_mom6_cice5_2d_cfsr
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_CFSR
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_CFSR/RESTART
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_2d_cfsr
 Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -68,9 +68,9 @@ Checking test 003 cpld_datm_mom6_cice5_2d_cfsr results ....
 Test 003 cpld_datm_mom6_cice5_2d_cfsr PASS
 
 
-baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_GEFS
-mediator baseline dir = /work/noaa/stmp/libin/RT/DATM-MOM6-CICE5/develop-20200721/RT-Baselines_2d_GEFS/RESTART
-working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_247398/cpld_datm_mom6_cice5_2d_gefs
+baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_GEFS
+mediator baseline dir = /work/noaa/nems/emc.nemspara/RT/DATM-MOM6-CICE5/develop-20200910/RT-Baselines_2d_GEFS/RESTART
+working dir  = /work/noaa/stmp/libin/test/libin/S2S_RT/rt_428715/cpld_datm_mom6_cice5_2d_gefs
 Checking test 004 cpld_datm_mom6_cice5_2d_gefs results ....
  Comparing RESTART/MOM.res.nc .........OK
  Comparing RESTART/MOM.res_1.nc .........OK
@@ -95,5 +95,5 @@ Test 004 cpld_datm_mom6_cice5_2d_gefs PASS
 
 
 REGRESSION TEST WAS SUCCESSFUL
-Sat Jul 25 20:21:58 CDT 2020
-Elapsed time: 00h:32m:51s. Have a nice day!
+Sat Sep 12 12:24:31 CDT 2020
+Elapsed time: 01h:06m:29s. Have a nice day!

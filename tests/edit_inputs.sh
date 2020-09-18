@@ -13,6 +13,8 @@ function edit_ice_in {
   sed -e "s/YEAR_INIT/$SYEAR/g" \
       -e "s/ISTEP0/$istep0/g" \
       -e "s/DT_CICE/$DT_CICE/g" \
+      -e "s/grid_cice_NEMS_mx/$grid_cice_NEMS_mx/g" \
+      -e "s/kmtu_cice_NEMS_mx/$kmtu_cice_NEMS_mx/g" \
       -e "s/NPROC_ICE/$NPROC_ICE/g" \
       -e "s/RUNTYPE/$RUNTYPE/g" \
       -e "s/RUNID/$RUNID/g" \

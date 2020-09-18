@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eux
-cp ../parm/comp_ice.backend_025 ../CICE/comp_ice.backend
+
+cp ../parm/comp_ice.backend_100 ../CICE/comp_ice.backend
 
 SECONDS=0
 
@@ -323,7 +324,7 @@ ROCOTO=false
 ECFLOW=false
 KEEP_RUNDIR=false
 
-TESTS_FILE='rt.conf'
+TESTS_FILE='rt_1degree.conf'
 # Switch to special regression test config on wcoss_cray:
 # don't run the IPD and CCPP tests in REPRO mode.
 if [[ $MACHINE_ID = wcoss_cray ]]; then
@@ -402,8 +403,8 @@ if [[ $CREATE_BASELINE == true ]]; then
   #rsync -a "${RTPWD}"/fv3_stretched_nest_quilt/INPUT "${NEW_BASELINE}"/fv3_stretched_nest_quilt/
 fi
 
-COMPILE_LOG=${PATHRT}/Compile_$MACHINE_ID.log
-REGRESSIONTEST_LOG=${PATHRT}/RegressionTests_$MACHINE_ID.log
+COMPILE_LOG=${PATHRT}/Compile_1d_$MACHINE_ID.log
+REGRESSIONTEST_LOG=${PATHRT}/RegressionTests_1d_$MACHINE_ID.log
 
 date > ${REGRESSIONTEST_LOG}
 echo "Start Regression test" >> ${REGRESSIONTEST_LOG}
@@ -511,7 +512,7 @@ EOF
 fi
 
 ##
-## read rt.conf and then either execute the test script directly or create
+## read rt_1degree.conf and then either execute the test script directly or create
 ## workflow description file
 ##
 

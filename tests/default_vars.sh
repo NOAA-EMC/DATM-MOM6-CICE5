@@ -151,6 +151,8 @@ export NPROC_ICE='48'
 export RUNTYPE='initial' 
 export DUMPFREQ='d' 
 export DUMPFREQ_N='1' 
+export grid_cice_NEMS_mx='grid_cice_NEMS_mx025.nc' 
+export kmtu_cice_NEMS_mx='kmtu_cice_NEMS_mx025.nc' 
 export USE_RESTART_TIME='.false.'
 # setting to true will allow Frazil FW and Salt to be
 # included in fluxes sent to ocean

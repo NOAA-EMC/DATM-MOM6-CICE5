@@ -32,10 +32,15 @@ atparse < ${PATHTR}/parm/model_configure.IN > model_configure
 atparse < ${PATHTR}/parm/${NEMS_CONFIGURE:-nems.configure} > nems.configure
 
 edit_ice_in < ${PATHTR}/parm/ice_in_template > ice_in
-edit_mom_input < ${PATHTR}/parm/MOM_input_template > INPUT/MOM_input
 edit_diag_table < ${PATHTR}/parm/diag_table_template > diag_table
 cp ${PATHTR}/parm/data_table data_table
 cp ${PATHTR}/parm/datm_data_table.IN datm_data_table
+
+if [[ $OCNRES = '025' ]]; then
+edit_mom_input < ${PATHTR}/parm/MOM_input_template > INPUT/MOM_input
+elif [[ $OCNRES = '100' ]]; then
+edit_mom_input < ${PATHTR}/parm/MOM_input_template100 > INPUT/MOM_input
+fi
 
 if [[ $SCHEDULER = 'moab' ]]; then
   atparse < $PATHRT/datm_conf/datm_msub.IN > job_card
