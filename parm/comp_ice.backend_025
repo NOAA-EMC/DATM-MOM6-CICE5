@@ -1,0 +1,256 @@
+#! /bin/csh -f
+
+### Expect to find the following environment variables set on entry:
+# SITE
+# SYSTEM_USERDIR
+# SRCDIR
+# EXEDIR
+
+### Grid resolution
+#setenv RES col ; setenv GRID 5x5
+#setenv RES gx3 ; setenv GRID 100x116
+#setenv RES nx1 ; setenv GRID 360x200
+#setenv RES gx1 ; setenv GRID 320x384
+#setenv RES tx1 ; setenv GRID 360x240
+#setenv RES mx5 ; setenv GRID 720x410
+#setenv RES mx2 ; setenv GRID 1500x1099
+#setenv RES mx1 ; setenv GRID 360x320
+
+setenv RES mx025
+setenv NEMS_GRID T126_mx025
+#setenv NEMS_GRID mx1
+echo "NEMS_GRID = $NEMS_GRID "
+if ($?NEMS_GRID) then
+  if ($NEMS_GRID =~ *col*) setenv RES col
+  if ($NEMS_GRID =~ *gx3*) setenv RES gx3
+  if ($NEMS_GRID =~ *nx1*) setenv RES nx1
+  if ($NEMS_GRID =~ *gx1*) setenv RES gx1
+  if ($NEMS_GRID =~ *tx1*) setenv RES tx1
+  if ($NEMS_GRID =~ *mx5*) setenv RES mx5
+  if ($NEMS_GRID =~ *mx025*) setenv RES mx025
+  if ($NEMS_GRID =~ *mx2*) setenv RES mx2
+  if ($NEMS_GRID =~ *mx1*) setenv RES mx1
+endif
+
+if ($RES == col) setenv GRID 5x5
+if ($RES == gx3) setenv GRID 100x116
+if ($RES == nx1) setenv GRID 360x200
+if ($RES == gx1) setenv GRID 320x384
+if ($RES == tx1) setenv GRID 360x240
+if ($RES == mx5) setenv GRID 720x410
+if ($RES == mx025) setenv GRID 1440x1080
+if ($RES == mx2) setenv GRID 1500x1099
+if ($RES == mx1) setenv GRID 360x320
+
+echo "tcx comp_ice.backend res grid $RES $GRID"
+
+set NXGLOB = `echo $GRID | sed s/x.\*//`
+set NYGLOB = `echo $GRID | sed s/.\*x//`
+
+# Recommendations:
+#   NTASK equals nprocs in ice_in 
+#   use processor_shape = slenderX1 or slenderX2 in ice_in
+#   one per processor with distribution_type='cartesian' or
+#   squarish blocks with distribution_type='rake'
+# If BLCKX (BLCKY) does not divide NXGLOB (NYGLOB) evenly, padding 
+# will be used on the right (top) of the grid.
+if ($RES == 'col') then   # for column configuration:
+   setenv NTASK      1       # total number of processors
+   setenv BLCKX      5       # x-dimension of blocks ( not including )
+   setenv BLCKY      5       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'gx3') then   # for column configuration:
+   setenv NTASK      4       # total number of processors
+   setenv BLCKX     50       # x-dimension of blocks ( not including )
+   setenv BLCKY     58       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'nx1') then   # for column configuration:
+   setenv NTASK      4       # total number of processors
+   setenv BLCKX    180       # x-dimension of blocks ( not including )
+   setenv BLCKY    100       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'mx5') then   # for column configuration:
+   setenv NTASK     20       # total number of processors
+   setenv BLCKX     72       # x-dimension of blocks ( not including )
+   setenv BLCKY    205       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'mx025') then   # for column configuration:
+#   setenv NTASK    120       # total number of processors
+#   setenv BLCKX    24        # x-dimension of blocks ( not including )
+##   setenv NTASK     24       # total number of processors
+##   setenv BLCKX    120       # x-dimension of blocks ( not including )
+   setenv NTASK     48       # total number of processors
+   setenv BLCKX     60       # x-dimension of blocks ( not including )
+   setenv BLCKY    540       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'mx2') then   # for column configuration:
+   setenv NTASK     24       # total number of processors
+   setenv BLCKX    125       # x-dimension of blocks ( not including )
+   setenv BLCKY    550       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+if ($RES == 'mx1') then   # for column configuration:
+   setenv NTASK     24       # total number of processors
+   setenv BLCKX     30       # x-dimension of blocks ( not including )
+   setenv BLCKY    160       # y-dimension of blocks (  ghost cells  )
+   setenv NICELYR    7       # number of vertical layers in the ice
+   setenv NSNWLYR    1       # number of vertical layers in the snow
+   setenv NICECAT    5       # number of ice thickness categories
+endif
+
+# may need to increase MXBLCKS with rake distribution or padding
+@ a = $NXGLOB * $NYGLOB ; @ b = $BLCKX * $BLCKY * $NTASK  
+@ m = $a / $b ; setenv MXBLCKS $m; if ($MXBLCKS == 0) setenv MXBLCKS 1
+#setenv MXBLCKS 37 # if necessary (code will print proper value)
+setenv MXBLCKS 1
+### Tracers               # match ice_in tracer_nml to conserve memory
+setenv TRAGE   1          # set to 1 for ice age tracer
+setenv TRFY    1          # set to 1 for first-year ice area tracer
+setenv TRLVL   1          # set to 1 for level and deformed ice tracers
+setenv TRPND   1          # set to 1 for melt pond tracers
+setenv NTRAERO 0          # number of aerosol tracers 
+                          # (up to max_aero in ice_domain_size.F90) 
+                          # CESM uses 3 aerosol tracers
+setenv TRBRI   0          # set to 1 for brine height tracer
+setenv NBGCLYR 7          # number of zbgc layers
+setenv TRBGCS  0          # number of skeletal layer bgc tracers 
+                          # TRBGCS=0 or 2<=TRBGCS<=9)
+
+### Specialty code
+setenv CAM_ICE  no        # set to yes for CAM runs (single column) 
+setenv SHRDIR   csm_share # location of CCSM shared code
+
+if !($?IO_TYPE) then
+  setenv IO_TYPE  netcdf4   # set to none if netcdf library is unavailable
+  # setenv IO_TYPE  netcdf3   # set to none if netcdf library is unavailable
+  # setenv IO_TYPE  pio    # set to pio for parallel netcdf
+endif
+
+setenv DITTO    no        # reproducible diagnostics
+setenv THRD     no        # set to yes for OpenMP threading
+
+if ( $THRD == 'yes') setenv OMP_NUM_THREADS 2 # positive integer 
+
+### File unit numbers
+setenv NUMIN 11           # minimum file unit number
+setenv NUMAX 99           # maximum file unit number
+
+                                          if !(-d $EXEDIR) mkdir -p $EXEDIR
+setenv CBLD   $SRCDIR/bld
+setenv OBJDIR $EXEDIR/compile           ; if !(-d $OBJDIR) mkdir -p $OBJDIR
+setenv RSTDIR $EXEDIR/restart           ; if !(-d $RSTDIR) mkdir -p $RSTDIR
+setenv HSTDIR $EXEDIR/history           ; if !(-d $HSTDIR) mkdir -p $HSTDIR
+
+setenv ARCH `uname -s`
+if ( $ARCH == 'UNICOS/mp') setenv ARCH UNICOS
+if ( $ARCH == 'UNICOS') then
+   cp -f $CBLD/Makefile.$ARCH $CBLD/Makefile
+else if ( $ARCH == 'Darwin' ) then
+   cp -f $CBLD/Makefile.$ARCH $CBLD/Makefile
+else
+   cp -f $CBLD/Makefile.std $CBLD/Makefile
+endif
+setenv ARCH $ARCH.$SITE
+
+cd $SRCDIR/source
+
+cd $EXEDIR
+
+#if !($RES == 'col') then
+#if !(-e grid)    cp $SRCDIR/input_templates/$RES/global_$RES.grid grid
+#if !(-e kmt)     cp $SRCDIR/input_templates/$RES/global_$RES.kmt kmt
+#endif
+#if !(-e ice_in)  cp $SRCDIR/input_templates/$RES/ice_in .
+#if !(-e run_ice) cp $SRCDIR/input_templates/run_ice.$ARCH run_ice
+
+cd $RSTDIR
+
+#cp $SRCDIR/input_templates/$RES/iced_$RES* .
+#if !(-e ice.restart_file) cp $SRCDIR/input_templates/$RES/ice.restart_file .
+
+cd $OBJDIR
+
+if ($NTASK == 1) then
+   setenv COMMDIR serial
+else
+   setenv COMMDIR mpi 
+endif
+
+setenv DRVDIR cice
+if ($IO_TYPE == 'netcdf3' || $IO_TYPE == 'netcdf4') then
+  setenv IODIR io_netcdf
+else if ($IO_TYPE == 'pio') then
+  setenv IODIR io_pio
+else
+  setenv IODIR io_binary
+endif
+
+### List of source code directories (in order of importance).
+cat >! Filepath << EOF
+$SRCDIR/drivers/$DRVDIR
+$SRCDIR/source
+$SRCDIR/$COMMDIR
+$SRCDIR/$IODIR
+$SRCDIR/$SHRDIR
+EOF
+
+echo "ARCH is $ARCH"
+if ( $ARCH == 'Linux.NEMS.wcoss_cray') then
+  icc -o makdep $CBLD/makdep.c  
+else
+  cc -o makdep $CBLD/makdep.c
+endif
+
+# Build in debug mode. If DEBUG=Y, enable DEBUG compilation. This
+# flag is set in ${ROOTDIR}/coupledFV3_MOM6_CICE_debug.appBuilder file.
+if (! $?DEBUG) then
+  set DEBUG = N
+else
+  if ($DEBUG != "Y") then
+    set DEBUG = N
+  endif
+endif
+echo "CICE comp_ice.backend ... DEBUG=${DEBUG}"
+
+gmake VPFILE=Filepath EXEC=$EXEDIR/cice \
+           NXGLOB=$NXGLOB NYGLOB=$NYGLOB \
+           BLCKX=$BLCKX BLCKY=$BLCKY MXBLCKS=$MXBLCKS \
+           DEBUG=$DEBUG \
+      -f  $CBLD/Makefile MACFILE=$CBLD/Macros.$ARCH 
+
+cd ..
+pwd                                         
+echo NTASK = $NTASK
+echo "global N, block_size" 
+echo "x    $NXGLOB,    $BLCKX"
+echo "y    $NYGLOB,    $BLCKY"
+echo max_blocks = $MXBLCKS
+echo $TRAGE   = TRAGE,   iage tracer
+echo $TRFY    = TRFY,    first-year ice tracer
+echo $TRLVL   = TRLVL,   level-ice tracers
+echo $TRPND   = TRPND,   melt pond tracers
+echo $NTRAERO = NTRAERO, number of aerosol tracers
+echo $TRBRI   = TRBRI,   brine height tracer
+echo $NBGCLYR = NBGCLYR, number of bio grid layers
+echo $TRBGCS  = TRBGCS,  number of BGC tracers
+
+cd $EXEDIR/compile
+
+ar -r $EXEDIR/liblanl_cice.a CICE_FinalMod.o CICE_InitMod.o CICE_RunMod.o ice_aerosol.o ice_age.o ice_algae.o ice_atmo.o ice_blocks.o ice_boundary.o ice_brine.o ice_broadcast.o ice_calendar.o ice_communicate.o ice_constants.o ice_diagnostics.o ice_distribution.o ice_domain.o ice_domain_size.o ice_dyn_eap.o ice_dyn_evp.o ice_dyn_shared.o ice_exit.o ice_fileunits.o ice_firstyear.o ice_flux.o ice_forcing.o ice_gather_scatter.o ice_global_reductions.o ice_grid.o ice_history.o ice_history_bgc.o ice_history_drag.o ice_history_mechred.o ice_history_pond.o ice_history_shared.o ice_history_write.o ice_init.o ice_itd.o ice_kinds_mod.o ice_lvl.o ice_mechred.o ice_meltpond_cesm.o ice_meltpond_lvl.o ice_meltpond_topo.o ice_ocean.o ice_orbital.o ice_read_write.o ice_restart.o ice_restart_driver.o ice_restart_shared.o ice_restoring.o ice_shortwave.o ice_spacecurve.o ice_state.o ice_step_mod.o ice_therm_0layer.o ice_therm_bl99.o ice_therm_itd.o ice_therm_mushy.o ice_therm_shared.o ice_therm_vertical.o ice_timers.o ice_transport_driver.o ice_transport_remap.o ice_zbgc.o ice_zbgc_shared.o shr_orb_mod.o
