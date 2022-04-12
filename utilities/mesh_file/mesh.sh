@@ -5,15 +5,16 @@
 # Input grid files are cfsr.SCRIP.nc and gefs.SCRIP.nc.
 # Output mesh files are cfsr_mesh.nc and gefs_mesh.nc.
 #
-module use /scratch2/NCEPDEV/nwprod/hpc-stack/test/modulefiles/stack
-module load hpc/1.0.0-beta1
+module use /scratch2/NCEPDEV/nwprod/hpc-stack/libs/hpc-stack/modulefiles/stack
+module load hpc/1.1.0
 module load hpc-intel/18.0.5.274
 module load hpc-impi/2018.0.4
 module load netcdf/4.7.4
-module load esmf/8_1_0_beta_snapshot_27
+module load esmf/8_2_0
 module load nco
 ln -s /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/DATM/cfsr.SCRIP.nc .
 ln -s /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/DATM/gefs.SCRIP.nc .
+ln -s /scratch1/NCEPDEV/nems/emc.nemspara/RT/DATM-MOM6-CICE5/DATM/gfs.SCRIP.nc .
 ###################################################################################
 #
 #  for nems_datm model
@@ -35,3 +36,6 @@ mv PET0.ESMF_LogFile PET0.ESMF_LogFile_CFSR
 #
 ESMF_Scrip2Unstruct gefs_mask.nc gefs_mesh.nc 0 ESMF
 mv PET0.ESMF_LogFile PET0.ESMF_LogFile_GEFS 
+#
+ESMF_Scrip2Unstruct gfs.SCRIP.nc gfs_mesh.nc 0 ESMF
+mv PET0.ESMF_LogFile PET0.ESMF_LogFile_GFS
